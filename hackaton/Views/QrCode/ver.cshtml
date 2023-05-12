@@ -1,0 +1,9 @@
+﻿@model IEnumerable<hackaton.Models.QrCode>
+
+@{
+    ViewData["Title"] = "ver";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>ver</h1>
+<img src="@Url.Action("GenerateQrCode", "QrCode")" />
