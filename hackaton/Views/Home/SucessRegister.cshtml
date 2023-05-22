@@ -1,0 +1,35 @@
+﻿@model hackaton.Models.User
+
+@{
+    ViewData["Title"] = "SucessRegister";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Sucesso</h1>
+
+<div>
+    <h4>User</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CPF)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CPF)
+        </dd>
+       
+        <h2>
+            Para continuar o registro,logue no aplicativo usando o QRCode
+            <img src="@Url.Action("GenerateQrCode", "QrCode")" />
+        </h2>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index">Voltar</a>
+</div>

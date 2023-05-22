@@ -5,16 +5,19 @@ using hackaton.Models.DAO;
 using System.Drawing.Imaging;
 using System.Drawing;
 using QRCoder;
+using hackaton.Models.Caches;
 
 namespace hackaton.Controllers
 {
     public class QrCodeController : Controller
     {
         private readonly Context _context;
+        private readonly QRCodeCacheService _qrCodeCacheService;
 
-        public QrCodeController(Context context)
+        public QrCodeController(Context context, QRCodeCacheService cache)
         {
             _context = context;
+            _qrCodeCacheService = cache;
         }
 
         public IActionResult ver() { 
@@ -22,12 +25,11 @@ namespace hackaton.Controllers
           return View();
         }
 
-        public IActionResult GenerateQrCode() {
+        public async Task<IActionResult> GenerateQrCode() {
           //  string text = "Testando QrCOde";
             // Define o texto para o QR Code
-            string qrCodeText = "https://www.google.com.br";
-           
-
+            string qrCodeText = Guid.NewGuid().ToString();
+            
             if (string.IsNullOrEmpty(qrCodeText))
             {
                 var retorno = Content("QR Code sem parametros");
@@ -35,8 +37,14 @@ namespace hackaton.Controllers
                 return retorno;
                
             }
+            Console.WriteLine("Texto: "+qrCodeText);
+            Console.WriteLine("Tamanho: " + qrCodeText.Length);
+           /* if (_qrCodeCacheService.GetQRCodeByContentAsync(qrCodeText) == null) {
 
-
+                _context.QrCodes.Add(new QrCode{ Content = qrCodeText });
+                await _context.SaveChangesAsync();
+            }
+           */
             // Configurações do QR Code
             byte[] imageBytes;
 
@@ -66,20 +74,20 @@ namespace hackaton.Controllers
         // GET: QrCode
         public async Task<IActionResult> Index()
         {
-              return _context.QrCode != null ? 
-                          View(await _context.QrCode.ToListAsync()) :
+              return _context.QrCodes != null ? 
+                          View(await _context.QrCodes.ToListAsync()) :
                           Problem("Entity set 'Context.QrCode'  is null.");
         }
 
         // GET: QrCode/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.QrCode == null)
+            if (id == null || _context.QrCodes == null)
             {
                 return NotFound();
             }
 
-            var qrCode = await _context.QrCode
+            var qrCode = await _context.QrCodes
                 .FirstOrDefaultAsync(m => m.QRCodeId == id);
             if (qrCode == null)
             {
@@ -112,12 +120,12 @@ namespace hackaton.Controllers
         // GET: QrCode/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.QrCode == null)
+            if (id == null || _context.QrCodes == null)
             {
                 return NotFound();
             }
 
-            var qrCode = await _context.QrCode.FindAsync(id);
+            var qrCode = await _context.QrCodes.FindAsync(id);
             if (qrCode == null)
             {
                 return NotFound();
@@ -163,12 +171,12 @@ namespace hackaton.Controllers
         // GET: QrCode/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.QrCode == null)
+            if (id == null || _context.QrCodes == null)
             {
                 return NotFound();
             }
 
-            var qrCode = await _context.QrCode
+            var qrCode = await _context.QrCodes
                 .FirstOrDefaultAsync(m => m.QRCodeId == id);
             if (qrCode == null)
             {
@@ -183,14 +191,14 @@ namespace hackaton.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.QrCode == null)
+            if (_context.QrCodes == null)
             {
                 return Problem("Entity set 'Context.QrCode'  is null.");
             }
-            var qrCode = await _context.QrCode.FindAsync(id);
+            var qrCode = await _context.QrCodes.FindAsync(id);
             if (qrCode != null)
             {
-                _context.QrCode.Remove(qrCode);
+                _context.QrCodes.Remove(qrCode);
             }
             
             await _context.SaveChangesAsync();
@@ -199,7 +207,7 @@ namespace hackaton.Controllers
 
         private bool QrCodeExists(int id)
         {
-          return (_context.QrCode?.Any(e => e.QRCodeId == id)).GetValueOrDefault();
+          return (_context.QrCodes?.Any(e => e.QRCodeId == id)).GetValueOrDefault();
         }
     }
 }

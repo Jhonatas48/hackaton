@@ -1,4 +1,5 @@
-﻿using hackaton.Models;
+﻿using hackaton.Controllers;
+using hackaton.Models.Caches;
 using hackaton.Models.DAO;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,6 +27,11 @@ namespace hackaton
             services.AddMemoryCache();
             //Adiciona a Classe UserCacheService no escopo para ser usado como cache
             services.AddScoped<UserCacheService>();
+            //Adiciona a Classe QRCodeService no escopo para ser usado como cache
+            services.AddScoped<QRCodeCacheService>();
+
+
+            services.AddScoped<HomeController>();
             //configuração para acesso ao banco de dados
             services.AddDbContext<Context>(options => options.UseSqlServer(
                Configuration["Data:ConnectionString"]));
@@ -61,14 +67,20 @@ namespace hackaton
             }
 
             );
+            /*
             // Obter a lista de usuários do banco de dados
-            var users = context.Users.ToList();
-
-            // Adicionar cada usuário ao cache
-            foreach (var user in users)
+            var users = context.Users.;//.ToList();
+           
+            if(users != null)
             {
-                userCache.AddUserToCache(user);
+                var usersList = users.ToList();
+                foreach (var user in usersList)
+                {
+                    userCache.AddUserToCache(user);
+                }
             }
+            // Adicionar cada usuário ao cache
+           */
 
         }
 

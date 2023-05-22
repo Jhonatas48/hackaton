@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using System.Reflection;
 
-namespace hackaton.Models
+namespace hackaton.Models.Caches
 {
- 
+
     /*
         Classe Responsável para armazenar os usuarios em cache,para melhor performance na aplicação
      */
@@ -18,7 +18,7 @@ namespace hackaton.Models
         {
             _cache = cache;
             _context = context;
-           
+
         }
 
         public void AddUserToCache(User user)
@@ -26,7 +26,7 @@ namespace hackaton.Models
             _cache.Set(user.CPF, user);
         }
 
-       
+
         public User GetUserByCPFAsync(string cpf)
         {
             // Verifica se o usuário está no cache
@@ -34,7 +34,7 @@ namespace hackaton.Models
             {
                 return user;
             }
-
+          
             // Se o usuário não está no cache, busca no banco de dados
             user = _context.Users.FirstOrDefault(u => u.CPF == cpf);
 

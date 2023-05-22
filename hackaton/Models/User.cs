@@ -1,4 +1,5 @@
 ﻿using DevOne.Security.Cryptography.BCrypt;
+using hackaton.Models.Security;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.Web.CodeGeneration.CommandLine;
 using System.ComponentModel.DataAnnotations;
@@ -28,6 +29,6 @@ namespace hackaton.Models
 
         public bool IsAdmin { get; set; } = false;
 
-       
+        public ICollection<Property>  Properties{ get; set; }
     }
 }

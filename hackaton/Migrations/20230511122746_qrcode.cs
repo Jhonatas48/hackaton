@@ -11,12 +11,12 @@ namespace hackaton.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "QrCode",
+                name: "QrCodes",
                 columns: table => new
                 {
                     QRCodeId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Content = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
+                    Content = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -28,7 +28,7 @@ namespace hackaton.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "QrCode");
+                name: "QrCodes");
         }
     }
 }

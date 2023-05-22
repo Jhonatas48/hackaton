@@ -1,21 +1,53 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using hackaton.Models.Security;
+using hackaton.Models;
+using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 
-namespace hackaton.Models
+namespace hackaton.Controllers
 {
     public class ApiController : Controller
     {
-        // GET: ApiController
-        [Route("apis")]
-        public ActionResult Index()
-        {
-            return Json("Ola");
+
+        private readonly HomeController _homeController;
+
+       public ApiController(HomeController homeController)
+       {
+         _homeController = homeController;
+
         }
-         
-        // GET: ApiController/Details/5
-        public ActionResult Details(int id)
+    // GET: ApiController/QRCode
+    [BearerAuthorize]
+ 
+        public ActionResult QRCode([FromBody] QrCode qrCode)
         {
-            return View();
+            return Json(qrCode);
+        }
+
+        // GET: ApiController/Details/5
+        public ActionResult validadeUser([FromBody] User user)
+        {
+            if(user == null)
+            {
+                return new BadRequestObjectResult(new { message = "User is required" });
+            }
+
+            if (!ModelState.IsValid)
+            {
+                ModelState.Remove("Name");
+                ModelState.Remove("Properties");
+
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (_homeController.validateLogin(user))
+            {
+                return Ok(user);
+            }
+
+            return new UnauthorizedObjectResult(new { message = "Invalid Credentials" });
         }
 
         // GET: ApiController/Create

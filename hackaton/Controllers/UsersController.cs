@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using hackaton.Models;
 using hackaton.Models.DAO;
 using DevOne.Security.Cryptography.BCrypt;
+using hackaton.Models.Caches;
 
 namespace hackaton.Controllers
 {

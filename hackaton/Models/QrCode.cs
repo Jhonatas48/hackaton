@@ -7,9 +7,10 @@ namespace hackaton.Models
     public class QrCode
     {
         public int QRCodeId { get; set; }
-        
+
         [System.ComponentModel.DataAnnotations.Required]
-        [MaxLength(20)]
+        [MaxLength(36)]
+        
         public string Content { get; set; }
     }
 }
