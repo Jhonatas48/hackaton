@@ -2,6 +2,7 @@
 using hackaton.Models;
 using hackaton.Models.Caches;
 using hackaton.Models.DAO;
+using hackaton.Models.Injectors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
@@ -20,12 +21,19 @@ namespace hackaton.Controllers
             _context = context;
             _userCacheService = cache;
         }
-
+      
         public IActionResult Index()
         {
+            var session = HttpContext.Session;
+            
+            if (!string.IsNullOrEmpty(session.GetString("CPF")) && !string.IsNullOrEmpty(session.GetString("SessionId")) &&  session.GetInt32("UserId") != null ) {
+                 
+                return RedirectToAction("Index", "Client");
+            }
+
             return View();
         }
-       
+
         public IActionResult Login() {
 
             return View();
@@ -39,9 +47,11 @@ namespace hackaton.Controllers
                 return false;
             }
 
-                return true;
+           
+            return true;
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Login(User user)
         {
             if (user == null) {
@@ -54,8 +64,12 @@ namespace hackaton.Controllers
                 ModelState.AddModelError("Password", "CPF ou Senha inválidos");
                 return View();
             }
-           
-            return View("Privacy");
+            user = _userCacheService.GetUserByCPFAsync(user.CPF);
+            HttpContext.Session.SetString("SessionId", user.CPF);
+            HttpContext.Session.SetInt32("UserId", user.Id);
+            HttpContext.Session.SetString("CPF", user.CPF);
+
+            return RedirectToAction("Index","Client");
            
         }
 
@@ -66,15 +80,33 @@ namespace hackaton.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Register(User user)
         {
-            return View("SucessRegister");
+           
+                var cpfExists =  _context.Users.Any(u => u.CPF == user.CPF);
+                if (cpfExists)
+                {
+                    ModelState.AddModelError("CPF", "O CPF já está cadastrado.");
+                    return View(user);
+                }
+            
+
+            user.Password = BCryptHelper.HashPassword(user.Password,BCryptHelper.GenerateSalt());
+            _context.Users.Add(user);
+            _context.SaveChanges();
+            user = _context.Users.Where(u => u.CPF.Equals(user.CPF)).FirstOrDefault();
+            return View("SucessRegister",user);
         }
 
         public IActionResult SucessRegister() {
+            
             return View();
         }
 
+        public IActionResult PermissionDenied() {
+            return View();
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

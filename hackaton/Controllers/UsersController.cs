@@ -9,6 +9,8 @@ using hackaton.Models;
 using hackaton.Models.DAO;
 using DevOne.Security.Cryptography.BCrypt;
 using hackaton.Models.Caches;
+using hackaton.Models.Validations;
+using hackaton.Models.Injectors;
 
 namespace hackaton.Controllers
 {
@@ -20,10 +22,9 @@ namespace hackaton.Controllers
         {
             _context = context;
             _userCacheService = cache;
-
         }
 
-        private readonly Context context;
+        // private readonly Context context;
         public IActionResult AllowedRegister(string cpf)
         {
             Console.WriteLine(cpf);
@@ -34,8 +35,11 @@ namespace hackaton.Controllers
             }
 
             return Json("CPF já cadastrado");
-           
+
         }
+
+       // [ServiceFilter(typeof(RequireLoginAttributeFactory))]
+        [ServiceFilter(typeof(RequireLoginAdminAttributeFactory))]
         // GET: Users
         public async Task<IActionResult> Index()
         {
@@ -45,6 +49,7 @@ namespace hackaton.Controllers
         }
 
         // GET: Users/Details/5
+        [ServiceFilter(typeof(RequireLoginAttributeFactory))]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Users == null)
@@ -63,6 +68,9 @@ namespace hackaton.Controllers
         }
 
         // GET: Users/Create
+        [ServiceFilter(typeof(RequireLoginAttributeFactory))]
+
+        [ServiceFilter(typeof(RequireLoginAdminAttributeFactory))]
         public IActionResult Create()
         {
             return View();
@@ -72,6 +80,8 @@ namespace hackaton.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [ServiceFilter(typeof(RequireLoginAttributeFactory))]
+        [ServiceFilter(typeof(RequireLoginAdminAttributeFactory))]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Password,CPF,IsAdmin")] User user)
         {
@@ -95,6 +105,8 @@ namespace hackaton.Controllers
         }
 
         // GET: Users/Edit/5
+        [ServiceFilter(typeof(RequireLoginAttributeFactory))]
+        [ServiceFilter(typeof(RequireLoginAdminAttributeFactory))]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Users == null)
@@ -114,7 +126,9 @@ namespace hackaton.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [ServiceFilter(typeof(RequireLoginAttributeFactory))]
         [ValidateAntiForgeryToken]
+       
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Password,CPF,IsAdmin")] User user)
         {
             if (id != user.Id)
@@ -148,6 +162,7 @@ namespace hackaton.Controllers
         }
 
         // GET: Users/Delete/5
+        [ServiceFilter(typeof(RequireLoginAttributeFactory))]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Users == null)
@@ -167,6 +182,7 @@ namespace hackaton.Controllers
 
         // POST: Users/Delete/5
         [HttpPost, ActionName("Delete")]
+        [ServiceFilter(typeof(RequireLoginAttributeFactory))]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {

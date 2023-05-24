@@ -25,7 +25,7 @@ namespace hackaton.Controllers
           return View();
         }
 
-        public async Task<IActionResult> GenerateQrCode() {
+        public IActionResult GenerateQrCode(User user) {
           //  string text = "Testando QrCOde";
             // Define o texto para o QR Code
             string qrCodeText = Guid.NewGuid().ToString();
@@ -37,14 +37,28 @@ namespace hackaton.Controllers
                 return retorno;
                
             }
+
+            if (string.IsNullOrEmpty(user.CPF))
+            {
+                return BadRequest();
+            }
             Console.WriteLine("Texto: "+qrCodeText);
             Console.WriteLine("Tamanho: " + qrCodeText.Length);
-           /* if (_qrCodeCacheService.GetQRCodeByContentAsync(qrCodeText) == null) {
+           if (_qrCodeCacheService.GetQRCodeByContentAsync(qrCodeText) == null) {
 
-                _context.QrCodes.Add(new QrCode{ Content = qrCodeText });
-                await _context.SaveChangesAsync();
+                QrCode qr = new QrCode
+                {
+                    Content = qrCodeText,
+                    UserId = user.Id,
+                  
+                    TimeExpiration = DateTime.Now.AddSeconds(30)//.AddMinutes(5)
+                };
+
+
+                _context.QrCodes.Add(qr);
+                 _context.SaveChanges();
             }
-           */
+           
             // Configurações do QR Code
             byte[] imageBytes;
 

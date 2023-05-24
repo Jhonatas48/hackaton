@@ -2,6 +2,7 @@
 using hackaton.Models.Security;
 using hackaton.Models;
 using Microsoft.DotNet.Scaffolding.Shared.Messaging;
+using hackaton.Models.DAO;
 
 namespace hackaton.Controllers
 {
@@ -9,10 +10,12 @@ namespace hackaton.Controllers
     {
 
         private readonly HomeController _homeController;
+        private readonly Context _context;
 
-       public ApiController(HomeController homeController)
+       public ApiController(HomeController homeController,Context context)
        {
          _homeController = homeController;
+         _context = context;
 
         }
     // GET: ApiController/QRCode
@@ -20,7 +23,44 @@ namespace hackaton.Controllers
  
         public ActionResult QRCode([FromBody] QrCode qrCode)
         {
-            return Json(qrCode);
+            if (qrCode == null || string.IsNullOrEmpty(qrCode.Content)) {
+                return new BadRequestObjectResult(new { message = "QrCode is required" });
+            }
+
+            QrCode qrCodeRetrieve = _context.QrCodes.Where(qr => qr.Content.Equals(qrCode.Content)).FirstOrDefault();
+            
+            if(qrCodeRetrieve == null)
+            {
+                return NotFound();
+            }
+            qrCode = new QrCode
+            {
+                     QRCodeId = qrCodeRetrieve.QRCodeId,
+                    Content = qrCodeRetrieve.Content,
+                    User = qrCodeRetrieve.User,
+                    UserId = qrCodeRetrieve.UserId,
+                    Expired = qrCodeRetrieve.Expired,
+                    TimeExpiration = qrCodeRetrieve.TimeExpiration
+
+             };
+
+            qrCodeRetrieve.Expired = true;
+            _context.Update(qrCodeRetrieve);
+            _context.SaveChanges();
+
+            if (qrCodeRetrieve.TimeExpiration <= DateTime.Now || qrCode.Expired)
+            {
+                var message = new
+                {
+                    Message = "QrCode is expired"
+
+                };
+                return new UnauthorizedObjectResult(message);
+            }
+
+           
+
+            return Json(qrCodeRetrieve);
         }
 
         // GET: ApiController/Details/5

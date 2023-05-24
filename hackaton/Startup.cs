@@ -1,7 +1,9 @@
 ﻿using hackaton.Controllers;
 using hackaton.Models.Caches;
 using hackaton.Models.DAO;
+using hackaton.Models.Injectors;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace hackaton
 {
@@ -21,25 +23,65 @@ namespace hackaton
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(5);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+                options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+            });
+
             services.AddControllersWithViews();
 
             //Configura o sistema de Cache
             services.AddMemoryCache();
+
+
+            services.AddScoped<RequireLoginAttributeFactory>();
+            services.AddScoped<RequireLoginAdminAttributeFactory>();
             //Adiciona a Classe UserCacheService no escopo para ser usado como cache
             services.AddScoped<UserCacheService>();
             //Adiciona a Classe QRCodeService no escopo para ser usado como cache
             services.AddScoped<QRCodeCacheService>();
-
-
             services.AddScoped<HomeController>();
             //configuração para acesso ao banco de dados
             services.AddDbContext<Context>(options => options.UseSqlServer(
                Configuration["Data:ConnectionString"]));
             services.AddMvc();
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = "MyAuthenticationScheme";
+                options.DefaultForbidScheme = "MyAuthenticationScheme";
+            }
+            ).AddCookie("MyAuthenticationScheme", options =>
+            {
+                // Nome do cookie usado para armazenar as informações de autenticação
+                options.Cookie.Name = "MyAuthCookie";
+
+                // Define se o cookie é acessível apenas por HTTP (HttpOnly)
+                options.Cookie.HttpOnly = true;
+
+                // Define se o cookie deve ser enviado apenas em conexões seguras (HTTPS)
+                options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+
+                // Define o tempo de expiração do cookie
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+
+                // Define a rota para redirecionar o usuário quando ocorrer uma autenticação falhada
+                options.AccessDeniedPath = "/Home/PermissionDenied";
+
+                // Define a rota para redirecionar o usuário quando ocorrer um desafio de autenticação
+               // options.LoginPath = "/Home/Login";
+
+                // Define a rota para redirecionar o usuário após fazer logout
+                options.LogoutPath = "/Home";
+            });
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, UserCacheService userCache, Context context)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, UserCacheService userCache, QRCodeCacheService qrCodeCache,Context context)
         {
             if (env.IsDevelopment())
             {
@@ -55,7 +97,7 @@ namespace hackaton
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseSession();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -67,9 +109,9 @@ namespace hackaton
             }
 
             );
-            /*
+            
             // Obter a lista de usuários do banco de dados
-            var users = context.Users.;//.ToList();
+            var users = context.Users;//.ToList();
            
             if(users != null)
             {
@@ -80,7 +122,17 @@ namespace hackaton
                 }
             }
             // Adicionar cada usuário ao cache
-           */
+
+            var qrCodes = context.QrCodes;
+            if(qrCodes != null)
+            {
+
+                var qrList = qrCodes.ToList();
+                foreach (var qr in qrList)
+                {
+                     qrCodeCache.AddQRCodeToCache(qr);
+                }
+            }
 
         }
 

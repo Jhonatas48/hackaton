@@ -4,9 +4,17 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<p>
+   
 <h1>Index</h1>
 
+  <a asp-action="Logout" asp-method="post" asp-controller="Client" class="btn btn-primary">Deslogar</a>
+</p>
+
+<div class="form-group">
+
+    <input type="submit" value="Teste" class="btn btn-primary" asp-action="Logout" asp-controller="Client" />
+</div>
 <p>
     <a asp-action="Create">Create New</a>
 </p>

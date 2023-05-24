@@ -4,10 +4,10 @@ using hackaton.Models.DAO;
 
 namespace hackaton.Models.Validations
 {
-    public class RequireLoginAttribute : Attribute, IAsyncAuthorizationFilter
+    public class RequireLoginAdminAttribute : Attribute, IAsyncAuthorizationFilter
     {
         private readonly Context _context;
-        public RequireLoginAttribute(Context context)
+        public RequireLoginAdminAttribute(Context context)
         {
             _context = context;
 
@@ -31,12 +31,12 @@ namespace hackaton.Models.Validations
                 //;
 
             }
-            User user = _context.Users.Where(u => u.Id == userId && u.CPF.Equals(cpf)).FirstOrDefault();
+            User user = _context.Users.Where(u => u.Id == userId && u.CPF.Equals(cpf) && u.IsAdmin).FirstOrDefault();
             if(user == null)
             {
                 //context.Result = new RedirectToActionResult("Login", "Home", null);
 
-                context.Result = new RedirectToActionResult("Login", "Home", null);
+                context.Result = new ForbidResult();
                 return;
 
             }

@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "SucessRegister";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
 
 <h1>Sucesso</h1>
@@ -26,7 +27,7 @@
        
         <h2>
             Para continuar o registro,logue no aplicativo usando o QRCode
-            <img src="@Url.Action("GenerateQrCode", "QrCode")" />
+            <img src="@Url.Action("GenerateQrCode", "QrCode",Model)" />
         </h2>
     </dl>
 </div>
