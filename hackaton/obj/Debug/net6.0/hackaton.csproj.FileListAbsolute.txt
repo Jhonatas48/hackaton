@@ -289,3 +289,10 @@ E:\Visual Studio\Workspace\hackaton\hackaton\bin\Debug\net6.0\runtimes\win-x86\n
 E:\Visual Studio\Workspace\hackaton\hackaton\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 E:\Visual Studio\Workspace\hackaton\hackaton\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
 E:\Visual Studio\Workspace\hackaton\hackaton\bin\Debug\net6.0\QRCoder.dll
+E:\Visual Studio\Workspace\hackaton\hackaton\bin\Debug\net6.0\libman.json
+E:\Visual Studio\Workspace\hackaton\hackaton\bin\Debug\net6.0\Microsoft.AspNet.SignalR.Core.dll
+E:\Visual Studio\Workspace\hackaton\hackaton\bin\Debug\net6.0\Microsoft.AspNet.SignalR.SystemWeb.dll
+E:\Visual Studio\Workspace\hackaton\hackaton\bin\Debug\net6.0\Microsoft.Owin.dll
+E:\Visual Studio\Workspace\hackaton\hackaton\bin\Debug\net6.0\Microsoft.Owin.Host.SystemWeb.dll
+E:\Visual Studio\Workspace\hackaton\hackaton\bin\Debug\net6.0\Microsoft.Owin.Security.dll
+E:\Visual Studio\Workspace\hackaton\hackaton\bin\Debug\net6.0\Owin.dll

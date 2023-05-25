@@ -2,6 +2,8 @@
 using hackaton.Models.Caches;
 using hackaton.Models.DAO;
 using hackaton.Models.Injectors;
+using hackaton.Models.WebSocket;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
@@ -23,11 +25,13 @@ namespace hackaton
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddDistributedMemoryCache();
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(5);
                 options.Cookie.HttpOnly = true;
+                options.Cookie.SameSite = SameSiteMode.Strict;
                 options.Cookie.IsEssential = true;
                 options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
             });
@@ -37,7 +41,10 @@ namespace hackaton
             //Configura o sistema de Cache
             services.AddMemoryCache();
 
-
+            //Configura o aplicativo para poder receber conexões websockets
+            services.AddSignalR();
+            //Configura a Classe RedirectClient para ser usado no injetor do aspnet
+            services.AddScoped<RedirectClient>();
             services.AddScoped<RequireLoginAttributeFactory>();
             services.AddScoped<RequireLoginAdminAttributeFactory>();
             //Adiciona a Classe UserCacheService no escopo para ser usado como cache
@@ -49,7 +56,7 @@ namespace hackaton
             services.AddDbContext<Context>(options => options.UseSqlServer(
                Configuration["Data:ConnectionString"]));
             services.AddMvc();
-            services.AddAuthentication(options =>
+            services.AddAuthentication( options =>
             {
                 options.DefaultScheme = "MyAuthenticationScheme";
                 options.DefaultForbidScheme = "MyAuthenticationScheme";
@@ -64,6 +71,7 @@ namespace hackaton
 
                 // Define se o cookie deve ser enviado apenas em conexões seguras (HTTPS)
                 options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+                options.Cookie.SameSite = SameSiteMode.Strict;
 
                 // Define o tempo de expiração do cookie
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
@@ -102,6 +110,8 @@ namespace hackaton
 
             app.UseEndpoints(endpoints =>
             {
+                //Adiciona o RedirectClient no sistema de mapeamento de endpoint
+                endpoints.MapHub<RedirectClient>("/RedirectClient");
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

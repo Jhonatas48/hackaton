@@ -3,7 +3,9 @@ using hackaton.Models;
 using hackaton.Models.Caches;
 using hackaton.Models.DAO;
 using hackaton.Models.Injectors;
+using hackaton.Models.WebSocket;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
@@ -13,6 +15,7 @@ namespace hackaton.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private Context _context;
+        private readonly IHubContext<RedirectClient> _redirectClient;
 
         private UserCacheService _userCacheService;
         public HomeController(ILogger<HomeController> logger,Context context,UserCacheService cache)
@@ -20,6 +23,7 @@ namespace hackaton.Controllers
             _logger = logger;
             _context = context;
             _userCacheService = cache;
+           
         }
       
         public IActionResult Index()
@@ -68,7 +72,7 @@ namespace hackaton.Controllers
             HttpContext.Session.SetString("SessionId", user.CPF);
             HttpContext.Session.SetInt32("UserId", user.Id);
             HttpContext.Session.SetString("CPF", user.CPF);
-
+          
             return RedirectToAction("Index","Client");
            
         }
@@ -95,7 +99,11 @@ namespace hackaton.Controllers
             user.Password = BCryptHelper.HashPassword(user.Password,BCryptHelper.GenerateSalt());
             _context.Users.Add(user);
             _context.SaveChanges();
-            user = _context.Users.Where(u => u.CPF.Equals(user.CPF)).FirstOrDefault();
+           // user = _context.Users.Where(u => u.CPF.Equals(user.CPF)).FirstOrDefault();
+            user = _userCacheService.GetUserByCPFAsync(user.CPF);
+            HttpContext.Session.SetString("SessionId", user.CPF);
+            HttpContext.Session.SetInt32("UserId", user.Id);
+            HttpContext.Session.SetString("CPF", user.CPF);
             return View("SucessRegister",user);
         }
 

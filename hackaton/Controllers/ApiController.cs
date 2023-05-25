@@ -3,6 +3,8 @@ using hackaton.Models.Security;
 using hackaton.Models;
 using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 using hackaton.Models.DAO;
+using hackaton.Models.WebSocket;
+using Microsoft.AspNetCore.SignalR;
 
 namespace hackaton.Controllers
 {
@@ -11,17 +13,18 @@ namespace hackaton.Controllers
 
         private readonly HomeController _homeController;
         private readonly Context _context;
-
-       public ApiController(HomeController homeController,Context context)
+        private readonly IHubContext<RedirectClient> _redirectClient;
+        public ApiController(HomeController homeController,Context context, IHubContext<RedirectClient> redirectClient)
        {
          _homeController = homeController;
          _context = context;
+         _redirectClient = redirectClient;
 
         }
     // GET: ApiController/QRCode
     [BearerAuthorize]
  
-        public ActionResult QRCode([FromBody] QrCode qrCode)
+        public async Task<ActionResult> QRCodeAsync([FromBody] QrCode qrCode)
         {
             if (qrCode == null || string.IsNullOrEmpty(qrCode.Content)) {
                 return new BadRequestObjectResult(new { message = "QrCode is required" });
@@ -45,7 +48,8 @@ namespace hackaton.Controllers
              };
 
             qrCodeRetrieve.Expired = true;
-            _context.Update(qrCodeRetrieve);
+            //_context.Update(qrCodeRetrieve);
+            _context.QrCodes.Remove(qrCodeRetrieve);
             _context.SaveChanges();
 
             if (qrCodeRetrieve.TimeExpiration <= DateTime.Now || qrCode.Expired)
@@ -57,9 +61,8 @@ namespace hackaton.Controllers
                 };
                 return new UnauthorizedObjectResult(message);
             }
-
-           
-
+            //Direciona o usuario para o /Client/Index
+            await _redirectClient.Clients.Group("pc_user"+qrCode.UserId).SendAsync("redirect","/Client/Index");
             return Json(qrCodeRetrieve);
         }
 

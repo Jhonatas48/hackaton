@@ -24,9 +24,12 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.CPF)
         </dd>
-       
+        
         <h2>
             Para continuar o registro,logue no aplicativo usando o QRCode
+            <p>
+                OBS: QR Code é valido somente por 5 minutos
+            </p>
             <img src="@Url.Action("GenerateQrCode", "QrCode",Model)" />
         </h2>
     </dl>
@@ -34,3 +37,22 @@
 <div>
     <a asp-action="Index">Voltar</a>
 </div>
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+<script>
+    //Função Responsavel por configurar o websocket do RedirectClient
+    const connection = new signalR.HubConnectionBuilder()
+        //Adiciona a Url apontando para o RedirectClient
+        .withUrl("/RedirectClient")
+        .build();
+
+    connection.on("redirect", (url) => {
+        //Chama o método removeClientToGroup da Classe RedirectClient para remover o PC do grupo
+        connection.invoke("removeClientToGroup", "pc_user" + @Model.Id);
+        window.location.href = url;
+    });
+
+    connection.start().then(() => {
+        // chamar o método AdicionarAoGrupo da Classe RedirectClient para adicionar o navegador do PC do usuário no grupo "pc"
+        connection.invoke("addClientToGroup", "pc_user" + @Model.Id);
+    }).catch((err) => console.error(err.toString()));
+</script>
