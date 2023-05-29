@@ -2,10 +2,144 @@
 
 @{
     ViewData["Title"] = "Register";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = null;
 }
 
-<h1>Register</h1>
+<head>
+    <link rel="stylesheet" href="~/css/sharedStyles.css" type="text/css" />
+</head>
+
+<div class="header">
+    <div class="header-logo">
+        <img src="https://raw.githubusercontent.com/WarmMateTea/ImageRepo/1f98e9ba4b641cb18ce0d6dda5c66204564ff52a/logo%2Bnome.svg"></img>
+    </div>
+    <div class="header-buttons">
+        <a asp-action="Login" type="button" class="btn btn-primary btn-override primary-color-override btn-header">
+            <span>Login</span>
+        </a>
+        <a asp-action="Index" type="button" class="btn btn-primary btn-override primary-color-override btn-header">
+            <span>Home</span> <img src="https://raw.githubusercontent.com/WarmMateTea/ImageRepo/976c737dd815789553dc686c0984cba499f04a76/orange-home.svg" class="icon home"></img>
+        </a>
+    </div>
+</div>
+<div class="main_container">
+
+    <div class="main_card signup">
+
+        <div class="content">
+            <form asp-action="Register" style="min-width:100%">
+            @Html.AntiForgeryToken()
+            <div class="leading-generic">
+                <div class="techagro">
+                    <span class="text_primary">tech</span><span class="text_secondary">agro</span>
+                </div>
+                <div class="heading">
+                    <span>Crie sua conta</span>
+                </div>
+                <div class="detail">
+                    <span>Comece a desfrutar de nossos serviços!</span>
+                </div>
+            </div>
+            <div class="trailing">
+                <div class="inputs">
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group" style="min-width:100%">
+                        <label class="input-description">Nome</label>
+                        <div class="input env" data-cluster="btn1">
+                            <div class="sub">
+                                <input class="form-control textbox" data-cluster="btn1" placeholder="Digite seu nome aqui" asp-for="Name">
+                            </div>
+                        </div>
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group" style="min-width:100%">
+                        <label class="input-description">Senha</label>
+                        <div class="input env" data-cluster="btn1">
+                            <div class="sub">
+                                <img src="https://raw.githubusercontent.com/WarmMateTea/ImageRepo/f85728639824166be9728567f69f6f2289494d2e/vpn_key_FILL0_wght400_GRAD0_opsz48.svg" class="icon"></img>
+                                <input class="form-control textbox" data-cluster="btn1" type="password" placeholder="●●●●●●" asp-for="Password">
+                            </div>
+                            <img src="https://raw.githubusercontent.com/WarmMateTea/ImageRepo/f85728639824166be9728567f69f6f2289494d2e/visibility_off_FILL0_wght400_GRAD0_opsz48.svg" class="icon eye hide"></img>
+                        </div>
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+
+                        @*                    <div class="form-group" style="min-width:100%">    <!--PRECISA AJEITAR ISSO PRA BATER COM A OUTRA SENHA-->
+                        <label class="input-description">Confirmar Senha</label>
+                        <div class="input env" data-cluster="btn1">
+                            <div class="sub">
+                                <img src="https://raw.githubusercontent.com/WarmMateTea/ImageRepo/f85728639824166be9728567f69f6f2289494d2e/vpn_key_FILL0_wght400_GRAD0_opsz48.svg" class="icon"></img>
+                                <input class="textbox" data-cluster="btn1" type="password" placeholder="●●●●●●">
+                            </div>
+                            <img src="https://raw.githubusercontent.com/WarmMateTea/ImageRepo/f85728639824166be9728567f69f6f2289494d2e/visibility_off_FILL0_wght400_GRAD0_opsz48.svg" class="icon eye hide"></img>
+                        </div>
+                        <span asp-validation-for="" class="text-danger"></span>
+                    </div*@
+
+                    <div class="form-group" style="min-width:100%">
+                        <label class="input-description">CPF</label>
+                        <div class="input env" data-cluster="btn1">
+                            <div class="sub">
+                                <img src="https://raw.githubusercontent.com/WarmMateTea/ImageRepo/f85728639824166be9728567f69f6f2289494d2e/badge_FILL0_wght400_GRAD0_opsz48.svg" class="icon"></img>
+                                <input class="form-control textbox" data-cluster="btn1" placeholder="123.456.789-00" asp-for="CPF">
+                            </div>
+                            <img src="https://raw.githubusercontent.com/WarmMateTea/ImageRepo/f85728639824166be9728567f69f6f2289494d2e/check_circle_FILL0_wght400_GRAD0_opsz48.svg" class="icon"></img>
+                        </div>
+                        <span asp-validation-for="CPF" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="actions">
+                    <div class="form-group" style="min-width:100%">
+                        <input type="submit" value="Registrar" class="btn btn-primary btn-override primary-color-override">
+                    </div>
+                </div>
+
+            </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.textbox').on('focus', function () {
+            $(this).parent().parent('.env').addClass('env-margin');
+        });
+
+        $('.textbox').on('blur', function () {
+            $(this).parent().parent('.env').removeClass('env-margin');
+        });
+
+        $('.env').on('click', function () {
+            $(this).children().children('.textbox').focus();
+        });
+
+        $('.eye').on('click', function () {
+            console.log('aa');
+            if ($(this).hasClass('hide')) {
+                console.log("rem");
+                $(this).removeClass('hide');
+                $(this).addClass('show');
+                $(this).siblings('.sub').children('.textbox').attr('type', '');
+                $(this).attr('src', 'https://raw.githubusercontent.com/WarmMateTea/ImageRepo/f85728639824166be9728567f69f6f2289494d2e/visibility_FILL0_wght400_GRAD0_opsz48.svg')
+            }
+            else {
+                $(this).removeClass('show');
+                $(this).addClass('hide');
+                $(this).attr('src', 'https://raw.githubusercontent.com/WarmMateTea/ImageRepo/f85728639824166be9728567f69f6f2289494d2e/visibility_off_FILL0_wght400_GRAD0_opsz48.svg');
+                $(this).siblings('.sub').children('.textbox').attr('type', 'password');
+            }
+        })
+    });
+</script>
+
+@*<h1>Register</h1>
 
 <h4>User</h4>
 <hr />
@@ -36,13 +170,15 @@
             </div>
         </form>
     </div>
-</div>
+</div>*@
+
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
 <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-<div>
-    <a asp-action="Index">Voltar</a>
-</div>
+
+@*<div>
+    <a asp-action="Index">Voltar</a>s
+</div>*@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

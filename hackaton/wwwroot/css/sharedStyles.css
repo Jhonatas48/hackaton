@@ -1,0 +1,457 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+    --color_primary: #ffa500;
+    --color_primary_inv: #FFFFFF;
+    --color_secondary: #FFE6BF;
+    --color_secondary_inv: #636C79;
+    --bg-color: #F1F2F4;
+}
+
+.text_primary {
+    color: #0;
+}
+
+.text_secondary {
+    color: #ffa500;
+}
+
+html, body {
+    font-family: 'Inter', sans-serif;
+    height: 100%;
+    min-height: 100%;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+a {
+    text-decoration: none;
+}
+
+    a:link {
+        text-decoration: none;
+    }
+
+    a:visited {
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+
+    a:active {
+        text-decoration: none;
+    }
+
+.main_container {
+    /*   background-color: var(--bg-color); */
+    background-image: url(https://github.com/WarmMateTea/ImageRepo/blob/main/bg_pattern.png?raw=true);
+    background-size: 8%;
+    background-repeat: repeat;
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column; /*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1*/
+    justify-content: center;
+    align-items: center;
+}
+
+.header {
+    background-color: var(--bg-color);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5em;
+    gap: 1%;
+    width: 100%;
+    height: auto;
+    box-shadow: 0px 0px 22px -4px rgba(13, 16, 23, 0.08), 0px 8px 10px -6px rgba(13, 16, 23, 0.04), inset 0px 0px 0px 1px #E0E3E6;
+    border-radius: 8px;
+}
+
+.header-buttons {
+    display: flex;
+    flex-direcion: row;
+    justify-content: flex-end;
+    min-width: 30%;
+    gap: 0.5em;
+}
+
+.header-logo {
+    padding: 0.5em;
+    display: flex;
+    min-width: max-content;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.logo-header {
+    object-fit: scale-down;
+    max-width: 5%;
+}
+
+.main_card {
+    background-color: #000000;
+    padding: 20px;
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-content: space-around;
+    padding: 24px 24px 28px;
+    gap: 48px;
+    isolation: isolate;
+    width: fit-content;
+    max-width: 75%;
+    height: fit-content;
+    background: #FFFFFF;
+    /* 🌞 Ring-1 [Light]/1px gray-200 | shadow-xl */
+    box-shadow: 0px 18px 22px -4px rgba(13, 16, 23, 0.08), 0px 8px 10px -6px rgba(13, 16, 23, 0.04), inset 0px 0px 0px 1px #E0E3E6;
+    border-radius: 8px;
+}
+
+.leading {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    text-align: center;
+}
+
+.leading-generic {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6em;
+    text-align: left;
+    width: fit-content;
+    height: auto;
+}
+
+.trailing {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1em;
+    width: fit-content;
+    height: auto;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5em;
+    width: fit-content;
+    height: auto;
+}
+
+.input-description {
+    /* Inter Medium/14 Text sm */
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    /* System colors/Gray/700 */
+    color: #2F3641;
+}
+
+.input {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 12px;
+    gap: 1em;
+    min-width: 368px;
+    height: auto;
+    background: #FFFFFF;
+    border: 1px solid #CDD1D6;
+    box-shadow: 0px 1px 2px rgba(13, 16, 23, 0.06);
+    border-radius: 8px;
+}
+
+.checkbox-w-text {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 0.7em;
+    width: fit-content;
+    height: auto;
+}
+
+.checkbox {
+    margin: 0;
+    box-sizing: border-box;
+    width: 0.9em;
+    height: 0.9em;
+    background: #FFFFFF;
+    border: 1px solid #99A0A8;
+    border-radius: 4px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 24px;
+    min-width: 100%;
+}
+
+.techagro {
+    font-family: 'Reality Hyper';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 46px;
+    color: #000000;
+    text-align: center;
+}
+
+.logo {
+    max-width: 9em;
+    object-fit: contain;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.heading {
+    min-width: 100%;
+    /* Inter Medium/20 Text xl */
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.2em;
+    line-height: 30px;
+    /* or 150% */
+    /*   text-align: center; <- should inherit from "leading"*/
+    /* System colors/Gray/900 */
+    color: #0D1017;
+}
+
+.detail {
+    min-width: 100%;
+    /* Inter Normal/14 Text sm */
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.8em;
+    line-height:;
+    /* identical to box height, or 143% */
+    /*   text-align: center; <- should inherit from "leading"*/
+    /* System colors/Gray/500 */
+    color: #636C79;
+    /* Inside auto layout */
+    /*   flex: none;
+  order: 3;
+  align-self: stretch;
+  flex-grow: 0; */
+}
+
+.actions {
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 14px;
+    width: 100%;
+    height: 100%;
+    /* Inside auto layout */
+    /*   flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+  z-index: 1; */
+}
+
+.btn-override {
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 18px;
+    gap: 8px;
+    border: 1px solid #00000000;
+    width: 100%;
+    /* font config */
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.btn-header {
+    width: 40%;
+}
+
+.primary-color-override {
+    background: var(--color_primary);
+    color: var(--color_primary_inv);
+}
+
+    .primary-color-override:hover {
+        border-color: var(--color_primary);
+        background: var(--color_primary_inv);
+        color: var(--color_primary);
+    }
+
+.secondary-color-override {
+    background: var(--color_secondary);
+    color: var(--color_secondary_inv);
+}
+
+    .secondary-color-override:hover {
+        border-color: var(--color_secondary);
+        background: var(--color_secondary_inv);
+        color: var(--color_secondary);
+    }
+
+/* inútil? */
+div[data-cluster="btn1"]:has(input) {
+    margin: 2px solid red;
+}
+
+.env {
+    display: flex;
+    justify-content: space-between;
+}
+
+.sub {
+    display: flex;
+    justfiy-content: flex-start;
+    gap: 0.5em;
+}
+
+.env-margin {
+    box-sizing: border-box;
+    outline: 2px solid black;
+}
+
+input[data-cluster="btn1"], input[data-cluster="btn1"]:focus, input[data-cluster="btn1"]:active {
+    border: none;
+    outline: none;
+}
+
+.icon {
+    max-width: 1.5em;
+}
+
+/* nota: o trigger aqui vai vir ou de uma loucura JS, ou do ASP.NET - não sei bem como puxar isso dele, considernado que a verificação fica num data annotation */
+.check-filter {
+    filter: invert(56%) sepia(68%) saturate(546%) hue-rotate(81deg) brightness(97%) contrast(84%);
+}
+
+.home {
+    filter: brightness(0) invert(1);
+    transition: .15s filter ease-in-out;
+}
+
+div.btn:hover .home {
+    filter: none;
+}
+
+/*==============================================================================*/
+/* + Exibição em lista (ADM) */
+/*==============================================================================*/
+
+.adm-search {
+    min-width: 70%;
+
+    .trailing {
+        min-width: 100%;
+    }
+}
+
+.card-produtor {
+    min-width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5em 2.5em;
+    gap: 0.3em;
+
+    .heading {
+        min-width: fit-content;
+    }
+
+    .actions {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+}
+
+.field-env {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 14px;
+}
+
+.danger-color-override {
+    background: var(--color_danger);
+    color: var(--color_danger_inv);
+}
+
+.danger-color-override:hover {
+    border-color: var(--color_danger);
+    background: var(--color_danger_inv);
+    color: var(--color_danger);
+}
+
+/*==============================================================================*/
+/* + Cadastro (Produtor) */
+/*==============================================================================*/
+
+
+.signup {
+    min-width: 50%;
+    .trailing, .inputs, .env, .textbox {
+    min-width: 100%;
+    }
+
+    .sub {
+    min-width: 80%;
+    }
+}
+
+
+/*==============================================================================*/
+/* + Perfil (Produtor) */
+/*==============================================================================*/
+.signup {
+    min-width: 50%;
+
+    .trailing, .inputs, .env, .textbox {
+        min-width: 100%;
+    }
+
+    .sub {
+        min-width: 80%;
+    }
+
+}
+
+/* Vai puxar a classe danger lá do exibição em lista; bug de lá acontecendo com o campo CPF, mas é só visual */

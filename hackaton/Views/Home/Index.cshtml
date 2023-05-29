@@ -1,8 +1,13 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    Layout = null;
 }
 
-<div class="text-center">
+<head>
+    <link rel="stylesheet" href="~/css/landpage.css" type="text/css" />
+</head>
+
+@*<div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
@@ -13,4 +18,34 @@
 
 <div>
     <a asp-action="Register">Registrar</a>
+</div>*@
+
+<div class="main_container">
+    <div class="main_card">
+        <div class="content">
+            <div class="leading">
+                <div class="techagro">
+                    <span class="text_primary">tech</span><span class="text_secondary">agro</span>
+                </div>
+                <div class="logo"><img class="logo" src="https://github.com/WarmMateTea/ImageRepo/blob/main/techagro_icon_logo.png?raw=true"></img></div>
+                <div class="heading">
+                    <span>Portal de Cadastro</span>
+                </div>
+                <div class="detail">
+                    <span>Crie seu cadastro ou entre com uma conta existente</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="actions">
+            <a class="btn btn-primary btn-override primary-color-override" asp-action="Register">
+                Criar Perfil
+            </a>
+            <a class="btn btn-secondary btn-override secondary-color-override" asp-action="Login">
+                Login
+            </a>
+        </div>
+    </div>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>

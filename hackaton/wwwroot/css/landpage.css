@@ -1,0 +1,224 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+    --color_primary: #ffa500;
+    --color_primary_inv: #FFFFFF;
+    --color_secondary: #FFE6BF;
+    --color_secondary_inv: #636C79;
+    --bg-color: #F1F2F4;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:active {
+    text-decoration: none;
+}
+
+.text_primary {
+    color: #0;
+}
+
+.text_secondary {
+    color: #ffa500;
+}
+
+html, body {
+    font-family: 'Inter', sans-serif;
+    height: 100%;
+    min-height: 100%;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+.main_container {
+    background-image: url(https://github.com/WarmMateTea/ImageRepo/blob/main/bg_pattern.png?raw=true);
+    background-size: 8%;
+    background-repeat: repeat;
+    background-color: var(--bg-color);
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main_card {
+    background-color: #000000;
+    padding: 20px;
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-content: space-around;
+    padding: 24px 24px 28px;
+    gap: 48px;
+    isolation: isolate;
+    width: fit-content;
+    max-width: 75%;
+    height: fit-content;
+    background: #FFFFFF;
+    /* 🌞 Ring-1 [Light]/1px gray-200 | shadow-xl */
+    box-shadow: 0px 18px 22px -4px rgba(13, 16, 23, 0.08), 0px 8px 10px -6px rgba(13, 16, 23, 0.04), inset 0px 0px 0px 1px #E0E3E6;
+    border-radius: 8px;
+}
+
+.leading {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 24px;
+    min-width: 100%;
+    /* Inside auto layout */
+    /*flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+  z-index: 0;*/
+}
+
+.techagro {
+    font-family: 'Reality Hyper';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 46px;
+    color: #000000;
+    text-align: center;
+    /* Inside auto layout */
+    /* flex: none;
+order: 0;
+flex-grow: 0; */
+}
+
+.logo {
+    max-width: 9em;
+    object-fit: contain;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.heading {
+    min-width: 100%;
+    /* Inter Medium/20 Text xl */
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.2em;
+    line-height: 30px;
+    /* or 150% */
+    text-align: center;
+    /* System colors/Gray/900 */
+    color: #0D1017;
+    /* Inside auto layout */
+    /*   flex: none;
+  order: 2;
+  align-self: stretch;
+  flex-grow: 0; */
+}
+
+.detail {
+    min-width: 100%;
+    /* Inter Normal/14 Text sm */
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.8em;
+    line-height:;
+    /* identical to box height, or 143% */
+    text-align: center;
+    /* System colors/Gray/500 */
+    color: #636C79;
+    /* Inside auto layout */
+    /*   flex: none;
+  order: 3;
+  align-self: stretch;
+  flex-grow: 0; */
+}
+
+.actions {
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 14px;
+    width: 100%;
+    height: 100%;
+    /* Inside auto layout */
+    /*   flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+  z-index: 1; */
+}
+
+.btn-override {
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 18px;
+    gap: 8px;
+    border: 1px solid #00000000;
+    width: 100%;
+    /* font config */
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.primary-color-override {
+    background: var(--color_primary);
+    color: var(--color_primary_inv);
+}
+
+    .primary-color-override:hover {
+        border-color: var(--color_primary);
+        background: var(--color_primary_inv);
+        color: var(--color_primary);
+    }
+
+.secondary-color-override {
+    background: var(--color_secondary);
+    color: var(--color_secondary_inv);
+}
+
+    .secondary-color-override:hover {
+        border-color: var(--color_secondary);
+        background: var(--color_secondary_inv);
+        color: var(--color_secondary);
+    }

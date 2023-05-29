@@ -40,7 +40,7 @@ namespace hackaton.Controllers
 
         public IActionResult Login() {
 
-            return View();
+            return View("Login");
         }
         public  bool validateLogin(User user) {
             var userRetrieve = _context.Users.FirstOrDefault(u => u.CPF == user.CPF);// _userCacheService.GetUserByCPFAsync(user.CPF);//_context.Users.FirstOrDefault(u => u.CPF.Equals(user.CPF));
