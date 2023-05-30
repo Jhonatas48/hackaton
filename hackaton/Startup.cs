@@ -12,7 +12,7 @@ namespace hackaton
     public class Startup
     {
         private readonly Context _context;
-        
+        private readonly bool useSqlServer= true;
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -52,9 +52,18 @@ namespace hackaton
             //Adiciona a Classe QRCodeService no escopo para ser usado como cache
             services.AddScoped<QRCodeCacheService>();
             services.AddScoped<HomeController>();
-            //configuração para acesso ao banco de dados
-            services.AddDbContext<Context>(options => options.UseSqlServer(
-               Configuration["Data:ConnectionString"]));
+
+            if (useSqlServer)
+            {
+                //configuração para acesso ao banco de dados
+                services.AddDbContext<Context>(options => options.UseSqlServer(
+                   Configuration["Data:SqlServerConnectionString"]));
+            }
+            else {
+               
+                services.AddDbContext<Context>(options => options.UseNpgsql(Configuration["Data:PostgresConnectionString"]));
+            }
+         
             services.AddMvc();
             services.AddAuthentication( options =>
             {

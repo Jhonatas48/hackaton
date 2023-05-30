@@ -50,8 +50,8 @@ namespace hackaton.Controllers
                 {
                     Content = qrCodeText,
                     UserId = user.Id,
-                  
-                    TimeExpiration = DateTime.Now.AddSeconds(30)//.AddMinutes(5)
+
+                    TimeExpiration = DateTime.Now.AddSeconds(30).ToUniversalTime()//.AddMinutes(5)
                 };
 
 

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mateu\\source\\repos\\hackaton\\hackaton\\hackaton.csproj": {}
+    "E:\\Visual Studio\\Workspace\\hackaton\\hackaton\\hackaton.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mateu\\source\\repos\\hackaton\\hackaton\\hackaton.csproj": {
+    "E:\\Visual Studio\\Workspace\\hackaton\\hackaton\\hackaton.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mateu\\source\\repos\\hackaton\\hackaton\\hackaton.csproj",
+        "projectUniqueName": "E:\\Visual Studio\\Workspace\\hackaton\\hackaton\\hackaton.csproj",
         "projectName": "hackaton",
-        "projectPath": "C:\\Users\\mateu\\source\\repos\\hackaton\\hackaton\\hackaton.csproj",
-        "packagesPath": "C:\\Users\\mateu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mateu\\source\\repos\\hackaton\\hackaton\\obj\\",
+        "projectPath": "E:\\Visual Studio\\Workspace\\hackaton\\hackaton\\hackaton.csproj",
+        "packagesPath": "C:\\Users\\Ti\\.nuget\\packages\\",
+        "outputPath": "E:\\Visual Studio\\Workspace\\hackaton\\hackaton\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\mateu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Ti\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -76,6 +76,10 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[6.0.13, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[7.0.4, )"
             },
             "QRCoderNetCore": {
               "target": "Package",

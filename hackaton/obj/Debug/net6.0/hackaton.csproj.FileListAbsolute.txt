@@ -594,3 +594,5 @@ C:\Users\mateu\source\repos\hackaton\hackaton\obj\Debug\net6.0\refint\hackaton.d
 C:\Users\mateu\source\repos\hackaton\hackaton\obj\Debug\net6.0\hackaton.pdb
 C:\Users\mateu\source\repos\hackaton\hackaton\obj\Debug\net6.0\hackaton.genruntimeconfig.cache
 C:\Users\mateu\source\repos\hackaton\hackaton\obj\Debug\net6.0\ref\hackaton.dll
+E:\Visual Studio\Workspace\hackaton\hackaton\bin\Debug\net6.0\Npgsql.dll
+E:\Visual Studio\Workspace\hackaton\hackaton\bin\Debug\net6.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll

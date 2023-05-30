@@ -9,121 +9,121 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = hackaton
 build_property.RootNamespace = hackaton
-build_property.ProjectDir = C:\Users\mateu\source\repos\hackaton\hackaton\
+build_property.ProjectDir = E:\Visual Studio\Workspace\hackaton\hackaton\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\mateu\source\repos\hackaton\hackaton
+build_property.MSBuildProjectDirectory = E:\Visual Studio\Workspace\hackaton\hackaton
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/mateu/source/repos/hackaton/hackaton/Views/Client/Index.cshtml]
+[E:/Visual Studio/Workspace/hackaton/hackaton/Views/Client/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50XEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/source/repos/hackaton/hackaton/Views/Home/Index.cshtml]
+[E:/Visual Studio/Workspace/hackaton/hackaton/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/source/repos/hackaton/hackaton/Views/Home/Login.cshtml]
+[E:/Visual Studio/Workspace/hackaton/hackaton/Views/Home/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/source/repos/hackaton/hackaton/Views/Home/PermissionDenied.cshtml]
+[E:/Visual Studio/Workspace/hackaton/hackaton/Views/Home/PermissionDenied.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQZXJtaXNzaW9uRGVuaWVkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/source/repos/hackaton/hackaton/Views/Home/Privacy.cshtml]
+[E:/Visual Studio/Workspace/hackaton/hackaton/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/source/repos/hackaton/hackaton/Views/Home/Register.cshtml]
+[E:/Visual Studio/Workspace/hackaton/hackaton/Views/Home/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/source/repos/hackaton/hackaton/Views/Home/SucessRegister.cshtml]
+[E:/Visual Studio/Workspace/hackaton/hackaton/Views/Home/SucessRegister.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTdWNlc3NSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/source/repos/hackaton/hackaton/Views/Properties/Create.cshtml]
+[E:/Visual Studio/Workspace/hackaton/hackaton/Views/Properties/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvcGVydGllc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/source/repos/hackaton/hackaton/Views/Properties/Delete.cshtml]
+[E:/Visual Studio/Workspace/hackaton/hackaton/Views/Properties/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvcGVydGllc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/source/repos/hackaton/hackaton/Views/Properties/Details.cshtml]
+[E:/Visual Studio/Workspace/hackaton/hackaton/Views/Properties/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvcGVydGllc1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/source/repos/hackaton/hackaton/Views/Properties/Edit.cshtml]
+[E:/Visual Studio/Workspace/hackaton/hackaton/Views/Properties/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvcGVydGllc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/source/repos/hackaton/hackaton/Views/Properties/Index.cshtml]
+[E:/Visual Studio/Workspace/hackaton/hackaton/Views/Properties/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvcGVydGllc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/source/repos/hackaton/hackaton/Views/QrCode/Create.cshtml]
+[E:/Visual Studio/Workspace/hackaton/hackaton/Views/QrCode/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXJDb2RlXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/source/repos/hackaton/hackaton/Views/QrCode/Delete.cshtml]
+[E:/Visual Studio/Workspace/hackaton/hackaton/Views/QrCode/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXJDb2RlXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/source/repos/hackaton/hackaton/Views/QrCode/Details.cshtml]
+[E:/Visual Studio/Workspace/hackaton/hackaton/Views/QrCode/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXJDb2RlXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/source/repos/hackaton/hackaton/Views/QrCode/Edit.cshtml]
+[E:/Visual Studio/Workspace/hackaton/hackaton/Views/QrCode/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXJDb2RlXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/source/repos/hackaton/hackaton/Views/QrCode/Index.cshtml]
+[E:/Visual Studio/Workspace/hackaton/hackaton/Views/QrCode/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXJDb2RlXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/source/repos/hackaton/hackaton/Views/QrCode/ver.cshtml]
+[E:/Visual Studio/Workspace/hackaton/hackaton/Views/QrCode/ver.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXJDb2RlXHZlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/source/repos/hackaton/hackaton/Views/Shared/Error.cshtml]
+[E:/Visual Studio/Workspace/hackaton/hackaton/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/source/repos/hackaton/hackaton/Views/Shared/_ValidationScriptsPartial.cshtml]
+[E:/Visual Studio/Workspace/hackaton/hackaton/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/source/repos/hackaton/hackaton/Views/Users/Create.cshtml]
+[E:/Visual Studio/Workspace/hackaton/hackaton/Views/Users/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/source/repos/hackaton/hackaton/Views/Users/Delete.cshtml]
+[E:/Visual Studio/Workspace/hackaton/hackaton/Views/Users/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/source/repos/hackaton/hackaton/Views/Users/Details.cshtml]
+[E:/Visual Studio/Workspace/hackaton/hackaton/Views/Users/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/source/repos/hackaton/hackaton/Views/Users/Edit.cshtml]
+[E:/Visual Studio/Workspace/hackaton/hackaton/Views/Users/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/source/repos/hackaton/hackaton/Views/Users/Index.cshtml]
+[E:/Visual Studio/Workspace/hackaton/hackaton/Views/Users/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/source/repos/hackaton/hackaton/Views/_ViewImports.cshtml]
+[E:/Visual Studio/Workspace/hackaton/hackaton/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/source/repos/hackaton/hackaton/Views/_ViewStart.cshtml]
+[E:/Visual Studio/Workspace/hackaton/hackaton/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mateu/source/repos/hackaton/hackaton/Views/Shared/_Layout.cshtml]
+[E:/Visual Studio/Workspace/hackaton/hackaton/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-3dnrz5qgi9
