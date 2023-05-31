@@ -22,6 +22,32 @@ namespace hackaton.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("hackaton.Models.Api", b =>
+                {
+                    b.Property<int>("ApiId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ApiId"));
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.HasKey("ApiId");
+
+                    b.ToTable("Apis");
+                });
+
             modelBuilder.Entity("hackaton.Models.Property", b =>
                 {
                     b.Property<int>("PropertyID")
@@ -81,6 +107,9 @@ namespace hackaton.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
                     b.Property<string>("CPF")
                         .IsRequired()
                         .HasMaxLength(14)
@@ -118,7 +147,7 @@ namespace hackaton.Migrations
             modelBuilder.Entity("hackaton.Models.QrCode", b =>
                 {
                     b.HasOne("hackaton.Models.User", "User")
-                        .WithMany()
+                        .WithMany("QrCodes")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -129,6 +158,8 @@ namespace hackaton.Migrations
             modelBuilder.Entity("hackaton.Models.User", b =>
                 {
                     b.Navigation("Properties");
+
+                    b.Navigation("QrCodes");
                 });
 #pragma warning restore 612, 618
         }

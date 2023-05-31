@@ -16,10 +16,14 @@ namespace hackaton.Models.DAO
             //Se o contexto estiver vazio
             if (!context.Users.Any())
             {
-                context.Users.Add(new User { Name = "Jhonatas", CPF = "1", Password = BCryptHelper.HashPassword("123",BCryptHelper.GenerateSalt()), IsAdmin = true });
-
+               
+                context.Apis.Add(new Api { Name = "Grupo TechAgro", Token = Guid.NewGuid().ToString(), Active = true});
+                context.Apis.Add(new Api { Name = "Grupo Isabela", Token = Guid.NewGuid().ToString(), Active = true });
+               
+                context.Users.Add(new User { Name = "Jhonatas", CPF = "136.621.076-00", Password = BCryptHelper.HashPassword("136.621.076-00", BCryptHelper.GenerateSalt()), IsAdmin = true});
+                context.SaveChanges();
             }
-            context.SaveChanges();
+          
         }
     }
 }

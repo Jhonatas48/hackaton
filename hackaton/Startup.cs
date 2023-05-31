@@ -124,7 +124,7 @@ namespace hackaton
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-                //DadosIniciais.popularBancoDeDados(app);
+                PopulateDataBase.initialize(app);
             }
 
             );

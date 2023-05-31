@@ -44,7 +44,7 @@ namespace hackaton.Controllers
         public async Task<IActionResult> Index()
         {
               return _context.Users != null ? 
-                          View(_context.Users.ToList()) :
+                          View(_context.Users.Where(user => user.Active == true).ToList()) :
                           Problem("Entity set 'Context.Users'  is null.");
         }
 
@@ -73,6 +73,7 @@ namespace hackaton.Controllers
         [ServiceFilter(typeof(RequireLoginAdminAttributeFactory))]
         public IActionResult Create()
         {
+          
             return View();
         }
 
@@ -193,7 +194,9 @@ namespace hackaton.Controllers
             var user = await _context.Users.FindAsync(id);
             if (user != null)
             {
-                _context.Users.Remove(user);
+                user.Active = false;
+                _context.Users.Update(user);
+                _context.SaveChangesAsync();
             }
             
             await _context.SaveChangesAsync();

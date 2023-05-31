@@ -29,6 +29,8 @@ namespace hackaton.Models
 
         public bool IsAdmin { get; set; } = false;
 
+        public bool Active { get; set; }=true;
+
         public ICollection<Property>  Properties{ get; set; }
         public ICollection<QrCode> QrCodes { get; set; }
     }
