@@ -6,6 +6,7 @@
     --color_secondary: #FFE6BF;
     --color_secondary_inv: #636C79;
     --bg-color: #F1F2F4;
+    --color_danger: #C61A09;
 }
 
 .text_primary {
@@ -309,22 +310,22 @@ a {
     color: var(--color_primary_inv);
 }
 
-    .primary-color-override:hover {
-        border-color: var(--color_primary);
-        background: var(--color_primary_inv);
-        color: var(--color_primary);
-    }
+.primary-color-override:hover {
+    border-color: var(--color_primary);
+    background: var(--color_primary_inv);
+    color: var(--color_primary);
+}
 
 .secondary-color-override {
     background: var(--color_secondary);
     color: var(--color_secondary_inv);
 }
 
-    .secondary-color-override:hover {
-        border-color: var(--color_secondary);
-        background: var(--color_secondary_inv);
-        color: var(--color_secondary);
-    }
+.secondary-color-override:hover {
+    border-color: var(--color_secondary);
+    background: var(--color_secondary_inv);
+    color: var(--color_secondary);
+}
 
 /* inútil? */
 div[data-cluster="btn1"]:has(input) {
@@ -354,6 +355,14 @@ input[data-cluster="btn1"], input[data-cluster="btn1"]:focus, input[data-cluster
 
 .icon {
     max-width: 1.5em;
+}
+
+/*==============================================================================*/
+/* * Correção text-danger (detail text-danger-override)*/
+/*==============================================================================*/
+
+.text-danger-override {
+    color: var(--color_danger);
 }
 
 /* nota: o trigger aqui vai vir ou de uma loucura JS, ou do ASP.NET - não sei bem como puxar isso dele, considernado que a verificação fica num data annotation */

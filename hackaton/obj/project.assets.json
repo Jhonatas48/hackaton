@@ -10878,19 +10878,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Ti\\.nuget\\packages\\": {}
+    "C:\\Users\\mateu\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Visual Studio\\Workspace\\hackaton\\hackaton\\hackaton.csproj",
+      "projectUniqueName": "C:\\Users\\mateu\\Source\\Repos\\hackaton-front\\hackaton\\hackaton.csproj",
       "projectName": "hackaton",
-      "projectPath": "E:\\Visual Studio\\Workspace\\hackaton\\hackaton\\hackaton.csproj",
-      "packagesPath": "C:\\Users\\Ti\\.nuget\\packages\\",
-      "outputPath": "E:\\Visual Studio\\Workspace\\hackaton\\hackaton\\obj\\",
+      "projectPath": "C:\\Users\\mateu\\Source\\Repos\\hackaton-front\\hackaton\\hackaton.csproj",
+      "packagesPath": "C:\\Users\\mateu\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\mateu\\Source\\Repos\\hackaton-front\\hackaton\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Ti\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\mateu\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
