@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mateu\\Source\\Repos\\hackaton-front\\hackaton\\hackaton.csproj": {}
+    "C:\\Users\\mateu\\source\\repos\\hackaton-front\\hackaton\\hackaton.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mateu\\Source\\Repos\\hackaton-front\\hackaton\\hackaton.csproj": {
+    "C:\\Users\\mateu\\source\\repos\\hackaton-front\\hackaton\\hackaton.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mateu\\Source\\Repos\\hackaton-front\\hackaton\\hackaton.csproj",
+        "projectUniqueName": "C:\\Users\\mateu\\source\\repos\\hackaton-front\\hackaton\\hackaton.csproj",
         "projectName": "hackaton",
-        "projectPath": "C:\\Users\\mateu\\Source\\Repos\\hackaton-front\\hackaton\\hackaton.csproj",
+        "projectPath": "C:\\Users\\mateu\\source\\repos\\hackaton-front\\hackaton\\hackaton.csproj",
         "packagesPath": "C:\\Users\\mateu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mateu\\Source\\Repos\\hackaton-front\\hackaton\\obj\\",
+        "outputPath": "C:\\Users\\mateu\\source\\repos\\hackaton-front\\hackaton\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\mateu\\AppData\\Roaming\\NuGet\\NuGet.Config",

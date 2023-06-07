@@ -31,7 +31,8 @@
             @Html.AntiForgeryToken()
             <div class="leading-generic">
                 <div class="techagro">
-                    <span class="text_primary">tech</span><span class="text_secondary">agro</span>
+                    <img class="" src="https://raw.githubusercontent.com/WarmMateTea/ImageRepo/65e4d9fad851957ac1143355782bb104f666fe12/techagro-nome.svg" />
+                    @*<span class="text_primary">tech</span><span class="text_secondary">agro</span>*@
                 </div>
                 <div class="heading">
                     <span>Crie sua conta</span>
@@ -63,15 +64,16 @@
                             </div>
                             <img src="https://raw.githubusercontent.com/WarmMateTea/ImageRepo/f85728639824166be9728567f69f6f2289494d2e/visibility_off_FILL0_wght400_GRAD0_opsz48.svg" class="icon eye hide"></img>
                         </div>
-                            <span asp-validation-for="Password" class="detail text-danger-override"></span>
+                        <span asp-validation-for="Password" class="detail text-danger-override"></span>
                     </div>
+
 
                         @*                    <div class="form-group" style="min-width:100%">    <!--PRECISA AJEITAR ISSO PRA BATER COM A OUTRA SENHA-->
                         <label class="input-description">Confirmar Senha</label>
                         <div class="input env" data-cluster="btn1">
                             <div class="sub">
                                 <img src="https://raw.githubusercontent.com/WarmMateTea/ImageRepo/f85728639824166be9728567f69f6f2289494d2e/vpn_key_FILL0_wght400_GRAD0_opsz48.svg" class="icon"></img>
-                                <input class="textbox" data-cluster="btn1" type="password" placeholder="●●●●●●">
+                                <input class="textbox" data-cluster="btn1" type="password" placeholder="●●●●●●" name="confirmPassword" @Validation.For("confirmPassword")/>
                             </div>
                             <img src="https://raw.githubusercontent.com/WarmMateTea/ImageRepo/f85728639824166be9728567f69f6f2289494d2e/visibility_off_FILL0_wght400_GRAD0_opsz48.svg" class="icon eye hide"></img>
                         </div>
@@ -175,10 +177,6 @@
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
 <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-
-@*<div>
-    <a asp-action="Index">Voltar</a>s
-</div>*@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RIPEDEuSRPfMNN4hl+0OX9Rim2v3d1+lXJ1Esljrw4C/gx0ao9Pjgf7B01DkQA1PhMpXBJLZxLTGEQU3lTsayQ==",
+  "dgSpecHash": "cpSOWyeG3ZcYpNh8lsaySkRDEcbqbC8qECsGi0ACmz4cnvbS+mqjFphaPZWzLGTaCej8AcqagqipSxzce8GwfA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\mateu\\Source\\Repos\\hackaton-front\\hackaton\\hackaton.csproj",
+  "projectFilePath": "C:\\Users\\mateu\\source\\repos\\hackaton-front\\hackaton\\hackaton.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mateu\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\mateu\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
