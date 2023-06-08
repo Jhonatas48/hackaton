@@ -85,11 +85,11 @@
                         <div class="input env" data-cluster="btn1">
                             <div class="sub">
                                 <img src="https://raw.githubusercontent.com/WarmMateTea/ImageRepo/f85728639824166be9728567f69f6f2289494d2e/badge_FILL0_wght400_GRAD0_opsz48.svg" class="icon"></img>
-                                <input class="form-control textbox" data-cluster="btn1" placeholder="123.456.789-00" asp-for="CPF">
+                                <input class="form-control textbox cpf" data-cluster="btn1" placeholder="123.456.789-00" asp-for="CPF">
                             </div>
-                            <img src="https://raw.githubusercontent.com/WarmMateTea/ImageRepo/f85728639824166be9728567f69f6f2289494d2e/check_circle_FILL0_wght400_GRAD0_opsz48.svg" class="icon"></img>
+                            <div class="icon checkmark"></div>
                         </div>
-                            <span asp-validation-for="CPF" class="detail text-danger-override"></span>
+                            <span asp-validation-for="CPF" class="ver-cpf detail text-danger-override"></span>
                     </div>
                 </div>
 
@@ -138,6 +138,19 @@
                 $(this).siblings('.sub').children('.textbox').attr('type', 'password');
             }
         })
+    });
+
+    $(document).ready(function () {
+        $('.cpf').on('blur', function () {
+            if ($('.ver-cpf').children().length === 0) {
+                // Alternar a classe "checked" nos campos de imagem com a classe "checkmark"
+                $('.checkmark').addClass('checked');
+            }
+            else
+            {
+                $('.checkmark').removeClass('checked');
+            }
+        });
     });
 </script>
 

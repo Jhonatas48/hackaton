@@ -354,7 +354,24 @@ input[data-cluster="btn1"], input[data-cluster="btn1"]:focus, input[data-cluster
 }
 
 .icon {
+    background-size: cover;
+    background-position: center;
+    display: inline-block;
+    min-height: 1.5em;
+    min-width: 1.5em;
     max-width: 1.5em;
+}
+
+/*==============================================================================*/
+/* * Ícones usam CSS background ao invés de SRC em <img/> */
+/*==============================================================================*/
+
+.checkmark {
+    background-image: url(https://raw.githubusercontent.com/WarmMateTea/ImageRepo/f85728639824166be9728567f69f6f2289494d2e/check_circle_FILL0_wght400_GRAD0_opsz48.svg);
+}
+
+.checked {
+    background-image: url(https://raw.githubusercontent.com/WarmMateTea/ImageRepo/bdf316192e8e923a1e7af7597b53fcdca5a81f06/checked.svg);
 }
 
 /*==============================================================================*/
