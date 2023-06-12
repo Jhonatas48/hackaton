@@ -32,28 +32,13 @@
             <div class="trailing">
                 <div class="inputs">
 
-                        <div asp-validation-summary="ModelOnly" class="detail text-danger-override"></div>
-                    <div class="form-group" style="min-width:100%">
-                        <label class="input-description">Nome</label>
-                        <div class="input env" data-cluster="btn1">
-                            <div class="sub">
-                                <input class="form-control textbox" data-cluster="btn1" placeholder="Digite seu nome aqui" asp-for="Name">
-                            </div>
-                        </div>
-                            <span asp-validation-for="Name" class="detail text-danger-override"></span>
-                    </div>
+                    <div asp-validation-summary="ModelOnly" class="detail text-danger-override"></div>
 
-                    <div class="form-group" style="min-width:100%">
-                        <label class="input-description">Senha</label>
-                        <div class="input env" data-cluster="btn1">
-                            <div class="sub">
-                                <img src="https://raw.githubusercontent.com/WarmMateTea/ImageRepo/f85728639824166be9728567f69f6f2289494d2e/vpn_key_FILL0_wght400_GRAD0_opsz48.svg" class="icon"></img>
-                                <input class="form-control textbox" data-cluster="btn1" type="password" placeholder="●●●●●●" asp-for="Password">
-                            </div>
-                                <div class="icon eye"></div>
-                        </div>
-                        <span asp-validation-for="Password" class="detail text-danger-override"></span>
-                    </div>
+                    <partial name="~/Views/Modules/partial_textbox_name.cshtml" model='new VM.VM_textbox { User = Model}' />
+
+                    <partial name="~/Views/Modules/partial_textbox_cpf.cshtml" model='new VM.VM_textbox { User = Model}' />
+
+                    <partial name="~/Views/Modules/partial_textbox_password.cshtml" model='new VM.VM_textbox {User = Model}' />
 
 
                         @*                    <div class="form-group" style="min-width:100%">    <!--PRECISA AJEITAR ISSO PRA BATER COM A OUTRA SENHA-->
@@ -68,26 +53,13 @@
                         <span asp-validation-for="" class="detail text-danger-override"></span>
                     </div*@
 
-                    <div class="form-group" style="min-width:100%">
-                        <label class="input-description">CPF</label>
-                        <div class="input env" data-cluster="btn1">
-                            <div class="sub">
-                                <img src="https://raw.githubusercontent.com/WarmMateTea/ImageRepo/f85728639824166be9728567f69f6f2289494d2e/badge_FILL0_wght400_GRAD0_opsz48.svg" class="icon"></img>
-                                <input class="form-control textbox cpf" data-cluster="btn1" placeholder="123.456.789-00" asp-for="CPF">
-                            </div>
-                            <div class="icon checkmark"></div>
+                    <div class="actions">
+                        <div class="form-group" style="min-width:100%">
+                            <partial name="~/Views/Modules/partial_submit_button.cshtml"
+                                         model='new hackaton.Models.ViewModels.VM_button { Class="btn btn-primary btn-override primary-color-override", Value="Registrar"}' />
                         </div>
-                            <span asp-validation-for="CPF" class="ver-cpf detail text-danger-override"></span>
                     </div>
                 </div>
-
-                <div class="actions">
-                    <div class="form-group" style="min-width:100%">
-                        <partial name="~/Views/Modules/partial_submit_button.cshtml"
-                                     model='new hackaton.Models.ViewModels.VM_button { Class="btn btn-primary btn-override primary-color-override", Value="Registrar"}' />
-                    </div>
-                </div>
-
             </div>
             </form>
         </div>

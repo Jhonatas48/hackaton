@@ -64,6 +64,30 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xwYXJ0aWFsX3N1Ym1pdF9idXR0b24uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/mateu/source/repos/hackaton-front/hackaton/Views/Modules/partial_textbox_cpf.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xwYXJ0aWFsX3RleHRib3hfY3BmLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/mateu/source/repos/hackaton-front/hackaton/Views/Modules/partial_textbox_cpf_readonly.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xwYXJ0aWFsX3RleHRib3hfY3BmX3JlYWRvbmx5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/mateu/source/repos/hackaton-front/hackaton/Views/Modules/partial_textbox_name.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xwYXJ0aWFsX3RleHRib3hfbmFtZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/mateu/source/repos/hackaton-front/hackaton/Views/Modules/partial_textbox_name_edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xwYXJ0aWFsX3RleHRib3hfbmFtZV9lZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/mateu/source/repos/hackaton-front/hackaton/Views/Modules/partial_textbox_password.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xwYXJ0aWFsX3RleHRib3hfcGFzc3dvcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/mateu/source/repos/hackaton-front/hackaton/Views/Modules/partial_textbox_password_edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xwYXJ0aWFsX3RleHRib3hfcGFzc3dvcmRfZWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/mateu/source/repos/hackaton-front/hackaton/Views/Properties/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvcGVydGllc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

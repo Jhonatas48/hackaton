@@ -30,29 +30,9 @@
             <div class="trailing">
                 <div class="inputs">
 
-                    <div class="form-group">
-                        <label class="input-description">CPF</label>
-                        <div class="input env" data-cluster="btn1">
-                            <div class="sub">
-                                <img src="https://raw.githubusercontent.com/WarmMateTea/ImageRepo/f85728639824166be9728567f69f6f2289494d2e/badge_FILL0_wght400_GRAD0_opsz48.svg" class="icon"></img>
-                                <input class="cpf form-control textbox" data-cluster="btn1" placeholder="123.456.789-00" asp-for="CPF">
-                            </div>
-                            <div class="icon checkmark"></div>
-                        </div>
-                        <span asp-validation-for="CPF" class="ver-cpf detail text-danger-override"></span>
-                    </div>
+                    <partial name="~/Views/Modules/partial_textbox_cpf.cshtml" model='new VM.VM_textbox { User = Model}'/>
 
-                    <div class="form-group">
-                        <label class="input-description">Senha</label>
-                        <div class="input env" data-cluster="btn1">
-                            <div class="sub">
-                                <img src="https://raw.githubusercontent.com/WarmMateTea/ImageRepo/f85728639824166be9728567f69f6f2289494d2e/vpn_key_FILL0_wght400_GRAD0_opsz48.svg" class="icon"></img>
-                                <input class="form-control textbox" data-cluster="btn1" type="password" placeholder="●●●●●●" asp-for="Password">
-                            </div>
-                            <div class="icon eye"></div>
-                        </div>
-                            <span asp-validation-for="Password" class="detail text-danger-override"></span>
-                    </div>
+                    <partial name="~/Views/Modules/partial_textbox_password.cshtml" model='new VM.VM_textbox {User = Model}' />
 
                 </div>
 @*                <div class="checkbox-w-text"> <!--NOTA! Isso ainda não está implementado.--!>

@@ -386,12 +386,12 @@ input[data-cluster="btn1"], input[data-cluster="btn1"]:focus, input[data-cluster
 }
 
 .home {
-    background-image: url(https://raw.githubusercontent.com/WarmMateTea/ImageRepo/bdf316192e8e923a1e7af7597b53fcdca5a81f06/home.svg);
+    background-image: url(https://raw.githubusercontent.com/WarmMateTea/ImageRepo/6520d5faa5879ec0c4ad8c21438f18a2346d6d2f/home_material_white.svg);
     /*transition: background-image 0.15s ease-in-out;*/
 }
 
 .home-orange {
-    background-image: url(https://raw.githubusercontent.com/WarmMateTea/ImageRepo/bdf316192e8e923a1e7af7597b53fcdca5a81f06/orange-home.svg);
+    background-image: url(https://raw.githubusercontent.com/WarmMateTea/ImageRepo/6520d5faa5879ec0c4ad8c21438f18a2346d6d2f/home_material_orange.svg);
 }
 
 /*.home {

@@ -1,0 +1,11 @@
+﻿@model hackaton.Models.ViewModels.VM_textbox
+
+<div class="form-group" style="min-width:100%">
+    <label class="input-description">Nome</label>
+    <div class="input env" data-cluster="btn1">
+        <div class="sub">
+            <input class="form-control textbox" data-cluster="btn1" placeholder="Digite seu nome aqui" asp-for="User.Name">
+        </div>
+    </div>
+    <span asp-validation-for="User.Name" class="detail text-danger-override"></span>
+</div>

@@ -16,49 +16,19 @@
 <div class="main_container">
 
     <div class="main_card">
-        <partial name="~/Views/Modules/partial-logo-nameonly-vector.cshtml" />
-        <div class="heading">
-            <span>Conta criada!</span>
-        </div>
-        <div class="detail">
-            <span>Para continuar, logue no aplicativo usando o QRCode abaixo.</span>
-            <p>OBS: O QR Code é válido somente por 5 minutos</p>
-            <img src="@Url.Action("GenerateQrCode","QrCode",Model)" />
+        <div class="leading-generic">
+            <partial name="~/Views/Modules/partial-logo-nameonly-vector.cshtml" />
+            <div class="heading">
+                <span>Conta criada!</span>
+            </div>
+            <div class="detail">
+                <span>Para continuar, logue no aplicativo usando o QRCode abaixo.</span>
+                <p>OBS: O QR Code é válido somente por 5 minutos</p>
+                <img src="@Url.Action("GenerateQrCode","QrCode",Model)" />
+            </div>
         </div>
     </div>
 </div>
-
-@*<h1>Sucesso</h1>
-
-<div>
-    <h4>User</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CPF)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CPF)
-        </dd>
-        
-        <h2>
-            Para continuar o registro,logue no aplicativo usando o QRCode
-            <p>
-                OBS: QR Code é valido somente por 5 minutos
-            </p>
-            <img src="@Url.Action("GenerateQrCode", "QrCode",Model)" />
-        </h2>
-    </dl>
-</div>
-<div>
-    <a asp-action="Index">Voltar</a>
-</div>*@
 
 <script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
 <script>
