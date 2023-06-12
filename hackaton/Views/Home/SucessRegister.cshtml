@@ -3,22 +3,32 @@
 
 @{
     ViewData["Title"] = "SucessRegister";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-
+    Layout = null;
 }
 
-@*
-==========================================================================================
-==========================================================================================
-ESTILIZAR - PÁGINA DO QR CODE
-==========================================================================================
-==========================================================================================
-*@
+<head>
+    <link rel="stylesheet" href="~/css/sharedStyles.css" type="text/css" />
+</head>
 
 @*Header*@
 <partial name="~/Views/Modules/partial_header.cshtml" model='new VM.VM_header { HeaderVariation=VM.VM_header.Variations.Logout}' />
 
-<h1>Sucesso</h1>
+<div class="main_container">
+
+    <div class="main_card">
+        <partial name="~/Views/Modules/partial-logo-nameonly-vector.cshtml" />
+        <div class="heading">
+            <span>Conta criada!</span>
+        </div>
+        <div class="detail">
+            <span>Para continuar, logue no aplicativo usando o QRCode abaixo.</span>
+            <p>OBS: O QR Code é válido somente por 5 minutos</p>
+            <img src="@Url.Action("GenerateQrCode","QrCode",Model)" />
+        </div>
+    </div>
+</div>
+
+@*<h1>Sucesso</h1>
 
 <div>
     <h4>User</h4>
@@ -48,7 +58,8 @@ ESTILIZAR - PÁGINA DO QR CODE
 </div>
 <div>
     <a asp-action="Index">Voltar</a>
-</div>
+</div>*@
+
 <script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
 <script>
     //Função Responsavel por configurar o websocket do RedirectClient

@@ -25,6 +25,10 @@
       "PackagePath": "staticwebassets\\js\\module-cpf-verification.js"
     },
     {
+      "Id": "C:\\Users\\mateu\\source\\repos\\hackaton-front\\hackaton\\wwwroot\\js\\module-home-hover.js",
+      "PackagePath": "staticwebassets\\js\\module-home-hover.js"
+    },
+    {
       "Id": "C:\\Users\\mateu\\source\\repos\\hackaton-front\\hackaton\\wwwroot\\js\\module-password-eye-visibility.js",
       "PackagePath": "staticwebassets\\js\\module-password-eye-visibility.js"
     },

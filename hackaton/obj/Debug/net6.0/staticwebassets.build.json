@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "hZ1yL26zdIRBbGYPIisV1J/3+du25yHlwEWKI6ha7zM=",
+  "Hash": "B4j4s8MmSjQqRzRB+0DNHfTMOtz8wC9uydXgks9lMWQ=",
   "Source": "hackaton",
   "BasePath": "_content/hackaton",
   "Mode": "Default",
@@ -134,6 +134,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\module-cpf-verification.js"
+    },
+    {
+      "Identity": "C:\\Users\\mateu\\source\\repos\\hackaton-front\\hackaton\\wwwroot\\js\\module-home-hover.js",
+      "SourceId": "hackaton",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\mateu\\source\\repos\\hackaton-front\\hackaton\\wwwroot\\",
+      "BasePath": "_content/hackaton",
+      "RelativePath": "js/module-home-hover.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\module-home-hover.js"
     },
     {
       "Identity": "C:\\Users\\mateu\\source\\repos\\hackaton-front\\hackaton\\wwwroot\\js\\module-password-eye-visibility.js",
