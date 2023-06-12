@@ -62,7 +62,7 @@
                                 <img src="https://raw.githubusercontent.com/WarmMateTea/ImageRepo/f85728639824166be9728567f69f6f2289494d2e/vpn_key_FILL0_wght400_GRAD0_opsz48.svg" class="icon"></img>
                                 <input class="form-control textbox" data-cluster="btn1" type="password" placeholder="●●●●●●" asp-for="Password">
                             </div>
-                            <img src="https://raw.githubusercontent.com/WarmMateTea/ImageRepo/f85728639824166be9728567f69f6f2289494d2e/visibility_off_FILL0_wght400_GRAD0_opsz48.svg" class="icon eye hide"></img>
+                            <div class="icon eye"></div>
                         </div>
                     </div>
 
@@ -80,8 +80,7 @@
                         <div class="sub">
                             <img src="https://raw.githubusercontent.com/WarmMateTea/ImageRepo/f85728639824166be9728567f69f6f2289494d2e/badge_FILL0_wght400_GRAD0_opsz48.svg" class="icon"></img>
                             <span class="textbox" data-cluster="btn1" placeholder="123.456.789-00">@Html.ViewBag.User.CPF</span>
-                        </div>
-                        <img src="https://raw.githubusercontent.com/WarmMateTea/ImageRepo/f85728639824166be9728567f69f6f2289494d2e/check_circle_FILL0_wght400_GRAD0_opsz48.svg" class="icon"></img>
+                        </div
                     </div>
 
                     <div class="form-group" style="min-width:100%">
@@ -105,40 +104,11 @@
     </div>
 </div>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('.textbox').on('focus', function () {
-                $(this).parent().parent('.env').addClass('env-margin');
-            });
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
-            $('.textbox').on('blur', function () {
-                $(this).parent().parent('.env').removeClass('env-margin');
-            });
-
-            $('.env').on('click', function () {
-                $(this).children().children('.textbox').focus();
-            });
-
-            $('.eye').on('click', function () {
-                console.log('aa');
-                if ($(this).hasClass('hide')) {
-                    console.log("rem");
-                    $(this).removeClass('hide');
-                    $(this).addClass('show');
-                    $(this).siblings('.sub').children('.textbox').attr('type', '');
-                    $(this).attr('src', 'https://raw.githubusercontent.com/WarmMateTea/ImageRepo/f85728639824166be9728567f69f6f2289494d2e/visibility_FILL0_wght400_GRAD0_opsz48.svg')
-                }
-                else {
-                    $(this).removeClass('show');
-                    $(this).addClass('hide');
-                    $(this).attr('src', 'https://raw.githubusercontent.com/WarmMateTea/ImageRepo/f85728639824166be9728567f69f6f2289494d2e/visibility_off_FILL0_wght400_GRAD0_opsz48.svg');
-                    $(this).siblings('.sub').children('.textbox').attr('type', 'password');
-                }
-            })
-        });
-    </script>
+<script src="/js/module-textbox-focus.js"></script>
+<script src="/js/module-password-eye-visibility.js"></script>

@@ -21,6 +21,18 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\mateu\\source\\repos\\hackaton-front\\hackaton\\wwwroot\\js\\module-cpf-verification.js",
+      "PackagePath": "staticwebassets\\js\\module-cpf-verification.js"
+    },
+    {
+      "Id": "C:\\Users\\mateu\\source\\repos\\hackaton-front\\hackaton\\wwwroot\\js\\module-password-eye-visibility.js",
+      "PackagePath": "staticwebassets\\js\\module-password-eye-visibility.js"
+    },
+    {
+      "Id": "C:\\Users\\mateu\\source\\repos\\hackaton-front\\hackaton\\wwwroot\\js\\module-textbox-focus.js",
+      "PackagePath": "staticwebassets\\js\\module-textbox-focus.js"
+    },
+    {
       "Id": "C:\\Users\\mateu\\source\\repos\\hackaton-front\\hackaton\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

@@ -363,7 +363,8 @@ input[data-cluster="btn1"], input[data-cluster="btn1"]:focus, input[data-cluster
 }
 
 /*==============================================================================*/
-/* * Ícones usam CSS background ao invés de SRC em <img/> */
+/* * Ícones usam CSS background ao invés de SRC em <img/>;
+     Devem ser usados em DIVs em associação à classe .icon */
 /*==============================================================================*/
 
 .checkmark {
@@ -372,6 +373,14 @@ input[data-cluster="btn1"], input[data-cluster="btn1"]:focus, input[data-cluster
 
 .checked {
     background-image: url(https://raw.githubusercontent.com/WarmMateTea/ImageRepo/bdf316192e8e923a1e7af7597b53fcdca5a81f06/checked.svg);
+}
+
+.eye {
+    background-image: url(https://raw.githubusercontent.com/WarmMateTea/ImageRepo/f85728639824166be9728567f69f6f2289494d2e/visibility_off_FILL0_wght400_GRAD0_opsz48.svg);
+}
+
+.eye-show {
+    background-image: url(https://raw.githubusercontent.com/WarmMateTea/ImageRepo/f85728639824166be9728567f69f6f2289494d2e/visibility_FILL0_wght400_GRAD0_opsz48.svg);
 }
 
 /*==============================================================================*/
