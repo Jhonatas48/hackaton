@@ -44,6 +44,26 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTdWNlc3NSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/mateu/source/repos/hackaton-front/hackaton/Views/Modules/partial-logo-name-vector.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xwYXJ0aWFsLWxvZ28tbmFtZS12ZWN0b3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/mateu/source/repos/hackaton-front/hackaton/Views/Modules/partial-logo-nameonly-vector.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xwYXJ0aWFsLWxvZ28tbmFtZW9ubHktdmVjdG9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/mateu/source/repos/hackaton-front/hackaton/Views/Modules/partial_common_button.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xwYXJ0aWFsX2NvbW1vbl9idXR0b24uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/mateu/source/repos/hackaton-front/hackaton/Views/Modules/partial_header.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xwYXJ0aWFsX2hlYWRlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/mateu/source/repos/hackaton-front/hackaton/Views/Modules/partial_submit_button.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xwYXJ0aWFsX3N1Ym1pdF9idXR0b24uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/mateu/source/repos/hackaton-front/hackaton/Views/Properties/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvcGVydGllc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

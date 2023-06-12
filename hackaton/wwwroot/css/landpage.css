@@ -184,6 +184,7 @@ flex-grow: 0; */
 }
 
 .btn-override {
+    border-radius: 8px;
     /* Auto layout */
     display: flex;
     flex-direction: row;

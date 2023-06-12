@@ -3,31 +3,20 @@
     Layout = null;
 }
 
+
+
 <head>
     <link rel="stylesheet" href="~/css/landpage.css" type="text/css" />
 </head>
 
-@*<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
-
-<div>
-    <a asp-action="Login">Login</a>
-</div>
-
-<div>
-    <a asp-action="Register">Registrar</a>
-</div>*@
 
 <div class="main_container">
     <div class="main_card">
         <div class="content">
             <div class="leading">
-                <div class="techagro">
-                    <span class="text_primary">tech</span><span class="text_secondary">agro</span>
-                </div>
+                <partial name="~/Views/Modules/partial-logo-nameonly-vector.cshtml" />
                 <div class="logo"><img class="logo" src="https://github.com/WarmMateTea/ImageRepo/blob/main/techagro_icon_logo.png?raw=true"></img></div>
+
                 <div class="heading">
                     <span>Portal de Cadastro</span>
                 </div>
@@ -38,12 +27,12 @@
         </div>
 
         <div class="actions">
-            <a class="btn btn-primary btn-override primary-color-override" asp-action="Register">
-                Criar Perfil
-            </a>
-            <a class="btn btn-secondary btn-override secondary-color-override" asp-action="Login">
-                Login
-            </a>
+            <partial name="~/Views/Modules/partial_common_button.cshtml"
+                     model='new hackaton.Models.ViewModels.VM_button { Class="btn btn-primary btn-override primary-color-override", Action="Register", Text="Criar Perfil" }' />
+
+            <partial name="~/Views/Modules/partial_common_button.cshtml"
+                     model='new hackaton.Models.ViewModels.VM_button { Class="btn btn-secondary btn-override secondary-color-override", Action="Login", Text="Login" }' />
+
         </div>
     </div>
 </div>

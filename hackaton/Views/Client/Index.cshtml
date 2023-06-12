@@ -1,41 +1,27 @@
 ﻿@model hackaton.Models.User
+@using VM = hackaton.Models.ViewModels
+
 @{
     ViewData["Title"] = "Index";
     Layout = null;
 }
 
-@*<h1>Index</h1>
-<p>
-    <a asp-action="Logout" class="btn btn-primary">Deslogar</a>
-</p>*@
-
 <head>
     <link rel="stylesheet" href="~/css/sharedStyles.css" type="text/css" />
 </head>
 
-<div class="header">
-    <div class="header-logo">
-        <img src="https://raw.githubusercontent.com/WarmMateTea/ImageRepo/1f98e9ba4b641cb18ce0d6dda5c66204564ff52a/logo%2Bnome.svg"></img>
-    </div>
-    <div class="header-buttons">
-        <a asp-action="Logout" type="button" class="btn btn-primary btn-override primary-color-override btn-header">
-            <span>Logout</span>
-        </a>
-        <a asp-controller="Home" asp-action="Index" type="button" class="btn btn-primary btn-override primary-color-override btn-header">
-            <span>Home</span> <img src="https://raw.githubusercontent.com/WarmMateTea/ImageRepo/976c737dd815789553dc686c0984cba499f04a76/orange-home.svg" class="icon home"></img>
-        </a>
-    </div>
-</div>
+@*Header*@
+<partial name="~/Views/Modules/partial_header.cshtml" model='new VM.VM_header { HeaderVariation=VM.VM_header.Variations.Logout}' />
+
+
 <div class="main_container">
 
     <div class="main_card signup">
 
         <div class="content">
-            <form asp-action="Index" style="min-width:100%"></form>
+            <form asp-action="Index" style="min-width:100%">
             <div class="leading-generic">
-                <div class="techagro">
-                    <span class="text_primary">tech</span><span class="text_secondary">agro</span>
-                </div>
+                <partial name="~/Views/Modules/partial-logo-nameonly-vector.cshtml" />
                 <div class="heading">
                     <span>Perfil de Produtor</span>
                 </div>
@@ -80,7 +66,7 @@
                         <div class="sub">
                             <img src="https://raw.githubusercontent.com/WarmMateTea/ImageRepo/f85728639824166be9728567f69f6f2289494d2e/badge_FILL0_wght400_GRAD0_opsz48.svg" class="icon"></img>
                             <span class="textbox" data-cluster="btn1" placeholder="123.456.789-00">@Html.ViewBag.User.CPF</span>
-                        </div
+                        </div>
                     </div>
 
                     <div class="form-group" style="min-width:100%">
@@ -99,6 +85,7 @@
                 </div>
 
             </div>
+            </form>
         </div>
 
     </div>
@@ -112,3 +99,4 @@
 
 <script src="/js/module-textbox-focus.js"></script>
 <script src="/js/module-password-eye-visibility.js"></script>
+<script src="/js/module-home-hover.js"></script>
