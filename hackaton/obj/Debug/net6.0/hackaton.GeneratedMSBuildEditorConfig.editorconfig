@@ -16,6 +16,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\mateu\source\repos\hackaton-front\hackaton
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/mateu/source/repos/hackaton-front/hackaton/Views/Admin/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/mateu/source/repos/hackaton-front/hackaton/Views/Client/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50XEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -50,6 +54,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/mateu/source/repos/hackaton-front/hackaton/Views/Modules/partial-logo-nameonly-vector.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xwYXJ0aWFsLWxvZ28tbmFtZW9ubHktdmVjdG9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/mateu/source/repos/hackaton-front/hackaton/Views/Modules/partial_card_produtor.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kdWxlc1xwYXJ0aWFsX2NhcmRfcHJvZHV0b3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/mateu/source/repos/hackaton-front/hackaton/Views/Modules/partial_common_button.cshtml]
