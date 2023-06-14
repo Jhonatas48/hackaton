@@ -13,6 +13,7 @@ using hackaton.Models.Validations;
 using hackaton.Models.Injectors;
 using hackaton.Models.ViewModels;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNet.SignalR.Hubs;
 
 namespace hackaton.Controllers
 {
@@ -151,6 +152,7 @@ namespace hackaton.Controllers
        
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Password,CPF,IsAdmin")] User user)
         {
+
             if (id != user.Id)
             {
                 return NotFound();
@@ -182,9 +184,10 @@ namespace hackaton.Controllers
         }
 
         // GET: Users/Delete/5
-        [ServiceFilter(typeof(RequireLoginAttributeFactory))]
+        [ServiceFilter(typeof(RequireLoginAdminAttributeFactory))]
         public async Task<IActionResult> Delete(int? id)
         {
+            int userId = (int)HttpContext.Session.GetInt32("UserId");
             if (id == null || _context.Users == null)
             {
                 return NotFound();
@@ -197,6 +200,12 @@ namespace hackaton.Controllers
                 return NotFound();
             }
 
+            if(user.Id == userId)
+            {
+                ModelState.AddModelError("Name", "Voce nao pode excluir a si mesmo");
+                return RedirectToAction("Index");
+            }
+
             return View(user);
         }
 
@@ -206,18 +215,29 @@ namespace hackaton.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            int userId = (int)HttpContext.Session.GetInt32("UserId");
+
             if (_context.Users == null)
             {
                 return Problem("Entity set 'Context.Users'  is null.");
             }
+
             var user = await _context.Users.FindAsync(id);
+
             if (user != null)
             {
-                user.Active = false;
-                _context.Users.Update(user);
-                await _context.SaveChangesAsync();
+                return NotFound();
             }
-            
+
+            if (user.Id == userId)
+            {
+                ModelState.AddModelError("Name", "Voce nao pode excluir a si mesmo");
+                return RedirectToAction("Index");
+            }
+
+            user.Active = false;
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
