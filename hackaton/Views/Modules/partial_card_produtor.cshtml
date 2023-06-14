@@ -14,12 +14,12 @@
         </div>
 
         <div class="actions">
-            <a class="btn btn-primary btn-override primary-color-override" href="@Url.Action("Edit", "User", new { id = Model.Id })">
+            <a class="btn btn-primary btn-override primary-color-override" href="@Url.Action("Edit", "Users", new { id = Model.Id })">
                 <label>Editar</label>
             </a>
-            <div class="btn btn-danger btn-override danger-color-override" href="@Url.Action("Delete", "User", new { id = Model.Id })">
+            <a class="btn btn-danger btn-override danger-color-override" href="@Url.Action("Delete", "Users", new { id = Model.Id })">
                 <label>Excluir</label>
-            </div>
+            </a>
         </div>
     </div>
 
