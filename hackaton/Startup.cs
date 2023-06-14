@@ -12,7 +12,7 @@ namespace hackaton
     public class Startup
     {
         private readonly Context _context;
-        private readonly bool useSqlServer= false;
+        private readonly bool useSqlServer= true;
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -124,11 +124,7 @@ namespace hackaton
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-                if (useSqlServer)
-                {
-                    PopulateDataBase.initialize(app);
-                }
-              
+                PopulateDataBase.initialize(app);
             }
 
             );
