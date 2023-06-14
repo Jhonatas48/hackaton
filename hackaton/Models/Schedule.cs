@@ -2,9 +2,9 @@
 
 namespace hackaton.Models
 {
-    public class Agendamento
+    public class Schedule
     {
-        public int AgendamentoId { get; set; }
+        public int ScheduleId { get; set; }
 
         [Required(ErrorMessage = "O campoe é obrigatório.")]
         public string Description { get; set; }
@@ -14,10 +14,12 @@ namespace hackaton.Models
         public DateTime DataInicial { get; set; }
 
         [Required(ErrorMessage = "O campoe é obrigatório.")]
-        [DataType(DataType.DateTime)]
+        [DataType(DataType.Date)]
         public DateTime DataFinal { get; set; }
 
         //Campos de navegação
         public User User { get; set; }
+
+        public int UserId { get; set; }
     }
 }

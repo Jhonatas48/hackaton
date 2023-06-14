@@ -9,12 +9,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace hackaton.Controllers
 {
-    public class AgendamentoController : Controller
+    public class ScheduleController : Controller
     {
         Context _ctx;
         private readonly UserCacheService _userService;
 
-        public AgendamentoController(Context ctx, UserCacheService cache)
+        public ScheduleController(Context ctx, UserCacheService cache)
         {
             _userService = cache;
             _ctx = ctx;
@@ -30,7 +30,7 @@ namespace hackaton.Controllers
 
         public IActionResult LoadPartialListAgendamentos()
         {
-            List<Agendamento> agendamentos;
+            List<Schedule> agendamentos;
 
             string cpf = HttpContext.Session.GetString("CPF");
             int userId = (int)HttpContext.Session.GetInt32("UserId");
@@ -38,11 +38,11 @@ namespace hackaton.Controllers
 
             if (user != null && user.Id == userId && user.IsAdmin)
             {
-                agendamentos = _ctx.Agendamentos.Where(a => a.User != null).ToList();
+                agendamentos = _ctx. Schedules.Where(a => a.User != null).ToList();
             }
             else
             {
-                agendamentos = _ctx.Agendamentos.Where(a => a.User.Id == user.Id).ToList();
+                agendamentos = _ctx. Schedules.Where(a => a.User.Id == user.Id).ToList();
             }
 
             return PartialView("~/Views/Modules/partial_list_agendamentos", agendamentos);
@@ -57,19 +57,20 @@ namespace hackaton.Controllers
         [ServiceFilter(typeof(RequireLoginAttributeFactory))]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Agendamento agendamento)
+        public async Task<IActionResult> Create(Schedule agendamento)
         {
             string cpf = HttpContext.Session.GetString("CPF");
             int userId = (int)HttpContext.Session.GetInt32("UserId");
             User user = _userService.GetUserByCPFAsync(cpf);
-            agendamento.User = user;
+           // agendamento.User = user;
 
             //ModelState.ClearValidationState("User");
             //TryValidateModel(agendamento);
 
             if (user != null) //ent, isso -> ModelState.IsValid tava dando problema, então aqui é só um bandaid sobre uma hemorragia :D
             {
-                _ctx.Agendamentos.Add(agendamento);
+                agendamento.UserId = userId;
+                _ctx. Schedules.Add(agendamento);
                 await _ctx.SaveChangesAsync();
             }
             else

@@ -22,34 +22,6 @@ namespace hackaton.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("hackaton.Models.Agendamento", b =>
-                {
-                    b.Property<int>("AgendamentoId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AgendamentoId"));
-
-                    b.Property<DateTime>("DataFinal")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DataInicial")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("AgendamentoId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Agendamentos");
-                });
-
             modelBuilder.Entity("hackaton.Models.Api", b =>
                 {
                     b.Property<int>("ApiId")
@@ -127,6 +99,34 @@ namespace hackaton.Migrations
                     b.ToTable("QrCodes");
                 });
 
+            modelBuilder.Entity("hackaton.Models.Schedule", b =>
+                {
+                    b.Property<int>("ScheduleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ScheduleId"));
+
+                    b.Property<DateTime>("DataFinal")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataInicial")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ScheduleId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Schedules");
+                });
+
             modelBuilder.Entity("hackaton.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -161,17 +161,6 @@ namespace hackaton.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("hackaton.Models.Agendamento", b =>
-                {
-                    b.HasOne("hackaton.Models.User", "User")
-                        .WithMany("Agendamentos")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("hackaton.Models.Property", b =>
                 {
                     b.HasOne("hackaton.Models.User", "User")
@@ -187,6 +176,17 @@ namespace hackaton.Migrations
                 {
                     b.HasOne("hackaton.Models.User", "User")
                         .WithMany("QrCodes")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("hackaton.Models.Schedule", b =>
+                {
+                    b.HasOne("hackaton.Models.User", "User")
+                        .WithMany("Agendamentos")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

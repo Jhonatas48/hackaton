@@ -1,4 +1,4 @@
-﻿@model hackaton.Models.Agendamento
+﻿@model hackaton.Models.Schedule
 @using VM = hackaton.Models.ViewModels
 
 <!--  Isso é o trecho que deve ser usado de molde pela página cshtml pra fazer o card-agendamento na view lista (index)   -->
@@ -34,7 +34,7 @@
 @*        <div class="btn btn-primary btn-override primary-color-override">
                             <label>Editar</label>
         </div> por ora sem edição :)*@
-        <a class="btn btn-danger btn-override danger-color-override" asp-action="Delete" asp-route-id="@Model.AgendamentoId">
+        <a class="btn btn-danger btn-override danger-color-override" asp-action="Delete" asp-route-id="@Model.ScheduleId">
             <label>Excluir</label>
         </a>
     </div>

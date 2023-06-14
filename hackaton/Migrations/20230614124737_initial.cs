@@ -85,6 +85,28 @@ namespace hackaton.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Schedules",
+                columns: table => new
+                {
+                    ScheduleId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DataInicial = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DataFinal = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Schedules", x => x.ScheduleId);
+                    table.ForeignKey(
+                        name: "FK_Schedules_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Properties_UserId",
                 table: "Properties",
@@ -93,6 +115,11 @@ namespace hackaton.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_QrCodes_UserId",
                 table: "QrCodes",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Schedules_UserId",
+                table: "Schedules",
                 column: "UserId");
         }
 
@@ -107,6 +134,9 @@ namespace hackaton.Migrations
 
             migrationBuilder.DropTable(
                 name: "QrCodes");
+
+            migrationBuilder.DropTable(
+                name: "Schedules");
 
             migrationBuilder.DropTable(
                 name: "Users");

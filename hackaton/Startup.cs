@@ -57,7 +57,10 @@ namespace hackaton
             {
                 //configuração para acesso ao banco de dados
                 services.AddDbContext<Context>(options => options.UseSqlServer(
-                   Configuration["Data:SqlServerConnectionString"]));
+                   Configuration["Data:SqlServerConnectionString"])
+               // .EnableSensitiveDataLogging() // Habilitar o log de dados sensíveis
+
+               );
             }
             else {
                
