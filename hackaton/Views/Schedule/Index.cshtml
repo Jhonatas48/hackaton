@@ -1,4 +1,4 @@
-﻿@model IEnumerable<hackaton.Models.Schedule>
+﻿@model List<hackaton.Models.Schedule>
 @using VM = hackaton.Models.ViewModels
 
 @{
@@ -36,11 +36,12 @@
                 <div class="halver-env">
 
                     <div class="halver-int" id="partialCardAgendar">
-                        <partial name="~/Views/Modules/partial_card_agendar.cshtml" />
+                        <partial name="~/Views/Modules/partial_card_agendar.cshtml" model="new Schedule()"/>
                     </div>
 
-                    <div class="halver-int" id="partialListAgendamentos">
-                        @{ await Html.RenderPartialAsync("~/Views/Modules/partial_list_agendamentos.cshtml"); }
+                    <div class="halver-int column" id="partialListAgendamentos">
+                        <partial name="~/Views/Modules/partial_list_agendamentos.cshtml" model="Model" />
+                        @*@{ await Html.RenderPartialAsync("~/Views/Modules/partial_list_agendamentos.cshtml"); }*@
                     </div>
 
                 </div>
@@ -51,40 +52,6 @@
 </div>
 
 
-@*<div class="main_container">
-    <div class="main_card">
-        <div class="content">
-
-        </div>
-    </div>
-</div>
-
-
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.AgendamentoId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.AgendamentoId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.AgendamentoId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
-*@
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -92,46 +59,46 @@
 <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 
 <script>
-    $(document).ready(function () {
-        $.ajax({
-            url: '@Url.Action("LoadPartialListAgendamentos", "Schedule")',
-            type: 'GET',
-            success: function (result) {
-                $('#partialListAgendamentos').html(result);
-            },
-            error: function (xhr, status, error) {
-                console.log(error);
-            }
-        })
-    });
+    //$(document).ready(function () {
+    //    $.ajax({
+    //        url: '@Url.Action("LoadPartialListAgendamentos", "Schedule")',
+    //        type: 'GET',
+    //        success: function (result) {
+    //            $('#partialListAgendamentos').html(result);
+    //        },
+    //        error: function (xhr, status, error) {
+    //            console.log(error);
+    //        }
+    //    })
+    //});
 
-    $(document).ready(function () {
-        $.ajax({
-            url: '@Url.Action("LoadPartialCardAgendar", "Schedule")',
-            type: 'GET',
-            success: function (result) {
-                $('#partialListAgendamentos').html(result);
-            },
-            error: function (xhr, status, error) {
-                console.log(error);
-            }
-        })
-    });
+    //$(document).ready(function () {
+    //    $.ajax({
+    //        url: '@Url.Action("LoadPartialCardAgendar", "Schedule")',
+    //        type: 'GET',
+    //        success: function (result) {
+    //            $('#partialListAgendamentos').html(result);
+    //        },
+    //        error: function (xhr, status, error) {
+    //            console.log(error);
+    //        }
+    //    })
+    //});
 
-    $(document).ready(function () {
-        $('#refreshButton').click(function () {
-            $.ajax({
-                url: '@Url.Action("LoadPartialListAgendamentos", "Schedule")',
-                type: 'GET',
-                success: function (result) {
-                    $('#partialListAgendamentos').html(result);
-                },
-                error: function (xhr, status, error) {
-                    console.log(error);
-                }
-            });
-        })
-    });
+    //$(document).ready(function () {
+    //    $('#refreshButton').click(function () {
+    //        $.ajax({
+    //            url: '@Url.Action("LoadPartialListAgendamentos", "Schedule")',
+    //            type: 'GET',
+    //            success: function (result) {
+    //                $('#partialListAgendamentos').html(result);
+    //            },
+    //            error: function (xhr, status, error) {
+    //                console.log(error);
+    //            }
+    //        });
+    //    })
+    //});
 </script>
 
 <script src="/js/module-textbox-focus.js"></script>

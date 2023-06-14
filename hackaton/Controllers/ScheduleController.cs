@@ -4,6 +4,7 @@ using hackaton.Models.DAO;
 using hackaton.Models.Injectors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 // Jhonatas, faz isso aqui verificar se o user tá logado, pf; eu tô perdido sobre onde fica a validação
 
@@ -25,7 +26,10 @@ namespace hackaton.Controllers
         [ServiceFilter(typeof(RequireLoginAttributeFactory))]
         public ActionResult Index()
         {
-            return View();
+            int userId = (int)HttpContext.Session.GetInt32("UserId");
+            List<Schedule> agendamentos = _ctx.Schedules.Where(sch => sch.UserId == userId).ToList();
+
+            return View("~/Views/Schedule/Index.cshtml", agendamentos);
         }
 
         public IActionResult LoadPartialListAgendamentos()
@@ -104,27 +108,24 @@ namespace hackaton.Controllers
             }
         }
 
-        // GET: AgendamentoController/Delete/5
-        [ServiceFilter(typeof(RequireLoginAttributeFactory))]
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+        //// GET: AgendamentoController/Delete/5
+        //[ServiceFilter(typeof(RequireLoginAttributeFactory))]
+        //public ActionResult Delete(int id)
+        //{
+        //    return View();
+        //}
 
         // POST: AgendamentoController/Delete/5
         [ServiceFilter(typeof(RequireLoginAttributeFactory))]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            var del = _ctx.Schedules.Where(a => a.ScheduleId == id).Single();
+            _ctx.Schedules.Remove(del);
+            _ctx.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

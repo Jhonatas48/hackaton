@@ -8,7 +8,7 @@
         <div class="input env min-w200 w100" data-cluster="btn1">
             <div class="sub">
                 <img src="https://raw.githubusercontent.com/WarmMateTea/ImageRepo/bff17f108256cf1d08be784a93b0d0bc733e199d/date_start.svg" class="icon"></img>
-                <span class="textbox">@Model.DataInicial</span>
+                <span class="textbox">@Model.DataInicial.Date</span>
             </div>
         </div>
 
@@ -16,7 +16,7 @@
         <div class="input env min-w200 w100" data-cluster="btn1">
             <div class="sub">
                 <img src="https://raw.githubusercontent.com/WarmMateTea/ImageRepo/bff17f108256cf1d08be784a93b0d0bc733e199d/date_end.svg" class="icon"></img>
-                <span class="textbox">@Model.DataFinal</span>
+                <span class="textbox">@Model.DataFinal.Date</span>
             </div>
         </div>
     </div>
@@ -34,9 +34,14 @@
 @*        <div class="btn btn-primary btn-override primary-color-override">
                             <label>Editar</label>
         </div> por ora sem edição :)*@
-        <a class="btn btn-danger btn-override danger-color-override" asp-action="Delete" asp-route-id="@Model.ScheduleId">
+        @*<a class="btn btn-danger btn-override danger-color-override" asp-action="Delete" asp-controller="Schedule" method="post" asp-route-id="@Model.ScheduleId">
             <label>Excluir</label>
-        </a>
+        </a>*@
+        <form asp-action="Delete" asp-controller="Schedule" method="post">
+            <input type="hidden" name="id" value="@Model.ScheduleId" />
+            <button type="submit" class="btn btn-danger btn-override danger-color-override">Excluir
+            </button>
+        </form>
     </div>
 </div>
 
