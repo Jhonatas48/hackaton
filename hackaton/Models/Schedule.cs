@@ -6,14 +6,14 @@ namespace hackaton.Models
     {
         public int ScheduleId { get; set; }
 
-        [Required(ErrorMessage = "O campoe é obrigatório.")]
+        [Required(ErrorMessage = "O campo é obrigatório.")]
         public string Description { get; set; }
 
-        [Required(ErrorMessage = "O campoe é obrigatório.")]
+        [Required(ErrorMessage = "O campo é obrigatório.")]
         [DataType(DataType.Date)]
         public DateTime DataInicial { get; set; }
 
-        [Required(ErrorMessage = "O campoe é obrigatório.")]
+        [Required(ErrorMessage = "O campo é obrigatório.")]
         [DataType(DataType.Date)]
         public DateTime DataFinal { get; set; }
 

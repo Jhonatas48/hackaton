@@ -1,7 +1,12 @@
 ﻿@model List<hackaton.Models.Schedule>
 @using VM = hackaton.Models.ViewModels
 
-@foreach (var agendamento in Model)
-{
-    <partial name="~/Views/Modules/partial_card_agendamento.cshtml" model="agendamento" />
+@{
+    if (Model != null)
+    {
+        @foreach (var agendamento in Model)
+        {
+            <partial name="~/Views/Modules/partial_card_agendamento.cshtml" model="agendamento" />
+        }
+    }
 }

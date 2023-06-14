@@ -40,7 +40,7 @@
                     </div>
 
                     <div class="halver-int" id="partialListAgendamentos">
-@*                        @{ await Html.RenderPartialAsync("~/Views/Modules/partial_list_agendamentos.cshtml"); }*@
+                        @{ await Html.RenderPartialAsync("~/Views/Modules/partial_list_agendamentos.cshtml"); }
                     </div>
 
                 </div>
@@ -93,33 +93,35 @@
 
 <script>
     $(document).ready(function () {
-        function () {
-            $.ajax({
-                url: '@Url.Action("PartialListAgendamentos", "Agendamento")',
-                type: 'GET',
-                success: function (result) {
-                    $('#partialListAgendamentos').html(result);
-                },
-                error: function (xhr, status, error) {
-                    console.log(error);
-                }
-            });
-        },
-        function () {
-            $.ajax({
-                url: '@Url.Action("PartialListAgendar", "Agendamento")',
-                type: 'GET',
-                success: function (result) {
-                    $('#partialListAgendamentos').html(result);
-                },
-                error: function (xhr, status, error) {
-                    console.log(error);
-                }
-            });
-        },
+        $.ajax({
+            url: '@Url.Action("LoadPartialListAgendamentos", "Schedule")',
+            type: 'GET',
+            success: function (result) {
+                $('#partialListAgendamentos').html(result);
+            },
+            error: function (xhr, status, error) {
+                console.log(error);
+            }
+        })
+    });
+
+    $(document).ready(function () {
+        $.ajax({
+            url: '@Url.Action("LoadPartialCardAgendar", "Schedule")',
+            type: 'GET',
+            success: function (result) {
+                $('#partialListAgendamentos').html(result);
+            },
+            error: function (xhr, status, error) {
+                console.log(error);
+            }
+        })
+    });
+
+    $(document).ready(function () {
         $('#refreshButton').click(function () {
             $.ajax({
-                url: '@Url.Action("PartialListAgendamentos", "Agendamento")',
+                url: '@Url.Action("LoadPartialListAgendamentos", "Schedule")',
                 type: 'GET',
                 success: function (result) {
                     $('#partialListAgendamentos').html(result);
@@ -128,7 +130,7 @@
                     console.log(error);
                 }
             });
-        });
+        })
     });
 </script>
 

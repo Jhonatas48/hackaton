@@ -11,6 +11,8 @@ using DevOne.Security.Cryptography.BCrypt;
 using hackaton.Models.Caches;
 using hackaton.Models.Validations;
 using hackaton.Models.Injectors;
+using hackaton.Models.ViewModels;
+using Microsoft.IdentityModel.Tokens;
 
 namespace hackaton.Controllers
 {
@@ -22,6 +24,22 @@ namespace hackaton.Controllers
         {
             _context = context;
             _userCacheService = cache;
+        }
+
+        public IActionResult Search(string searchQuery)
+        {
+            List<User> ListaUsers;
+
+            if (searchQuery.IsNullOrEmpty())
+            {
+                ListaUsers = _context.Users.Where(u => u.Active == true).ToList();
+            }
+            else
+            {
+                ListaUsers = _context.Users.Where(u => (u.Active == true) && ((u.CPF.Contains(searchQuery)) || (u.Name.Contains(searchQuery)))).OrderBy(u => u.Name).ToList();
+            }
+            
+            return View("~/Views/Admin/Index.cshtml", ListaUsers);
         }
 
         // private readonly Context context;
@@ -43,9 +61,10 @@ namespace hackaton.Controllers
         // GET: Users
         public async Task<IActionResult> Index()
         {
-              return _context.Users != null ? 
-                          View(_context.Users.Where(user => user.Active == true).ToList()) :
-                          Problem("Entity set 'Context.Users'  is null.");
+            return _context.Users != null ?
+                        View("~/Views/Admin/Index.cshtml", _context.Users.Where(user => user.Active == true).ToList()) :
+                        Problem("Entity set 'Context.Users'  is null.");
+            //return View("~/Views/Admin/Index.cshtml");
         }
 
         // GET: Users/Details/5
@@ -196,7 +215,7 @@ namespace hackaton.Controllers
             {
                 user.Active = false;
                 _context.Users.Update(user);
-                _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
             }
             
             await _context.SaveChangesAsync();
