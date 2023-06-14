@@ -1,0 +1,137 @@
+﻿@model IEnumerable<hackaton.Models.Agendamento>
+@using VM = hackaton.Models.ViewModels
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = null;
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/sharedStyles.css" type="text/css" />
+</head>
+
+@*Header*@
+<partial name="~/Views/Modules/partial_header.cshtml" model='new VM.VM_header { HeaderVariation=VM.VM_header.Variations.Logout}' />
+
+<div class="main_container">
+
+    <div class="main_card adm-search">
+
+        <div class="content">
+            <div class="leading-generic">
+                <partial name="~/Views/Modules/partial-logo-nameonly-vector.cshtml" />
+                <div class="heading">
+                    <span>Agenda</span>
+                </div>
+            </div>
+            <div class="trailing">
+                <button id="refreshButton">Refresh</button>
+@*                <div class="input env" data-cluster="btn1">
+                    <div class="sub">
+                        <img src="https://raw.githubusercontent.com/WarmMateTea/ImageRepo/f85728639824166be9728567f69f6f2289494d2e/search_FILL0_wght400_GRAD0_opsz48%20(2).svg" class="icon"></img>
+                        <input class="textbox" data-cluster="btn1" placeholder="Pesquisar...">
+                    </div>
+                </div>*@
+
+                <div class="halver-env">
+
+                    <div class="halver-int" id="partialCardAgendar">
+                        <partial name="~/Views/Modules/partial_card_agendar.cshtml" />
+                    </div>
+
+                    <div class="halver-int" id="partialListAgendamentos">
+@*                        @{ await Html.RenderPartialAsync("~/Views/Modules/partial_list_agendamentos.cshtml"); }*@
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*<div class="main_container">
+    <div class="main_card">
+        <div class="content">
+
+        </div>
+    </div>
+</div>
+
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.AgendamentoId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.AgendamentoId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.AgendamentoId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+*@
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        function () {
+            $.ajax({
+                url: '@Url.Action("PartialListAgendamentos", "Agendamento")',
+                type: 'GET',
+                success: function (result) {
+                    $('#partialListAgendamentos').html(result);
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                }
+            });
+        },
+        function () {
+            $.ajax({
+                url: '@Url.Action("PartialListAgendar", "Agendamento")',
+                type: 'GET',
+                success: function (result) {
+                    $('#partialListAgendamentos').html(result);
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                }
+            });
+        },
+        $('#refreshButton').click(function () {
+            $.ajax({
+                url: '@Url.Action("PartialListAgendamentos", "Agendamento")',
+                type: 'GET',
+                success: function (result) {
+                    $('#partialListAgendamentos').html(result);
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                }
+            });
+        });
+    });
+</script>
+
+<script src="/js/module-textbox-focus.js"></script>
+<script src="/js/module-password-eye-visibility.js"></script>
+<script src="/js/module-home-hover.js"></script>

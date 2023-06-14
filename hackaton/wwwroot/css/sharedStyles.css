@@ -501,3 +501,64 @@ div.btn:hover .home {
 }
 
 /* Vai puxar a classe danger lá do exibição em lista; bug de lá acontecendo com o campo CPF, mas é só visual */
+
+/*==============================================================================*/
+/* + Agendamento */
+/*==============================================================================*/
+
+.halver-env {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    width: 100%;
+}
+
+.halver-int {
+    display: flex;
+    width: 50%;
+}
+
+.half-card {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    width: 100%;
+}
+
+.field-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.horizontal-flex {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.column-flex {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.w100 {
+    width: 100%;
+}
+
+.w50 {
+    width: 50%;
+}
+
+.w30 {
+    width: 30%;
+}
+
+.min-w200 {
+    min-width: 200px;
+}
+
+.align-center {
+    align-items: center;
+}

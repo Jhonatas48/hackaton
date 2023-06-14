@@ -1,0 +1,46 @@
+﻿@model hackaton.Models.Agendamento
+@using VM = hackaton.Models.ViewModels
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+
+<div class="main_card half-card">
+    <form asp-action="Create" method="post">
+        <span class="heading">Novo Agendamento</span>
+
+        <div class="horizontal-flex form-group" style="min-width:100%">
+
+            <div class="field-wrapper">
+                <span class="heading">Data de início</span>
+                <div class="input env min-w200 w100" data-cluster="btn1">
+                    <input class="textbox" placeholder="dd/mm/aaaa" asp-for="DataInicial">
+                </div>
+                <span asp-validation-for="DataInicial" class="detail text-danger-override"></span>
+            </div>
+
+            <div class="field-wrapper form-group" style="min-width:100%">
+                <span class="heading">Data de término</span>
+                <div class="input env min-w200 w100" data-cluster="btn1">
+                    <input class="textbox" placeholder="dd/mm/aaaa" asp-for="DataFinal">
+                </div>
+                <span asp-validation-for="DataFinal" class="detail text-danger-override"></span>
+            </div>
+
+        </div>
+
+
+        <div class="horizontal-flex form-group" style="min-width:100%">
+
+            <div class="field-wrapper">
+                <span class="heading">Descrição</span>
+                <div class="input env min-w200 w100" data-cluster="btn1">
+                    <input class="textbox" placeholder="..." asp-for="Description">
+                </div>
+                <span asp-validation-for="Description" class="detail text-danger-override"></span>
+            </div>
+
+        </div>
+
+        <div class="field-wrapper form-group">
+            <input class="btn btn-primary btn-override primary-color-override" type="submit" value="Salvar">
+        </div>
+    </form>
+</div>

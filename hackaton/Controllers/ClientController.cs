@@ -24,7 +24,6 @@ namespace hackaton.Controllers
             if (user != null && user.Id == userId && user.IsAdmin) {
                 return RedirectToAction("Index", "Users");
             }
-            //ViewBag.User = user;
             
             return View(user);
         }

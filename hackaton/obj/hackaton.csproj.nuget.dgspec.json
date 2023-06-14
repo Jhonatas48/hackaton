@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mateu\\source\\repos\\hackaton-front\\hackaton\\hackaton.csproj": {}
+    "C:\\Users\\mateu\\Documents\\GitHub\\hackaton\\hackaton\\hackaton.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mateu\\source\\repos\\hackaton-front\\hackaton\\hackaton.csproj": {
+    "C:\\Users\\mateu\\Documents\\GitHub\\hackaton\\hackaton\\hackaton.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mateu\\source\\repos\\hackaton-front\\hackaton\\hackaton.csproj",
+        "projectUniqueName": "C:\\Users\\mateu\\Documents\\GitHub\\hackaton\\hackaton\\hackaton.csproj",
         "projectName": "hackaton",
-        "projectPath": "C:\\Users\\mateu\\source\\repos\\hackaton-front\\hackaton\\hackaton.csproj",
+        "projectPath": "C:\\Users\\mateu\\Documents\\GitHub\\hackaton\\hackaton\\hackaton.csproj",
         "packagesPath": "C:\\Users\\mateu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mateu\\source\\repos\\hackaton-front\\hackaton\\obj\\",
+        "outputPath": "C:\\Users\\mateu\\Documents\\GitHub\\hackaton\\hackaton\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\mateu\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -81,9 +81,9 @@
               "target": "Package",
               "version": "[7.0.4, )"
             },
-            "QRCoderNetCore": {
+            "QRCoder-ImageSharp": {
               "target": "Package",
-              "version": "[1.0.0, )"
+              "version": "[0.9.0, )"
             }
           },
           "imports": [

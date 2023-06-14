@@ -1,0 +1,43 @@
+﻿@model hackaton.Models.Agendamento
+@using VM = hackaton.Models.ViewModels
+
+<!--  Isso é o trecho que deve ser usado de molde pela página cshtml pra fazer o card-agendamento na view lista (index)   -->
+<div class="main_card card-produtor column-flex">
+    <div class="field-env">
+        <span class="heading">Início</span>
+        <div class="input env min-w200 w100" data-cluster="btn1">
+            <div class="sub">
+                <img src="https://raw.githubusercontent.com/WarmMateTea/ImageRepo/bff17f108256cf1d08be784a93b0d0bc733e199d/date_start.svg" class="icon"></img>
+                <span class="textbox">@Model.DataInicial</span>
+            </div>
+        </div>
+
+        <span class="heading">Final</span>
+        <div class="input env min-w200 w100" data-cluster="btn1">
+            <div class="sub">
+                <img src="https://raw.githubusercontent.com/WarmMateTea/ImageRepo/bff17f108256cf1d08be784a93b0d0bc733e199d/date_end.svg" class="icon"></img>
+                <span class="textbox">@Model.DataFinal</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="field-env horizontal-flex">
+        <span class="heading">Descrição</span>
+        <div class="input env min-w200 w100" data-cluster="btn1">
+            <div class="sub">
+                <span class="textbox">@Model.Description</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="actions">
+@*        <div class="btn btn-primary btn-override primary-color-override">
+                            <label>Editar</label>
+        </div> por ora sem edição :)*@
+        <a class="btn btn-danger btn-override danger-color-override" asp-action="Delete" asp-route-id="@Model.AgendamentoId">
+            <label>Excluir</label>
+        </a>
+    </div>
+</div>
+
+                @*nota: o botão delete ali tem que chamar o refresh depois de apagar a entrada :)*@
