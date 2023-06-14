@@ -1,0 +1,12 @@
+﻿@model hackaton.Models.ViewModels.VM_button
+@{
+}
+
+<a class="btn @Html.Raw(Model.Class)" asp-controller="@Html.Raw(Model.Controller)" asp-action="@Html.Raw(Model.Action)">
+    @Model.Text
+    @(
+        (Model.IconClass is null) ?
+        Html.Raw("") : Html.Raw($"<div src=\"{Model.IconURL}\" class=\"{Model.IconClass}\"></div>")   //Html.Raw($"<img src=\"{Model.IconURL}\" class=\"{Model.IconClass}\">")
+        )
+</a>
+

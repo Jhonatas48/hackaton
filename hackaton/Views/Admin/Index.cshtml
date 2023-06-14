@@ -1,0 +1,75 @@
+﻿@*@model hackaton.Models.User*@ @*obviamente isso ainda não foi implementado do jeito correto*@
+@using VM = hackaton.Models.ViewModels
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = null;
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/sharedStyles.css" type="text/css" />
+</head>
+
+@*Header*@
+<partial name="~/Views/Modules/partial_header.cshtml" model='new VM.VM_header { HeaderVariation = VM.VM_header.Variations.Logout }' />
+@*CUSTOMIZAR UMA VARIATION PARA LOGOUT DO ADMIN*@
+
+<div class="main_container">
+    
+    <div class="main_card adm-search">
+      
+        <div class="content">
+            <div class="leading-generic">
+
+                <partial name="~/Views/Modules/partial-logo-nameonly-vector.cshtml" />
+
+                <div class="heading">
+                    <span>Exibição de produtores</span>
+                </div>
+
+            </div>
+
+            <div class="trailing">
+
+                <div class="input env" data-cluster="btn1">
+                    <div class="sub">
+                        <img src="https://raw.githubusercontent.com/WarmMateTea/ImageRepo/f85728639824166be9728567f69f6f2289494d2e/search_FILL0_wght400_GRAD0_opsz48%20(2).svg" class="icon"></img>
+                    <input class="textbox"  data-cluster="btn1" placeholder="Pesquisar...">
+                    </div>
+                </div>
+
+                <!--  Isso é o trecho que deve ser usado de molde pela página cshtml pra fazer o card-produtor na view de busca e lista   -->
+                <div class="main_card card-produtor">
+
+                    <label class="heading">(nome)</label>
+
+                    <div class="field-env">
+                        <span class="heading">CPF</span>
+                        <div class="input env" data-cluster="btn1">
+                            <div class="sub">
+                            <img src="https://raw.githubusercontent.com/WarmMateTea/ImageRepo/f85728639824166be9728567f69f6f2289494d2e/badge_FILL0_wght400_GRAD0_opsz48.svg" class="icon"></img>
+                            <span class="textbox">(cpf)</span>
+                            </div>
+                        </div>
+
+                        <div class="actions">
+                            <div class="btn btn-primary btn-override primary-color-override">
+                                <label>Editar</label>
+                            </div>
+                            <div class="btn btn-danger btn-override danger-color-override">
+                                <label>Excluir</label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+<script src="/js/module-textbox-focus.js"></script>
+<script src="/js/module-home-hover.js"></script>

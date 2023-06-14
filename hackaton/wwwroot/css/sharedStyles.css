@@ -6,6 +6,8 @@
     --color_secondary: #FFE6BF;
     --color_secondary_inv: #636C79;
     --bg-color: #F1F2F4;
+    --color_danger: #000000; /*#C61A09*/
+    --color_danger_inv: #FFFFFF;
 }
 
 .text_primary {
@@ -283,6 +285,7 @@ a {
 }
 
 .btn-override {
+    border-radius: 8px;
     /* Auto layout */
     display: flex;
     flex-direction: row;
@@ -309,22 +312,22 @@ a {
     color: var(--color_primary_inv);
 }
 
-    .primary-color-override:hover {
-        border-color: var(--color_primary);
-        background: var(--color_primary_inv);
-        color: var(--color_primary);
-    }
+.primary-color-override:hover {
+    border-color: var(--color_primary);
+    background: var(--color_primary_inv);
+    color: var(--color_primary);
+}
 
 .secondary-color-override {
     background: var(--color_secondary);
     color: var(--color_secondary_inv);
 }
 
-    .secondary-color-override:hover {
-        border-color: var(--color_secondary);
-        background: var(--color_secondary_inv);
-        color: var(--color_secondary);
-    }
+.secondary-color-override:hover {
+    border-color: var(--color_secondary);
+    background: var(--color_secondary_inv);
+    color: var(--color_secondary);
+}
 
 /* inútil? */
 div[data-cluster="btn1"]:has(input) {
@@ -353,21 +356,64 @@ input[data-cluster="btn1"], input[data-cluster="btn1"]:focus, input[data-cluster
 }
 
 .icon {
+    background-size: cover;
+    background-position: center;
+    display: inline-block;
+    min-height: 1.5em;
+    min-width: 1.5em;
     max-width: 1.5em;
 }
 
-/* nota: o trigger aqui vai vir ou de uma loucura JS, ou do ASP.NET - não sei bem como puxar isso dele, considernado que a verificação fica num data annotation */
-.check-filter {
-    filter: invert(56%) sepia(68%) saturate(546%) hue-rotate(81deg) brightness(97%) contrast(84%);
+/*==============================================================================*/
+/* * Ícones usam CSS background ao invés de SRC em <img/>;
+     Devem ser usados em DIVs em associação à classe .icon */
+/*==============================================================================*/
+
+.checkmark {
+    background-image: url(https://raw.githubusercontent.com/WarmMateTea/ImageRepo/f85728639824166be9728567f69f6f2289494d2e/check_circle_FILL0_wght400_GRAD0_opsz48.svg);
+}
+
+.checked {
+    background-image: url(https://raw.githubusercontent.com/WarmMateTea/ImageRepo/bdf316192e8e923a1e7af7597b53fcdca5a81f06/checked.svg);
+}
+
+.eye {
+    background-image: url(https://raw.githubusercontent.com/WarmMateTea/ImageRepo/f85728639824166be9728567f69f6f2289494d2e/visibility_off_FILL0_wght400_GRAD0_opsz48.svg);
+}
+
+.eye-show {
+    background-image: url(https://raw.githubusercontent.com/WarmMateTea/ImageRepo/f85728639824166be9728567f69f6f2289494d2e/visibility_FILL0_wght400_GRAD0_opsz48.svg);
 }
 
 .home {
+    background-image: url(https://raw.githubusercontent.com/WarmMateTea/ImageRepo/6520d5faa5879ec0c4ad8c21438f18a2346d6d2f/home_material_white.svg);
+    /*transition: background-image 0.15s ease-in-out;*/
+}
+
+.home-orange {
+    background-image: url(https://raw.githubusercontent.com/WarmMateTea/ImageRepo/6520d5faa5879ec0c4ad8c21438f18a2346d6d2f/home_material_orange.svg);
+}
+
+/*.home {
     filter: brightness(0) invert(1);
     transition: .15s filter ease-in-out;
 }
 
 div.btn:hover .home {
     filter: none;
+}*/
+
+/*==============================================================================*/
+/* * Correção text-danger (detail text-danger-override)*/
+/*==============================================================================*/
+
+.text-danger-override {
+    color: var(--color_danger);
+}
+
+/* nota: o trigger aqui vai vir ou de uma loucura JS, ou do ASP.NET - não sei bem como puxar isso dele, considernado que a verificação fica num data annotation */
+.check-filter {
+    filter: invert(56%) sepia(68%) saturate(546%) hue-rotate(81deg) brightness(97%) contrast(84%);
 }
 
 /*==============================================================================*/

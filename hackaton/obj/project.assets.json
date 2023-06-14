@@ -2118,17 +2118,16 @@
           "lib/net40/Owin.dll": {}
         }
       },
-      "QRCoder-ImageSharp/0.9.0": {
+      "QRCoderNetCore/1.0.0": {
         "type": "package",
         "dependencies": {
-          "SixLabors.ImageSharp": "2.0.0",
-          "System.Text.Encoding.CodePages": "6.0.0"
+          "System.Drawing.Common": "4.5.1"
         },
         "compile": {
-          "lib/netstandard2.0/QRCoder.dll": {}
+          "lib/netstandard2.1/QRCoder.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/QRCoder.dll": {}
+          "lib/netstandard2.1/QRCoder.dll": {}
         }
       },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
@@ -2299,23 +2298,6 @@
           "runtimes/ubuntu.16.10-x64/native/System.Security.Cryptography.Native.OpenSsl.so": {
             "assetType": "native",
             "rid": "ubuntu.16.10-x64"
-          }
-        }
-      },
-      "SixLabors.ImageSharp/2.0.0": {
-        "type": "package",
-        "dependencies": {
-          "System.Runtime.CompilerServices.Unsafe": "5.0.0",
-          "System.Text.Encoding.CodePages": "5.0.0"
-        },
-        "compile": {
-          "lib/netcoreapp3.1/SixLabors.ImageSharp.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/netcoreapp3.1/SixLabors.ImageSharp.dll": {
-            "related": ".xml"
           }
         }
       },
@@ -6699,18 +6681,16 @@
         "owin.nuspec"
       ]
     },
-    "QRCoder-ImageSharp/0.9.0": {
-      "sha512": "ioSTDOxFslWpV35XCGAOBmGUWaK4uPpedISzZD4o7TkPxHuLePmVxcXAJimpRss8wPu/iun0CnVhDJ9DCav2Mg==",
+    "QRCoderNetCore/1.0.0": {
+      "sha512": "nTQ/vgpaQDn5iT7dDu5euM9bgmV8Ul25ZQwUGg2doh72yhmzyMdpVfQykp/WyuHoKmK2EXYB2+/MRq4e5dpuXw==",
       "type": "package",
-      "path": "qrcoder-imagesharp/0.9.0",
+      "path": "qrcodernetcore/1.0.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "lib/netstandard2.0/QRCoder.dll",
-        "nuget-icon.png",
-        "nuget-readme.md",
-        "qrcoder-imagesharp.0.9.0.nupkg.sha512",
-        "qrcoder-imagesharp.nuspec"
+        "lib/netstandard2.1/QRCoder.dll",
+        "qrcodernetcore.1.0.0.nupkg.sha512",
+        "qrcodernetcore.nuspec"
       ]
     },
     "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
@@ -6935,28 +6915,6 @@
         "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
         "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.nuspec",
         "runtimes/ubuntu.16.10-x64/native/System.Security.Cryptography.Native.OpenSsl.so"
-      ]
-    },
-    "SixLabors.ImageSharp/2.0.0": {
-      "sha512": "hZmADrZvn1q9tjPNuuvvl8F8vkz+LFEhnfBkuvwq6Bjgyj3BcOBk6ct4qfssrs25vWIITeH1HkIVdcCYWacpLw==",
-      "type": "package",
-      "path": "sixlabors.imagesharp/2.0.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/net472/SixLabors.ImageSharp.dll",
-        "lib/net472/SixLabors.ImageSharp.xml",
-        "lib/netcoreapp2.1/SixLabors.ImageSharp.dll",
-        "lib/netcoreapp2.1/SixLabors.ImageSharp.xml",
-        "lib/netcoreapp3.1/SixLabors.ImageSharp.dll",
-        "lib/netcoreapp3.1/SixLabors.ImageSharp.xml",
-        "lib/netstandard2.0/SixLabors.ImageSharp.dll",
-        "lib/netstandard2.0/SixLabors.ImageSharp.xml",
-        "lib/netstandard2.1/SixLabors.ImageSharp.dll",
-        "lib/netstandard2.1/SixLabors.ImageSharp.xml",
-        "sixlabors.imagesharp.128.png",
-        "sixlabors.imagesharp.2.0.0.nupkg.sha512",
-        "sixlabors.imagesharp.nuspec"
       ]
     },
     "System.AppContext/4.3.0": {
@@ -10916,23 +10874,23 @@
       "Microsoft.EntityFrameworkCore.Tools >= 7.0.5",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 6.0.13",
       "Npgsql.EntityFrameworkCore.PostgreSQL >= 7.0.4",
-      "QRCoder-ImageSharp >= 0.9.0"
+      "QRCoderNetCore >= 1.0.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\T.I\\.nuget\\packages\\": {}
+    "C:\\Users\\mateu\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\T.I\\Desktop\\github\\hackaton\\hackaton\\hackaton.csproj",
+      "projectUniqueName": "C:\\Users\\mateu\\source\\repos\\hackaton-front\\hackaton\\hackaton.csproj",
       "projectName": "hackaton",
-      "projectPath": "C:\\Users\\T.I\\Desktop\\github\\hackaton\\hackaton\\hackaton.csproj",
-      "packagesPath": "C:\\Users\\T.I\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\T.I\\Desktop\\github\\hackaton\\hackaton\\obj\\",
+      "projectPath": "C:\\Users\\mateu\\source\\repos\\hackaton-front\\hackaton\\hackaton.csproj",
+      "packagesPath": "C:\\Users\\mateu\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\mateu\\source\\repos\\hackaton-front\\hackaton\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\T.I\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\mateu\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -10999,9 +10957,9 @@
             "target": "Package",
             "version": "[7.0.4, )"
           },
-          "QRCoder-ImageSharp": {
+          "QRCoderNetCore": {
             "target": "Package",
-            "version": "[0.9.0, )"
+            "version": "[1.0.0, )"
           }
         },
         "imports": [

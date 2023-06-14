@@ -1,0 +1,34 @@
+﻿@model hackaton.Models.ViewModels.VM_header
+@using VM = hackaton.Models.ViewModels
+
+@{
+    string actionVar = "", textVar = "", controllerVar = "";
+    switch (Model.HeaderVariation)
+    {
+        case VM.VM_header.Variations.Criar_Perfil:
+            actionVar = "Register";
+            textVar = "Criar Perfil";
+            break;
+        case VM.VM_header.Variations.Login:
+            actionVar = "Login";
+            textVar = "Login";
+            break;
+        case VM.VM_header.Variations.Logout:
+            actionVar = "Logout";
+            textVar = "Logout";
+            controllerVar = "Client";
+            break;
+    }
+}
+
+<div class="header">
+    <partial name="~/Views/Modules/partial-logo-name-vector.cshtml" />
+    <div class="header-buttons">
+
+        <partial name="~/Views/Modules/partial_common_button.cshtml"
+                 model='new hackaton.Models.ViewModels.VM_button { Class="btn btn-primary btn-override primary-color-override btn-header", Action=$"{actionVar}", Text=$"{textVar}", Controller=$"{controllerVar}"}' />
+        <partial name="~/Views/Modules/partial_common_button.cshtml"
+                 model='new hackaton.Models.ViewModels.VM_button { Class="btn btn-primary btn-override primary-color-override btn-header home-btn", Action="Index", Text="Home", IconClass="icon home" }' />
+        @*IconURL="https://raw.githubusercontent.com/WarmMateTea/ImageRepo/976c737dd815789553dc686c0984cba499f04a76/orange-home.svg",*@
+    </div>
+</div>

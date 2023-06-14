@@ -1,4 +1,5 @@
 ﻿@model hackaton.Models.User
+@using VM = hackaton.Models.ViewModels
 
 @{
     ViewData["Title"] = "Login";
@@ -9,30 +10,16 @@
     <link rel="stylesheet" href="~/css/sharedStyles.css" type="text/css" />
 </head>
 
+@*Header*@
+<partial name="~/Views/Modules/partial_header.cshtml" model='new VM.VM_header { HeaderVariation=VM.VM_header.Variations.Criar_Perfil}' />
 
-
-<div class="header">
-    <div class="header-logo">
-        <img src="https://raw.githubusercontent.com/WarmMateTea/ImageRepo/1f98e9ba4b641cb18ce0d6dda5c66204564ff52a/logo%2Bnome.svg"></img>
-    </div>
-    <div class="header-buttons">
-        <a asp-action="Register" type="button" class="btn btn-primary btn-override primary-color-override btn-header">
-            <span>Criar Perfil</span>
-        </a>
-        <a asp-action="Index" type="button" class="btn btn-primary btn-override primary-color-override btn-header">
-            <span>Home</span> <img src="https://raw.githubusercontent.com/WarmMateTea/ImageRepo/976c737dd815789553dc686c0984cba499f04a76/orange-home.svg" class="icon home"></img>
-        </a>
-    </div>
-</div>
 <div class="main_container">
 
     <div class="main_card">
         <form asp-action="Login">
         <div class="content">
             <div class="leading-generic">
-                <div class="techagro">
-                    <span class="text_primary">tech</span><span class="text_secondary">agro</span>
-                </div>
+                <partial name="~/Views/Modules/partial-logo-nameonly-vector.cshtml"/>
                 <div class="heading">
                     <span>Entrar na sua conta</span>
                 </div>
@@ -43,29 +30,9 @@
             <div class="trailing">
                 <div class="inputs">
 
-                    <div class="form-group">
-                        <label class="input-description">CPF</label>
-                        <div class="input env" data-cluster="btn1">
-                            <div class="sub">
-                                <img src="https://raw.githubusercontent.com/WarmMateTea/ImageRepo/f85728639824166be9728567f69f6f2289494d2e/badge_FILL0_wght400_GRAD0_opsz48.svg" class="icon"></img>
-                                <input class="form-control textbox" data-cluster="btn1" placeholder="123.456.789-00" asp-for="CPF">
-                            </div>
-                            <img src="https://raw.githubusercontent.com/WarmMateTea/ImageRepo/f85728639824166be9728567f69f6f2289494d2e/check_circle_FILL0_wght400_GRAD0_opsz48.svg" class="icon"></img>
-                        </div>
-                        <span asp-validation-for="CPF" class="text-danger"></span>
-                    </div>
+                    <partial name="~/Views/Modules/partial_textbox_cpf.cshtml" model='new VM.VM_textbox { User = Model}'/>
 
-                    <div class="form-group">
-                        <label class="input-description">Senha</label>
-                        <div class="input env" data-cluster="btn1">
-                            <div class="sub">
-                                <img src="https://raw.githubusercontent.com/WarmMateTea/ImageRepo/f85728639824166be9728567f69f6f2289494d2e/vpn_key_FILL0_wght400_GRAD0_opsz48.svg" class="icon"></img>
-                                <input class="form-control textbox" data-cluster="btn1" type="password" placeholder="●●●●●●" asp-for="Password">
-                            </div>
-                            <img src="https://raw.githubusercontent.com/WarmMateTea/ImageRepo/f85728639824166be9728567f69f6f2289494d2e/visibility_off_FILL0_wght400_GRAD0_opsz48.svg" class="icon eye hide"></img>
-                        </div>
-                        <span asp-validation-for="Password" class="text-danger"></span>
-                    </div>
+                    <partial name="~/Views/Modules/partial_textbox_password.cshtml" model='new VM.VM_textbox {User = Model}' />
 
                 </div>
 @*                <div class="checkbox-w-text"> <!--NOTA! Isso ainda não está implementado.--!>
@@ -76,7 +43,8 @@
 
             <div class="actions">
                 <div class="form-group" style="min-width:100%">
-                    <input type="submit" value="Login" class="btn btn-primary btn-override primary-color-override">
+                    <partial name="~/Views/Modules/partial_submit_button.cshtml"
+                                model='new hackaton.Models.ViewModels.VM_button { Class="btn btn-primary btn-override primary-color-override", Value="Login"}' />
                 </div>
                 <span class="detail">Não tem um cadastro? <a asp-action="Register" class="text_secondary">Cadastre-se</a></span>
                 @*<span hidden class="detail">É um administrador? <a asp-action="" class="">Login para Administradores</a></span> <!--!NOTA! Ainda não implementado.--!>*@
@@ -88,70 +56,12 @@
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $('.textbox').on('focus', function () {
-            $(this).parent().parent('.env').addClass('env-margin');
-        });
 
-        $('.textbox').on('blur', function () {
-            $(this).parent().parent('.env').removeClass('env-margin');
-        });
-
-        $('.env').on('click', function () {
-            $(this).children().children('.textbox').focus();
-        });
-
-        $('.eye').on('click', function () {
-            console.log('aa');
-            if ($(this).hasClass('hide')) {
-                console.log("rem");
-                $(this).removeClass('hide');
-                $(this).addClass('show');
-                $(this).siblings('.sub').children('.textbox').attr('type', '');
-                $(this).attr('src', 'https://raw.githubusercontent.com/WarmMateTea/ImageRepo/f85728639824166be9728567f69f6f2289494d2e/visibility_FILL0_wght400_GRAD0_opsz48.svg')
-            }
-            else {
-                $(this).removeClass('show');
-                $(this).addClass('hide');
-                $(this).attr('src', 'https://raw.githubusercontent.com/WarmMateTea/ImageRepo/f85728639824166be9728567f69f6f2289494d2e/visibility_off_FILL0_wght400_GRAD0_opsz48.svg');
-                $(this).siblings('.sub').children('.textbox').attr('type', 'password');
-            }
-        })
-    });
-</script>
-
-@*<h1>Login</h1>
-
-<h4>User</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Login">
-           
-            <div class="form-group">
-                <label asp-for="CPF" class="control-label"></label>
-                <input asp-for="CPF" class="form-control" />
-                <span asp-validation-for="CPF" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Password" class="control-label">Senha</label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-          
-            <div class="form-group">
-                <input type="submit" value="Login" class="btn btn-primary" />
-                
-            </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>*@
+@*Diversão.*@
+<script src="/js/module-textbox-focus.js"></script>
+<script src="/js/module-password-eye-visibility.js"></script>
+<script src="/js/module-cpf-verification.js"></script>
+<script src="/js/module-home-hover.js"></script>
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
