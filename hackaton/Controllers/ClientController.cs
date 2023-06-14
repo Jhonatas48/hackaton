@@ -6,6 +6,7 @@ using hackaton.Models.Injectors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace hackaton.Controllers
 {
@@ -44,21 +45,21 @@ namespace hackaton.Controllers
             return RedirectToAction("Index","Home");
         }
 
-        // GET: Users/Edit/5
-        [ServiceFilter(typeof(RequireLoginAttributeFactory))]
-        public async Task<IActionResult> Edit()
-        {
-            string cpf = HttpContext.Session.GetString("CPF");
-            int userId = (int)HttpContext.Session.GetInt32("UserId");
-            User user = _userService.GetUserByCPFAsync(cpf);
+        //// GET: Users/Edit/5
+        //[ServiceFilter(typeof(RequireLoginAttributeFactory))]
+        //public async Task<IActionResult> Edit()
+        //{
+        //    string cpf = HttpContext.Session.GetString("CPF");
+        //    int userId = (int)HttpContext.Session.GetInt32("UserId");
+        //    User user = _userService.GetUserByCPFAsync(cpf);
            
-            if (user == null || !user.CPF.Equals(cpf) || user.Id != userId)
-            {
-                return NotFound();
-            }
+        //    if (user == null || !user.CPF.Equals(cpf) || user.Id != userId)
+        //    {
+        //        return NotFound();
+        //    }
            
-            return View(user);
-        }
+        //    return View(user);
+        //}
 
         // POST: Users/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -67,16 +68,23 @@ namespace hackaton.Controllers
         [ServiceFilter(typeof(RequireLoginAttributeFactory))]
         [ValidateAntiForgeryToken]
 
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Password,CPF,IsAdmin")] User user)
+        public async Task<IActionResult> Edit([Bind("Id,Name,Password,CPF,IsAdmin")] User user)
         {
             int userId = (int)HttpContext.Session.GetInt32("UserId");
             string cpf = HttpContext.Session.GetString("CPF");
             User userRetrieve = _userService.GetUserByCPFAsync(cpf);
+            user.CPF = cpf;
+            
 
             if (userRetrieve == null)
             {
                 return NotFound();
             }
+
+            ModelState.Remove("user.CPF");  //Temporário, até eu descobrir pq o cpf n tá vindo
+            ModelState.Remove("user.QrCodes");
+            ModelState.Remove("user.Agendamentos");
+            ModelState.Remove("user.Properties");
 
             if (ModelState.IsValid)
             {
@@ -84,7 +92,7 @@ namespace hackaton.Controllers
                 {
                     string password = user.Password;
 
-                    userRetrieve.Password = BCryptHelper.HashPassword(password, BCryptHelper.GenerateSalt());
+                    userRetrieve.Password = (!password.IsNullOrEmpty()) ? BCryptHelper.HashPassword(password, BCryptHelper.GenerateSalt()) : userRetrieve.Password;
                     _context.Update(userRetrieve);
                     await _context.SaveChangesAsync();
                 }
@@ -101,25 +109,25 @@ namespace hackaton.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            return View("~/Views/Client/Index.cshtml", user);
         }
 
-        // GET: Users/Delete/5
-        [ServiceFilter(typeof(RequireLoginAttributeFactory))]
-        public async Task<IActionResult> Delete()
-        {
+        //// GET: Users/Delete/5
+        //[ServiceFilter(typeof(RequireLoginAttributeFactory))]
+        //public async Task<IActionResult> Delete()
+        //{
 
-            string cpf = HttpContext.Session.GetString("CPF");
-            int userId = (int)HttpContext.Session.GetInt32("UserId");
-            User user = _userService.GetUserByCPFAsync(cpf);
+        //    string cpf = HttpContext.Session.GetString("CPF");
+        //    int userId = (int)HttpContext.Session.GetInt32("UserId");
+        //    User user = _userService.GetUserByCPFAsync(cpf);
 
-            if (user == null || !user.CPF.Equals(cpf) || user.Id != userId)
-            {
-                return NotFound();
-            }
+        //    if (user == null || !user.CPF.Equals(cpf) || user.Id != userId)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return View(user);
-        }
+        //    return View(user);
+        //}
 
         // POST: Users/Delete/5
         [HttpPost, ActionName("Delete")]
@@ -150,7 +158,9 @@ namespace hackaton.Controllers
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+
+            return RedirectToAction(nameof(Logout));
+            //return RedirectToAction(nameof(Index));
         }
 
         private bool UserExists(int id)

@@ -140,7 +140,7 @@ namespace hackaton.Controllers
             {
                 return NotFound();
             }
-            return View(user);
+            return View("~/Views/Admin/Edit.cshtml",user);
         }
 
         // POST: Users/Edit/5
@@ -152,11 +152,16 @@ namespace hackaton.Controllers
        
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Password,CPF,IsAdmin")] User user)
         {
-
+            user.Id = id;
             if (id != user.Id)
             {
                 return NotFound();
             }
+
+            ModelState.Remove("user.QrCodes");
+            ModelState.Remove("user.Agendamentos");
+            ModelState.Remove("user.Properties");
+            ModelState.Remove("user.CPF");  //suspeito que alguma verificação aqui esteja quebrada, se tiver a validação do "já cadastrado"
 
             if (ModelState.IsValid)
             {
@@ -180,7 +185,7 @@ namespace hackaton.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            return View("~/Views/Admin/Edit.cshtml",user);
         }
 
         // GET: Users/Delete/5
