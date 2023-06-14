@@ -6,6 +6,8 @@ using System.Drawing.Imaging;
 using System.Drawing;
 using QRCoder;
 using hackaton.Models.Caches;
+using Microsoft.VisualStudio.Web.CodeGeneration;
+using SixLabors.ImageSharp.Formats.Png;
 
 namespace hackaton.Controllers
 {
@@ -59,29 +61,27 @@ namespace hackaton.Controllers
                  _context.SaveChanges();
             }
            
-            // Configurações do QR Code
-            byte[] imageBytes;
 
-            using (MemoryStream stream = new MemoryStream()) { 
+            // Define o formato da imagem como PNG em um string base 64
+            var imgType = Base64QRCode.ImageType.Png;
 
-                QRCodeGenerator qrCodeGenerator = new QRCodeGenerator();
-                QRCodeData qRCodeData = qrCodeGenerator.CreateQrCode(qrCodeText,QRCodeGenerator.ECCLevel.Q);
-                QRCode qrCode = new QRCode(qRCodeData);
-                
-                //Cria um bitmap baseada no tamnho de 20 pixels
-                using (Bitmap qrCodeBitmap = qrCode.GetGraphic(20)) {
+            //Instancia o Gerador de QrCode
+            QRCodeGenerator qrCodeGenerator = new QRCodeGenerator();
 
-                    //Salva a imagem no bitmat no formatp PNG
-                    qrCodeBitmap.Save(stream,ImageFormat.Png);
-                  
-                    //Converte a imagem em um array de bytes
-                    imageBytes = stream.ToArray();
-                    
-                }
-            }
+            //Gera o qrcode baseado no qrcodeText de tamanho médio
+            QRCodeData qrCodeData = qrCodeGenerator.CreateQrCode(qrCodeText, QRCodeGenerator.ECCLevel.Q);
 
-            //retorna a imagem do QR Code
-            return File(imageBytes, "image/png");
+            //Cria uma instancia de um gerador para gerar um qrCode Base64
+            var qrCode = new Base64QRCode(qrCodeData);
+          
+            //Gera um qrcode em uma string base 64
+            string qrCodeImageAsBase64 = qrCode.GetGraphic(20, SixLabors.ImageSharp.Color.Black, SixLabors.ImageSharp.Color.White, true, imgType);
+
+            //Converte a string em formate base 64 para um array de bytes
+            byte[] imageBytes = Convert.FromBase64String(qrCodeImageAsBase64);
+
+            //retorna a imagem do QR Code no formato PNG
+             return File(imageBytes, "image/png");
 
         }
 
