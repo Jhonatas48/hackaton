@@ -80,7 +80,8 @@ namespace hackaton.Controllers
             {
                 return NotFound();
             }
-
+          
+            userRetrieve.CPF = cpf;
             ModelState.Remove("user.CPF");  //Temporário, até eu descobrir pq o cpf n tá vindo
             ModelState.Remove("user.QrCodes");
             ModelState.Remove("user.Agendamentos");
@@ -91,8 +92,9 @@ namespace hackaton.Controllers
                 try
                 {
                     string password = user.Password;
-
+                     userRetrieve.Name = user.Name;
                     userRetrieve.Password = (!password.IsNullOrEmpty()) ? BCryptHelper.HashPassword(password, BCryptHelper.GenerateSalt()) : userRetrieve.Password;
+                    _context.ChangeTracker.Clear();
                     _context.Update(userRetrieve);
                     await _context.SaveChangesAsync();
                 }

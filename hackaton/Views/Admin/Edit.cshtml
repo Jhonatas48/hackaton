@@ -19,7 +19,7 @@
     <div class="main_card signup">
 
         <div class="content">
-            <form asp-action="Index" style="min-width:100%">
+            <form asp-action="Edit" asp-controller="Users" method="post">
                 <div class="leading-generic">
                     <partial name="~/Views/Modules/partial-logo-nameonly-vector.cshtml" />
                     <div class="heading">
@@ -29,20 +29,29 @@
                         <span>Visualize seus dados pessoais</span>
                     </div>
                 </div>
+                
                 <div class="trailing">
                     <div class="inputs">
 
+                        
                         <partial name="~/Views/Modules/partial_textbox_name_edit.cshtml" model='new VM.VM_textbox { User = Model }' />
 
                         <partial name="~/Views/Modules/partial_textbox_password_edit.cshtml" model='new VM.VM_textbox { User = Model }' />
 
                         <partial name="~/Views/Modules/partial_textbox_cpf.cshtml" model='new VM.VM_textbox { User = Model }' />
 
+                        <input class="form-control textbox" data-cluster="btn1" asp-for="Id" hidden>
+                         
                         @Html.HiddenFor(m => m.Id)
                     </div>
 
                     <div class="actions">
-                        <input asp-controller="Users" asp-action="Edit" class="btn btn-primary btn-override primary-color-override" type="submit" value="Salvar Alterações">
+                        
+                            <button type="submit" class="btn btn-primary btn-override primary-color-override">
+                                Salvar Alterações
+                            </button>
+                        
+                        @*<input asp-controller="Users" asp-action="Edit" class="btn btn-primary btn-override primary-color-override" type="submit" value="Salvar Alterações">*@
                         <a href="@Url.Action("Delete","Client", new { id = Model.Id })" class="btn btn-danger btn-override danger-color-override">
                             <label>Excluir Perfil</label>
                         </a>

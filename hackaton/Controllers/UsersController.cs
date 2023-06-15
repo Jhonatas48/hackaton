@@ -150,14 +150,12 @@ namespace hackaton.Controllers
         [ServiceFilter(typeof(RequireLoginAttributeFactory))]
         [ValidateAntiForgeryToken]
        
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Password,CPF,IsAdmin")] User user)
+        public async Task<IActionResult> Edit(int id, User user)
         {
-            user.Id = id;
-            if (id != user.Id)
-            {
-                return NotFound();
-            }
-
+            int userId = id;
+            var userRetrieve = _context.Users.Where(u => u.Id == userId).Single();
+            user.IsAdmin = userRetrieve.IsAdmin;
+            user.Id = userId;
             ModelState.Remove("user.QrCodes");
             ModelState.Remove("user.Agendamentos");
             ModelState.Remove("user.Properties");
@@ -168,7 +166,11 @@ namespace hackaton.Controllers
                 try
                 {
                     string password = user.Password;
+                   
                     user.Password = BCryptHelper.HashPassword(password, BCryptHelper.GenerateSalt());
+
+                    _context.ChangeTracker.Clear();
+
                     _context.Update(user);
                     await _context.SaveChangesAsync();
                 }
@@ -183,7 +185,7 @@ namespace hackaton.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index");
             }
             return View("~/Views/Admin/Edit.cshtml",user);
         }
