@@ -14,6 +14,7 @@ using hackaton.Models.Injectors;
 using hackaton.Models.ViewModels;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNet.SignalR.Hubs;
+using System.Text.Json.Nodes;
 
 namespace hackaton.Controllers
 {
@@ -66,6 +67,12 @@ namespace hackaton.Controllers
                         View("~/Views/Admin/Index.cshtml", _context.Users.Where(user => user.Active == true).ToList()) :
                         Problem("Entity set 'Context.Users'  is null.");
             //return View("~/Views/Admin/Index.cshtml");
+        }
+
+        public async Task<ActionResult> getUsers() {
+
+            return Json(_context.Users.ToList());
+            // return Json(true);
         }
 
         // GET: Users/Details/5
@@ -231,7 +238,7 @@ namespace hackaton.Controllers
 
             var user = await _context.Users.FindAsync(id);
 
-            if (user != null)
+            if (user == null)
             {
                 return NotFound();
             }
@@ -245,8 +252,7 @@ namespace hackaton.Controllers
             user.Active = false;
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index");
         }
 
         private bool UserExists(int id)

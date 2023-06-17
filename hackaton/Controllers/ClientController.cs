@@ -115,21 +115,21 @@ namespace hackaton.Controllers
         }
 
         //// GET: Users/Delete/5
-        //[ServiceFilter(typeof(RequireLoginAttributeFactory))]
-        //public async Task<IActionResult> Delete()
-        //{
+        [ServiceFilter(typeof(RequireLoginAttributeFactory))]
+       public async Task<IActionResult> Delete()
+       {
 
-        //    string cpf = HttpContext.Session.GetString("CPF");
-        //    int userId = (int)HttpContext.Session.GetInt32("UserId");
-        //    User user = _userService.GetUserByCPFAsync(cpf);
+           string cpf = HttpContext.Session.GetString("CPF");
+           int userId = (int)HttpContext.Session.GetInt32("UserId");
+            User user = _userService.GetUserByCPFAsync(cpf);
 
-        //    if (user == null || !user.CPF.Equals(cpf) || user.Id != userId)
-        //    {
-        //        return NotFound();
-        //    }
+            if (user == null || !user.CPF.Equals(cpf) || user.Id != userId)
+            {
+                return NotFound();
+            }
 
-        //    return View(user);
-        //}
+            return View(user);
+        }
 
         // POST: Users/Delete/5
         [HttpPost, ActionName("Delete")]

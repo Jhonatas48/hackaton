@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mateu\\Documents\\GitHub\\hackaton\\hackaton\\hackaton.csproj": {}
+    "C:\\Users\\T.I\\Desktop\\github\\hackaton\\hackaton\\hackaton.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mateu\\Documents\\GitHub\\hackaton\\hackaton\\hackaton.csproj": {
+    "C:\\Users\\T.I\\Desktop\\github\\hackaton\\hackaton\\hackaton.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mateu\\Documents\\GitHub\\hackaton\\hackaton\\hackaton.csproj",
+        "projectUniqueName": "C:\\Users\\T.I\\Desktop\\github\\hackaton\\hackaton\\hackaton.csproj",
         "projectName": "hackaton",
-        "projectPath": "C:\\Users\\mateu\\Documents\\GitHub\\hackaton\\hackaton\\hackaton.csproj",
-        "packagesPath": "C:\\Users\\mateu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mateu\\Documents\\GitHub\\hackaton\\hackaton\\obj\\",
+        "projectPath": "C:\\Users\\T.I\\Desktop\\github\\hackaton\\hackaton\\hackaton.csproj",
+        "packagesPath": "C:\\Users\\T.I\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\T.I\\Desktop\\github\\hackaton\\hackaton\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\mateu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\T.I\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
