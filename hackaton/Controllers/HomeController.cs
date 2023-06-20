@@ -7,6 +7,7 @@ using hackaton.Models.WebSocket;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System.Diagnostics;
 
 namespace hackaton.Controllers
@@ -25,23 +26,6 @@ namespace hackaton.Controllers
             _userCacheService = cache;
            
         }
-      
-        public IActionResult Index()
-        {
-            var session = HttpContext.Session;
-            
-            if (!string.IsNullOrEmpty(session.GetString("CPF")) && !string.IsNullOrEmpty(session.GetString("SessionId")) &&  session.GetInt32("UserId") != null ) {
-                 
-                return RedirectToAction("Index", "Client");
-            }
-
-            return View();
-        }
-
-        public IActionResult Login() {
-
-            return View("Login");
-        }
         public  bool validateLogin(User user) {
             var userRetrieve = _context.Users.FirstOrDefault(u => u.CPF == user.CPF);// _userCacheService.GetUserByCPFAsync(user.CPF);//_context.Users.FirstOrDefault(u => u.CPF.Equals(user.CPF));
 
@@ -55,70 +39,78 @@ namespace hackaton.Controllers
             return true;
         }
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Login(User user)
+       // [ValidateAntiForgeryToken]
+        public IActionResult Login([FromBody][Bind("Password,CPF")] User user)
         {
             if (user == null) {
                 return new BadRequestObjectResult(new { message = "User is required" }); ;
+            }
+            ModelState.Remove("Name");
+            ModelState.Remove("Properties");
+
+            if (!ModelState.IsValid)
+            {
+                var erros = ModelState.Keys
+                 .Where(key => ModelState[key].Errors.Any())
+                 .ToDictionary(key => key, key => ModelState[key].Errors.Select(error => error.ErrorMessage).ToList());
+
+                var response = new
+                {
+                    Message = "Houve erros de validação.",
+                    Errors = erros,
+
+                };
+
+                var json = JsonConvert.SerializeObject(response);
+
+                return BadRequest(json);
             }
 
             if (!validateLogin(user))
             {
                 ModelState.AddModelError("CPF", "CPF ou Senha inválidos");
                 ModelState.AddModelError("Password", "CPF ou Senha inválidos");
-                return View();
+                return new UnauthorizedObjectResult(new { message = "Invalid Credentials" });
             }
-            user = _userCacheService.GetUserByCPFAsync(user.CPF);
-            HttpContext.Session.SetString("SessionId", user.CPF);
-            HttpContext.Session.SetInt32("UserId", user.Id);
-            HttpContext.Session.SetString("CPF", user.CPF);
           
-            return RedirectToAction("Index","Client");
+          
+            return Ok();
            
-        }
-
-
-        public IActionResult Register()
-        {
-            return View();
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Register(User user)
+       // [ValidateAntiForgeryToken]
+        public IActionResult Register( [FromBody]User user)
         {
-           
                 var cpfExists =  _context.Users.Any(u => u.CPF == user.CPF);
                 if (cpfExists)
                 {
                     ModelState.AddModelError("CPF", "O CPF já está cadastrado.");
-                    return View(user);
+                   // return View(user);
                 }
-            
+            if (!ModelState.IsValid)
+            {
+                var erros = ModelState.Keys
+             .Where(key => ModelState[key].Errors.Any())
+             .ToDictionary(key => key, key => ModelState[key].Errors.Select(error => error.ErrorMessage).ToList());
+
+                var response = new
+                {
+                    Message = "Houve erros de validação.",
+                    Errors = erros,
+
+                };
+
+                var json = JsonConvert.SerializeObject(response);
+
+                return BadRequest(json);
+            }
 
             user.Password = BCryptHelper.HashPassword(user.Password,BCryptHelper.GenerateSalt());
             _context.Users.Add(user);
             _context.SaveChanges();
-           // user = _context.Users.Where(u => u.CPF.Equals(user.CPF)).FirstOrDefault();
-            user = _userCacheService.GetUserByCPFAsync(user.CPF);
-            HttpContext.Session.SetString("SessionId", user.CPF);
-            HttpContext.Session.SetInt32("UserId", user.Id);
-            HttpContext.Session.SetString("CPF", user.CPF);
-            return View("SucessRegister",user);
-        }
-
-        public IActionResult SucessRegister() {
-            
-            return View();
-        }
-
-        public IActionResult PermissionDenied() {
-            return View();
-        }
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+          
+            return Json(user);
         }
     }
 }

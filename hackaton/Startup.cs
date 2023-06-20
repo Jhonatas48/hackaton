@@ -12,7 +12,7 @@ namespace hackaton
     public class Startup
     {
         private readonly Context _context;
-        private readonly bool useSqlServer= false;
+        private readonly bool useSqlServer= true;
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -25,6 +25,17 @@ namespace hackaton
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecificOrigins",
+                    builder =>
+                    {
+                        builder.WithOrigins("https://localhost:7294")
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                    });
+            });
 
             services.AddDistributedMemoryCache();
             services.AddSession(options =>
@@ -113,6 +124,7 @@ namespace hackaton
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseCors("AllowSpecificOrigins");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

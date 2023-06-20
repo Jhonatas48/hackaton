@@ -1,7 +1,9 @@
 ﻿using DevOne.Security.Cryptography.BCrypt;
 using hackaton.Models.Security;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.VisualStudio.Web.CodeGeneration.CommandLine;
+using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -31,8 +33,6 @@ namespace hackaton.Models
 
         public bool Active { get; set; }=true;
 
-        public ICollection<Property>  Properties{ get; set; }
-        public ICollection<QrCode> QrCodes { get; set; }
-        public ICollection<Schedule> Agendamentos { get; set;}
+        
     }
 }

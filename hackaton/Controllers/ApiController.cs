@@ -73,17 +73,22 @@ namespace hackaton.Controllers
             {
                 return new BadRequestObjectResult(new { message = "User is required" });
             }
-
+            ModelState.Remove("Name");
+            ModelState.Remove("Properties");
+           
             if (!ModelState.IsValid)
             {
-                ModelState.Remove("Name");
-                ModelState.Remove("Properties");
+                var erros = ModelState.Keys
+                .Where(key => ModelState[key].Errors.Any())
+                .ToDictionary(key => key, key => ModelState[key].Errors.Select(error => error.ErrorMessage).ToList());
 
-            }
+                var response = new
+                {
+                    Message = "Houve erros de validação.",
+                    Errors = erros,
 
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
+                };
+                return BadRequest(response);
             }
             if (_homeController.validateLogin(user))
             {
@@ -93,67 +98,5 @@ namespace hackaton.Controllers
             return new UnauthorizedObjectResult(new { message = "Invalid Credentials" });
         }
 
-        // GET: ApiController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: ApiController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: ApiController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: ApiController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: ApiController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: ApiController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

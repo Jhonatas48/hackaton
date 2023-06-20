@@ -1,5 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
-
+﻿using hackaton.Models.Converters;
+using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
 namespace hackaton.Models
 {
     public class Schedule
@@ -9,11 +10,11 @@ namespace hackaton.Models
         [Required(ErrorMessage = "O campo é obrigatório.")]
         public string Description { get; set; }
 
-        [Required(ErrorMessage = "O campo é obrigatório.")]
+      
         [DataType(DataType.Date)]
         public DateTime DataInicial { get; set; }
 
-        [Required(ErrorMessage = "O campo é obrigatório.")]
+        
         [DataType(DataType.Date)]
         public DateTime DataFinal { get; set; }
 

@@ -3,10 +3,12 @@ using hackaton.Models;
 using hackaton.Models.Caches;
 using hackaton.Models.DAO;
 using hackaton.Models.Injectors;
+using hackaton.Models.Security;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 
 namespace hackaton.Controllers
 {
@@ -18,77 +20,42 @@ namespace hackaton.Controllers
             _userService = cache;
             _context = context;
         }
-        // GET: ClientController
-        [ServiceFilter(typeof(RequireLoginAttributeFactory))]
-        public ActionResult Index()
-        {
-            string cpf = HttpContext.Session.GetString("CPF");
-            int userId = (int)HttpContext.Session.GetInt32("UserId");
-            User user = _userService.GetUserByCPFAsync(cpf);
-            Console.WriteLine(user.IsAdmin);
-            if (user != null && user.Id == userId && user.IsAdmin) {
-                return RedirectToAction("Index", "Users");
-            }
-            
-            return View(user);
-        }
-
-        // GET: ClientController/Logout
-        public ActionResult Logout()
-        {
-            //limpa a session do client
-            HttpContext.Session.Clear();
-            //Deleta o cookie que tem os dados de sessão
-            Response.Cookies.Delete("MyAuthCookie");
-
-            //Direciona o usuario a pagina /Home/Index
-            return RedirectToAction("Index","Home");
-        }
-
-        //// GET: Users/Edit/5
-        //[ServiceFilter(typeof(RequireLoginAttributeFactory))]
-        //public async Task<IActionResult> Edit()
-        //{
-        //    string cpf = HttpContext.Session.GetString("CPF");
-        //    int userId = (int)HttpContext.Session.GetInt32("UserId");
-        //    User user = _userService.GetUserByCPFAsync(cpf);
-           
-        //    if (user == null || !user.CPF.Equals(cpf) || user.Id != userId)
-        //    {
-        //        return NotFound();
-        //    }
-           
-        //    return View(user);
-        //}
 
         // POST: Users/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ServiceFilter(typeof(RequireLoginAttributeFactory))]
-        [ValidateAntiForgeryToken]
-
-        public async Task<IActionResult> Edit([Bind("Id,Name,Password,CPF,IsAdmin")] User user)
+        [BearerAuthorize]
+        public async Task<IActionResult> Edit([FromBody] User user)
         {
-            int userId = (int)HttpContext.Session.GetInt32("UserId");
-            string cpf = HttpContext.Session.GetString("CPF");
-            User userRetrieve = _userService.GetUserByCPFAsync(cpf);
-            user.CPF = cpf;
-            
 
+            ModelState.Remove("user.QrCodes");
+            ModelState.Remove("user.Agendamentos");
+            ModelState.Remove("user.Properties");
+            if (!ModelState.IsValid)
+            {
+                var erros = ModelState.Keys
+                 .Where(key => ModelState[key].Errors.Any())
+                 .ToDictionary(key => key, key => ModelState[key].Errors.Select(error => error.ErrorMessage).ToList());
+
+                var response = new
+                {
+                    Message = "Houve erros de validação.",
+                    Errors = erros,
+
+                };
+
+                var json = JsonConvert.SerializeObject(response);
+
+                return BadRequest(json);
+            };
+                User userRetrieve = _userService.GetUserByCPFAsync(user.CPF);
+          
             if (userRetrieve == null)
             {
                 return NotFound();
             }
-          
-            userRetrieve.CPF = cpf;
-            ModelState.Remove("user.CPF");  //Temporário, até eu descobrir pq o cpf n tá vindo
-            ModelState.Remove("user.QrCodes");
-            ModelState.Remove("user.Agendamentos");
-            ModelState.Remove("user.Properties");
 
-            if (ModelState.IsValid)
-            {
                 try
                 {
                     string password = user.Password;
@@ -97,6 +64,7 @@ namespace hackaton.Controllers
                     _context.ChangeTracker.Clear();
                     _context.Update(userRetrieve);
                     await _context.SaveChangesAsync();
+                    return Json(user);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -106,17 +74,16 @@ namespace hackaton.Controllers
                     }
                     else
                     {
-                        throw;
+                       return Problem("Erro no banco de dados");
                     }
                 }
-                return RedirectToAction(nameof(Index));
-            }
-            return View("~/Views/Client/Index.cshtml", user);
+             
         }
 
         //// GET: Users/Delete/5
-        [ServiceFilter(typeof(RequireLoginAttributeFactory))]
-       public async Task<IActionResult> Delete()
+         [BearerAuthorize]
+        //   [ServiceFilter(typeof(RequireLoginAttributeFactory))]
+        public async Task<IActionResult> Delete()
        {
 
            string cpf = HttpContext.Session.GetString("CPF");
@@ -128,13 +95,14 @@ namespace hackaton.Controllers
                 return NotFound();
             }
 
-            return View(user);
+            return Json(user);
         }
 
         // POST: Users/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ServiceFilter(typeof(RequireLoginAttributeFactory))]
-        [ValidateAntiForgeryToken]
+        [BearerAuthorize]
+        //  [ServiceFilter(typeof(RequireLoginAttributeFactory))]
+        // [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Users == null)
@@ -154,15 +122,13 @@ namespace hackaton.Controllers
                 user.Active = false;
                 _context.Users.Update(user);
                 await _context.SaveChangesAsync();
+                return Json(user);
             }
+
             else {
-                RedirectToAction("Index", "Users");
+                return StatusCode(405, "Voce nao tem permissao para executar esta ação");
             }
 
-            await _context.SaveChangesAsync();
-
-            return RedirectToAction(nameof(Logout));
-            //return RedirectToAction(nameof(Index));
         }
 
         private bool UserExists(int id)
