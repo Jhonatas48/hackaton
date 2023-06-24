@@ -24,7 +24,7 @@ namespace hackaton.Controllers
     // GET: ApiController/QRCode
     [BearerAuthorize]
  
-        public async Task<ActionResult> QRCodeAsync([FromBody] QrCode qrCode)
+        public async Task<ActionResult> validateqrcode([FromBody] QrCode qrCode)
         {
             if (qrCode == null || string.IsNullOrEmpty(qrCode.Content)) {
                 return new BadRequestObjectResult(new { message = "QrCode is required" });
@@ -67,7 +67,7 @@ namespace hackaton.Controllers
         }
 
         // GET: ApiController/Details/5
-        public ActionResult validadeUser([FromBody] User user)
+        public ActionResult validateUser([FromBody] User user)
         {
             if(user == null)
             {
