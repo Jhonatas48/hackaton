@@ -3,11 +3,13 @@ using hackaton.Models;
 using hackaton.Models.Caches;
 using hackaton.Models.DAO;
 using hackaton.Models.Injectors;
+using hackaton.Models.Security;
 using hackaton.Models.WebSocket;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using NuGet.Common;
 using System.Diagnostics;
 
 namespace hackaton.Controllers
@@ -27,6 +29,9 @@ namespace hackaton.Controllers
            
         }
         public  bool validateLogin(User user) {
+           
+            if(user.ApiId==0) return false;
+
             var userRetrieve = _context.Users.FirstOrDefault(u => u.CPF == user.CPF);// _userCacheService.GetUserByCPFAsync(user.CPF);//_context.Users.FirstOrDefault(u => u.CPF.Equals(user.CPF));
 
             //Usuario não existe ou credenciais estão inválidas
@@ -42,6 +47,22 @@ namespace hackaton.Controllers
        // [ValidateAntiForgeryToken]
         public IActionResult Login([FromBody][Bind("Password,CPF")] User user)
         {
+            string apiToken  = HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
+            Api api = _context.Apis.Where(a=> a.Token.Equals(apiToken)).FirstOrDefault();
+
+            if (string.IsNullOrEmpty(apiToken))
+            {
+                var response = new
+                {
+                    Message = "Houve erros de validação.",
+                    Errors = "Api token invalido",
+
+                };
+
+                var json = JsonConvert.SerializeObject(response);
+
+                return BadRequest(json);
+            }
             if (user == null) {
                 return new BadRequestObjectResult(new { message = "User is required" }); ;
             }
@@ -65,6 +86,7 @@ namespace hackaton.Controllers
 
                 return BadRequest(json);
             }
+            user.ApiId = api.ApiId;
 
             if (!validateLogin(user))
             {
@@ -79,10 +101,28 @@ namespace hackaton.Controllers
         }
 
         [HttpPost]
+        [BearerAuthorize]
        // [ValidateAntiForgeryToken]
         public IActionResult Register( [FromBody]User user)
         {
-                var cpfExists =  _context.Users.Any(u => u.CPF == user.CPF);
+            string apiToken = HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
+            Api api = _context.Apis.Where(a => a.Token.Equals(apiToken)).FirstOrDefault();
+
+            if (string.IsNullOrEmpty(apiToken))
+            {
+                var response = new
+                {
+                    Message = "Houve erros de validação.",
+                    Errors = "Api token invalido",
+
+                };
+
+                var json = JsonConvert.SerializeObject(response);
+
+                return BadRequest(json);
+            }
+
+            var cpfExists =  _context.Users.Any(u => u.CPF == user.CPF);
                 if (cpfExists)
                 {
                     ModelState.AddModelError("CPF", "O CPF já está cadastrado.");
@@ -107,6 +147,8 @@ namespace hackaton.Controllers
             }
 
             user.Password = BCryptHelper.HashPassword(user.Password,BCryptHelper.GenerateSalt());
+            user.ApiId = api.ApiId;
+            user.Api = api;
             _context.Users.Add(user);
             _context.SaveChanges();
           

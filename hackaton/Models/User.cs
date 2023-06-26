@@ -33,6 +33,7 @@ namespace hackaton.Models
 
         public bool Active { get; set; }=true;
 
-        
+        public Api Api { get; set; }
+        public int ApiId { get; set; }
     }
 }

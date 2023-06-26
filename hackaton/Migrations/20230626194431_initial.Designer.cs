@@ -12,7 +12,7 @@ using hackaton.Models.DAO;
 namespace hackaton.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20230614124737_initial")]
+    [Migration("20230626194431_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -141,6 +141,9 @@ namespace hackaton.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
 
+                    b.Property<int>("ApiId")
+                        .HasColumnType("int");
+
                     b.Property<string>("CPF")
                         .IsRequired()
                         .HasMaxLength(14)
@@ -161,13 +164,15 @@ namespace hackaton.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ApiId");
+
                     b.ToTable("Users");
                 });
 
             modelBuilder.Entity("hackaton.Models.Property", b =>
                 {
                     b.HasOne("hackaton.Models.User", "User")
-                        .WithMany("Properties")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -178,7 +183,7 @@ namespace hackaton.Migrations
             modelBuilder.Entity("hackaton.Models.QrCode", b =>
                 {
                     b.HasOne("hackaton.Models.User", "User")
-                        .WithMany("QrCodes")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -189,7 +194,7 @@ namespace hackaton.Migrations
             modelBuilder.Entity("hackaton.Models.Schedule", b =>
                 {
                     b.HasOne("hackaton.Models.User", "User")
-                        .WithMany("Agendamentos")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -199,11 +204,13 @@ namespace hackaton.Migrations
 
             modelBuilder.Entity("hackaton.Models.User", b =>
                 {
-                    b.Navigation("Agendamentos");
+                    b.HasOne("hackaton.Models.Api", "Api")
+                        .WithMany()
+                        .HasForeignKey("ApiId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Properties");
-
-                    b.Navigation("QrCodes");
+                    b.Navigation("Api");
                 });
 #pragma warning restore 612, 618
         }

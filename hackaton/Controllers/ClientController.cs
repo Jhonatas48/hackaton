@@ -28,10 +28,11 @@ namespace hackaton.Controllers
         [BearerAuthorize]
         public async Task<IActionResult> Edit([FromBody] User user)
         {
-
+           
             ModelState.Remove("user.QrCodes");
             ModelState.Remove("user.Agendamentos");
             ModelState.Remove("user.Properties");
+           
             if (!ModelState.IsValid)
             {
                 var erros = ModelState.Keys
@@ -50,8 +51,12 @@ namespace hackaton.Controllers
                 return BadRequest(json);
             };
                 User userRetrieve = _userService.GetUserByCPFAsync(user.CPF);
-          
-            if (userRetrieve == null)
+               if (userRetrieve.IsAdmin && user.Id == user.Id) {
+               
+                return Forbid();
+            }
+
+                if (userRetrieve == null)
             {
                 return NotFound();
             }
@@ -86,11 +91,29 @@ namespace hackaton.Controllers
         public async Task<IActionResult> Delete()
        {
 
-           string cpf = HttpContext.Session.GetString("CPF");
+            string apiToken = HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
+            Api api = _context.Apis.Where(a => a.Token.Equals(apiToken)).FirstOrDefault();
+
+            if (string.IsNullOrEmpty(apiToken))
+            {
+                var response = new
+                {
+                    Message = "Houve erros de validação.",
+                    Errors = "Api token invalido",
+
+                };
+
+                var json = JsonConvert.SerializeObject(response);
+
+                return BadRequest(json);
+            }
+
+
+            string cpf = HttpContext.Session.GetString("CPF");
            int userId = (int)HttpContext.Session.GetInt32("UserId");
             User user = _userService.GetUserByCPFAsync(cpf);
 
-            if (user == null || !user.CPF.Equals(cpf) || user.Id != userId)
+            if (user == null || !user.CPF.Equals(cpf) || user.Id != userId || user.ApiId ==0 || user.ApiId != api.ApiId)
             {
                 return NotFound();
             }
@@ -105,6 +128,24 @@ namespace hackaton.Controllers
         // [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+
+            string apiToken = HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
+            Api api = _context.Apis.Where(a => a.Token.Equals(apiToken)).FirstOrDefault();
+
+            if (string.IsNullOrEmpty(apiToken))
+            {
+                var response = new
+                {
+                    Message = "Houve erros de validação.",
+                    Errors = "Api token invalido",
+
+                };
+
+                var json = JsonConvert.SerializeObject(response);
+
+                return BadRequest(json);
+            }
+
             if (_context.Users == null)
             {
                 return Problem("Entity set 'Context.Users'  is null.");
@@ -112,7 +153,7 @@ namespace hackaton.Controllers
             string cpf = HttpContext.Session.GetString("CPF");
             int userId = (int)HttpContext.Session.GetInt32("UserId");
             User user = _userService.GetUserByCPFAsync(cpf);
-            if(user == null)
+            if(user == null || user.ApiId ==0 || user.ApiId != api.ApiId)
             {
                 return NotFound();
             }

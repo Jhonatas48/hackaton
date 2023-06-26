@@ -36,11 +36,18 @@ namespace hackaton.Migrations
                     Password = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
                     CPF = table.Column<string>(type: "nvarchar(14)", maxLength: 14, nullable: false),
                     IsAdmin = table.Column<bool>(type: "bit", nullable: false),
-                    Active = table.Column<bool>(type: "bit", nullable: false)
+                    Active = table.Column<bool>(type: "bit", nullable: false),
+                    ApiId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Users_Apis_ApiId",
+                        column: x => x.ApiId,
+                        principalTable: "Apis",
+                        principalColumn: "ApiId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -121,14 +128,16 @@ namespace hackaton.Migrations
                 name: "IX_Schedules_UserId",
                 table: "Schedules",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_ApiId",
+                table: "Users",
+                column: "ApiId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Apis");
-
             migrationBuilder.DropTable(
                 name: "Properties");
 
@@ -140,6 +149,9 @@ namespace hackaton.Migrations
 
             migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Apis");
         }
     }
 }

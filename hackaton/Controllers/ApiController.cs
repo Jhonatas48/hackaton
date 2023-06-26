@@ -5,6 +5,7 @@ using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 using hackaton.Models.DAO;
 using hackaton.Models.WebSocket;
 using Microsoft.AspNetCore.SignalR;
+using Newtonsoft.Json;
 
 namespace hackaton.Controllers
 {
@@ -21,8 +22,8 @@ namespace hackaton.Controllers
          _redirectClient = redirectClient;
 
         }
-    // GET: ApiController/QRCode
-    [BearerAuthorize]
+        // GET: ApiController/validateqrcode
+        [BearerAuthorize]
  
         public async Task<ActionResult> validateqrcode([FromBody] QrCode qrCode)
         {
@@ -66,16 +67,35 @@ namespace hackaton.Controllers
             return Json(qrCodeRetrieve);
         }
 
-        // GET: ApiController/Details/5
+
+        // GET: ApiController/validateUser
+        [BearerAuthorize]
         public ActionResult validateUser([FromBody] User user)
         {
-            if(user == null)
+            string apiToken = HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
+            Api api = _context.Apis.Where(a => a.Token.Equals(apiToken)).FirstOrDefault();
+
+            if (string.IsNullOrEmpty(apiToken))
+            {
+                var response = new
+                {
+                    Message = "Houve erros de validação.",
+                    Errors = "Api token invalido",
+
+                };
+
+                var json = JsonConvert.SerializeObject(response);
+
+                return BadRequest(json);
+            }
+          
+            if (user == null)
             {
                 return new BadRequestObjectResult(new { message = "User is required" });
             }
             ModelState.Remove("Name");
             ModelState.Remove("Properties");
-           
+            
             if (!ModelState.IsValid)
             {
                 var erros = ModelState.Keys
@@ -90,9 +110,12 @@ namespace hackaton.Controllers
                 };
                 return BadRequest(response);
             }
+            user.ApiId = api.ApiId;
             if (_homeController.validateLogin(user))
             {
-                return Ok(user);
+                User userRetrieve = _context.Users.Where(u => u.CPF.Equals(user.CPF) && u.Active==true).FirstOrDefault();
+                userRetrieve.Password = "";
+                return Ok(userRetrieve);
             }
 
             return new UnauthorizedObjectResult(new { message = "Invalid Credentials" });
