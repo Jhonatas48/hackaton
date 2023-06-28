@@ -95,7 +95,7 @@ namespace hackaton.Controllers
             }
             ModelState.Remove("Name");
             ModelState.Remove("Properties");
-            
+            ModelState.Remove("Api");
             if (!ModelState.IsValid)
             {
                 var erros = ModelState.Keys

@@ -32,7 +32,7 @@ namespace hackaton.Controllers
            
             if(user.ApiId==0) return false;
 
-            var userRetrieve = _context.Users.FirstOrDefault(u => u.CPF == user.CPF);// _userCacheService.GetUserByCPFAsync(user.CPF);//_context.Users.FirstOrDefault(u => u.CPF.Equals(user.CPF));
+            var userRetrieve = _context.Users.FirstOrDefault(u => u.CPF == user.CPF && u.ApiId== user.ApiId);// _userCacheService.GetUserByCPFAsync(user.CPF);//_context.Users.FirstOrDefault(u => u.CPF.Equals(user.CPF));
 
             //Usuario não existe ou credenciais estão inválidas
             if (userRetrieve == null || !BCryptHelper.CheckPassword(user.Password, userRetrieve.Password))

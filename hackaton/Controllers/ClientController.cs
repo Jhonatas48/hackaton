@@ -32,7 +32,8 @@ namespace hackaton.Controllers
             ModelState.Remove("user.QrCodes");
             ModelState.Remove("user.Agendamentos");
             ModelState.Remove("user.Properties");
-           
+            ModelState.Remove("Api");
+
             if (!ModelState.IsValid)
             {
                 var erros = ModelState.Keys
@@ -90,7 +91,7 @@ namespace hackaton.Controllers
         //   [ServiceFilter(typeof(RequireLoginAttributeFactory))]
         public async Task<IActionResult> Delete()
        {
-
+            ModelState.Remove("Api");
             string apiToken = HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
             Api api = _context.Apis.Where(a => a.Token.Equals(apiToken)).FirstOrDefault();
 
@@ -128,7 +129,7 @@ namespace hackaton.Controllers
         // [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-
+            ModelState.Remove("Api");
             string apiToken = HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
             Api api = _context.Apis.Where(a => a.Token.Equals(apiToken)).FirstOrDefault();
 

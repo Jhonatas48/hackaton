@@ -109,6 +109,7 @@ namespace hackaton.Controllers
         [ServiceFilter(typeof(BearerAuthorizeAttributeFactory))]
         public async Task<IActionResult> Edit(int? id, [FromBody]User userAdmin)
         {
+            ModelState.Remove("Api");
             User userAdminRetrieve = _context.Users
              .Where(
              admin => admin.Id == id
@@ -140,6 +141,7 @@ namespace hackaton.Controllers
         [ServiceFilter(typeof(BearerAuthorizeAttributeFactory))]
         public async Task<IActionResult> Edit(int id, [FromBody] User user)
         {
+            ModelState.Remove("Api");
             string apiToken = HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
             Api api = _context.Apis.Where(a => a.Token.Equals(apiToken)).FirstOrDefault();
 
@@ -293,6 +295,7 @@ namespace hackaton.Controllers
         [ServiceFilter(typeof(BearerAuthorizeAttributeFactory))]
         public async Task<IActionResult> DeleteConfirmed(int id,[FromBody] User userAdmin)
         {
+            ModelState.Remove("Api");
             string apiToken = HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
             Api api = _context.Apis.Where(a => a.Token.Equals(apiToken)).FirstOrDefault();
 
@@ -341,7 +344,7 @@ namespace hackaton.Controllers
             {
                 return NotFound();
             }
-
+            ModelState.Remove("Api");
             if (user.Id == userAdminRetrieve.Id)
             {
                 ModelState.AddModelError("Name", "Voce nao pode excluir a si mesmo");
