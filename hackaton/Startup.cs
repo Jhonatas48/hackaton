@@ -6,6 +6,7 @@ using hackaton.Models.WebSocket;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Npgsql;
 
 namespace hackaton
 {
@@ -25,7 +26,9 @@ namespace hackaton
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+            AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
+
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowSpecificOrigins",
