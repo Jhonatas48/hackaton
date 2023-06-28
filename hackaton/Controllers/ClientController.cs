@@ -25,7 +25,7 @@ namespace hackaton.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [BearerAuthorize]
+        [ServiceFilter(typeof(BearerAuthorizeAttributeFactory))]
         public async Task<IActionResult> Edit([FromBody] User user)
         {
            
@@ -86,7 +86,7 @@ namespace hackaton.Controllers
         }
 
         //// GET: Users/Delete/5
-         [BearerAuthorize]
+        [ServiceFilter(typeof(BearerAuthorizeAttributeFactory))]
         //   [ServiceFilter(typeof(RequireLoginAttributeFactory))]
         public async Task<IActionResult> Delete()
        {
@@ -123,7 +123,7 @@ namespace hackaton.Controllers
 
         // POST: Users/Delete/5
         [HttpPost, ActionName("Delete")]
-        [BearerAuthorize]
+        [ServiceFilter(typeof(BearerAuthorizeAttributeFactory))]
         //  [ServiceFilter(typeof(RequireLoginAttributeFactory))]
         // [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -157,7 +157,7 @@ namespace hackaton.Controllers
             {
                 return NotFound();
             }
-
+            user.ApiId = api.ApiId;
             if (user.IsAdmin == false)
             {
                 user.Active = false;

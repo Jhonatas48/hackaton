@@ -20,7 +20,7 @@ namespace hackaton.Models.DAO
                 context.Apis.Add(new Api { Name = "Grupo TechAgro", Token = Guid.NewGuid().ToString(), Active = true});
                 context.Apis.Add(new Api { Name = "Grupo Isabela", Token = Guid.NewGuid().ToString(), Active = true });
                
-                context.Users.Add(new User { Name = "Jhonatas", CPF = "136.621.076-00", Password = BCryptHelper.HashPassword("136.621.076-00", BCryptHelper.GenerateSalt()), IsAdmin = true});
+                context.Users.Add(new User { Name = "Jhonatas", CPF = "136.621.076-00", Password = BCryptHelper.HashPassword("136.621.076-00", BCryptHelper.GenerateSalt()), IsAdmin = true,ApiId=1});
                 context.SaveChanges();
             }
           

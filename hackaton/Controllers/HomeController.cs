@@ -44,7 +44,8 @@ namespace hackaton.Controllers
             return true;
         }
         [HttpPost]
-       // [ValidateAntiForgeryToken]
+        [ServiceFilter(typeof(BearerAuthorizeAttributeFactory))]
+        // [ValidateAntiForgeryToken]
         public IActionResult Login([FromBody][Bind("Password,CPF")] User user)
         {
             string apiToken  = HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
@@ -66,8 +67,11 @@ namespace hackaton.Controllers
             if (user == null) {
                 return new BadRequestObjectResult(new { message = "User is required" }); ;
             }
+         
+            user.ApiId = api.ApiId;
             ModelState.Remove("Name");
             ModelState.Remove("Properties");
+            ModelState.Remove("Api");
 
             if (!ModelState.IsValid)
             {
@@ -101,8 +105,8 @@ namespace hackaton.Controllers
         }
 
         [HttpPost]
-        [BearerAuthorize]
-       // [ValidateAntiForgeryToken]
+        [ServiceFilter(typeof(BearerAuthorizeAttributeFactory))]
+        // [ValidateAntiForgeryToken]
         public IActionResult Register( [FromBody]User user)
         {
             string apiToken = HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
@@ -128,6 +132,8 @@ namespace hackaton.Controllers
                     ModelState.AddModelError("CPF", "O CPF já está cadastrado.");
                    // return View(user);
                 }
+            user.ApiId = api.ApiId;
+            ModelState.Remove("Api");
             if (!ModelState.IsValid)
             {
                 var erros = ModelState.Keys

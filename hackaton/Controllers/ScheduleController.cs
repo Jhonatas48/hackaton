@@ -23,7 +23,7 @@ namespace hackaton.Controllers
             _ctx = ctx;
         }
 
-        //[BearerAuthorize]
+        [ServiceFilter(typeof(BearerAuthorizeAttributeFactory))]
         public ActionResult Index(int userId)
         {
            
@@ -33,6 +33,8 @@ namespace hackaton.Controllers
         }
 
         // POST: AgendamentoController/Create
+
+        [ServiceFilter(typeof(BearerAuthorizeAttributeFactory))]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] Schedule agendamento)
         {
@@ -77,7 +79,7 @@ namespace hackaton.Controllers
         // POST: AgendamentoController/Delete/5
        
         [HttpPost]
-        [BearerAuthorize]
+        [ServiceFilter(typeof(BearerAuthorizeAttributeFactory))]
         public ActionResult Delete(int id)
         {
             var del = _ctx.Schedules.Where(a => a.ScheduleId == id).Single();

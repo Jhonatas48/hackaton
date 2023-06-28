@@ -32,26 +32,59 @@ namespace hackaton.Controllers
             _userCacheService = cache;
         }
 
-        [BearerAuthorize]
+        [ServiceFilter(typeof(BearerAuthorizeAttributeFactory))]
         public async Task<ActionResult> Index()
         {
+            string apiToken = HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
+            Api api = _context.Apis.Where(a => a.Token.Equals(apiToken)).FirstOrDefault();
 
-            return Json(_context.Users.Where(u => u.Active == true).ToList());
+            if (string.IsNullOrEmpty(apiToken))
+            {
+                var response = new
+                {
+                    Message = "Houve erros de validação.",
+                    Errors = "Api token invalido",
+
+                };
+
+                var json = JsonConvert.SerializeObject(response);
+
+                return BadRequest(json);
+            }
+
+            return Json(_context.Users.Where(u => u.Active == true && u.ApiId==api.ApiId).ToList());
             
         }
 
-        [BearerAuthorize]
+        [ServiceFilter(typeof(BearerAuthorizeAttributeFactory))]
         public IActionResult Search(string searchQuery)
         {
+            string apiToken = HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
+            Api api = _context.Apis.Where(a => a.Token.Equals(apiToken)).FirstOrDefault();
+
+            if (string.IsNullOrEmpty(apiToken))
+            {
+                var response = new
+                {
+                    Message = "Houve erros de validação.",
+                    Errors = "Api token invalido",
+
+                };
+
+                var json = JsonConvert.SerializeObject(response);
+
+                return BadRequest(json);
+            }
+
             List<User> ListaUsers;
 
             if (searchQuery.IsNullOrEmpty())
             {
-                ListaUsers = _context.Users.Where(u => u.Active == true).ToList();
+                ListaUsers = _context.Users.Where(u => u.Active == true && u.ApiId == api.ApiId).OrderBy(u => u.Name).ToList();
             }
             else
             {
-                ListaUsers = _context.Users.Where(u => (u.Active == true) && ((u.CPF.Contains(searchQuery)) || (u.Name.Contains(searchQuery)))).OrderBy(u => u.Name).ToList();
+                ListaUsers = _context.Users.Where(u => (u.Active == true) && ((u.CPF.Contains(searchQuery)) || (u.Name.Contains(searchQuery))) && u.ApiId == api.ApiId).OrderBy(u => u.Name).ToList();
             }
             
             return Json(ListaUsers);
@@ -73,6 +106,7 @@ namespace hackaton.Controllers
         }
 
         // GET: Users/Edit/5
+        [ServiceFilter(typeof(BearerAuthorizeAttributeFactory))]
         public async Task<IActionResult> Edit(int? id, [FromBody]User userAdmin)
         {
             User userAdminRetrieve = _context.Users
@@ -103,12 +137,28 @@ namespace hackaton.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [BearerAuthorize]
+        [ServiceFilter(typeof(BearerAuthorizeAttributeFactory))]
         public async Task<IActionResult> Edit(int id, [FromBody] User user)
         {
-          
+            string apiToken = HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
+            Api api = _context.Apis.Where(a => a.Token.Equals(apiToken)).FirstOrDefault();
+
+            if (string.IsNullOrEmpty(apiToken))
+            {
+                var responses = new
+                {
+                    Message = "Houve erros de validação.",
+                    Errors = "Api token invalido",
+
+                };
+
+                var jsons = JsonConvert.SerializeObject(responses);
+
+                return BadRequest(jsons);
+            }
+
             int userId = id;
-            var userRetrieve = _context.Users.Where(u => u.Id == userId).Single();
+            var userRetrieve = _context.Users.Where(u => u.Id == userId && u.ApiId == api.ApiId).Single();
             if (userRetrieve != null)
             {
                 user.IsAdmin = userRetrieve.IsAdmin;
@@ -162,10 +212,27 @@ namespace hackaton.Controllers
         }
 
         // GET: Users/Delete/5
-        [BearerAuthorize]
+        [ServiceFilter(typeof(BearerAuthorizeAttributeFactory))]
         public async Task<IActionResult> Delete(int? id, [FromBody]User userAdmin)
         {
-            if(userAdmin == null)
+            string apiToken = HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
+            Api api = _context.Apis.Where(a => a.Token.Equals(apiToken)).FirstOrDefault();
+
+            if (string.IsNullOrEmpty(apiToken))
+            {
+                var response = new
+                {
+                    Message = "Houve erros de validação.",
+                    Errors = "Api token invalido",
+
+                };
+
+                var json = JsonConvert.SerializeObject(response);
+
+                return BadRequest(json);
+            }
+
+            if (userAdmin == null)
             {
                 return BadRequest("User is required");
             }
@@ -177,6 +244,7 @@ namespace hackaton.Controllers
              && admin.Name.Equals(userAdmin.Name)
              && admin.IsAdmin == true
              && admin.Active == true
+             && admin.ApiId == api.ApiId
              )
              .FirstOrDefault();
 
@@ -185,20 +253,20 @@ namespace hackaton.Controllers
                 return StatusCode(405, "Voce nao tem permissao para executar esta ação"); ;
             }
 
-            int userId = (int)HttpContext.Session.GetInt32("UserId");
+         
             if (id == null || _context.Users == null)
             {
                 return NotFound();
             }
 
             var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.Id == id && m.ApiId == api.ApiId);
             if (user == null)
             {
                 return NotFound();
             }
 
-            if(user.Id == userId)
+            if(user.Id == userAdminRetrieve.Id)
             {
                 ModelState.AddModelError("Name", "Voce nao pode excluir a si mesmo");
                 var erros = ModelState.Keys
@@ -222,9 +290,26 @@ namespace hackaton.Controllers
 
         // POST: Users/Delete/5
         [HttpPost, ActionName("Delete")]
-        [BearerAuthorize]
+        [ServiceFilter(typeof(BearerAuthorizeAttributeFactory))]
         public async Task<IActionResult> DeleteConfirmed(int id,[FromBody] User userAdmin)
         {
+            string apiToken = HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
+            Api api = _context.Apis.Where(a => a.Token.Equals(apiToken)).FirstOrDefault();
+
+            if (string.IsNullOrEmpty(apiToken))
+            {
+                var response = new
+                {
+                    Message = "Houve erros de validação.",
+                    Errors = "Api token invalido",
+
+                };
+
+                var json = JsonConvert.SerializeObject(response);
+
+                return BadRequest(json);
+            }
+
             if (userAdmin == null)
             {
                 return BadRequest("User is required");
@@ -241,6 +326,7 @@ namespace hackaton.Controllers
                 && admin.Name.Equals(userAdmin.Name)
                 && admin.IsAdmin == true 
                 && admin.Active == true
+                && admin.ApiId == api.ApiId
                 )
                 .FirstOrDefault();
             
@@ -251,7 +337,7 @@ namespace hackaton.Controllers
 
             var user = await _context.Users.FindAsync(id);
 
-            if (user == null)
+            if (user == null || user.ApiId != api.ApiId)
             {
                 return NotFound();
             }

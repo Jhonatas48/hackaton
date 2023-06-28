@@ -6,6 +6,7 @@ using hackaton.Models.DAO;
 using hackaton.Models.WebSocket;
 using Microsoft.AspNetCore.SignalR;
 using Newtonsoft.Json;
+using hackaton.Models.Injectors;
 
 namespace hackaton.Controllers
 {
@@ -23,8 +24,7 @@ namespace hackaton.Controllers
 
         }
         // GET: ApiController/validateqrcode
-        [BearerAuthorize]
- 
+        [ServiceFilter(typeof(BearerAuthorizeAttributeFactory))]
         public async Task<ActionResult> validateqrcode([FromBody] QrCode qrCode)
         {
             if (qrCode == null || string.IsNullOrEmpty(qrCode.Content)) {
@@ -69,7 +69,7 @@ namespace hackaton.Controllers
 
 
         // GET: ApiController/validateUser
-        [BearerAuthorize]
+        [ServiceFilter(typeof(BearerAuthorizeAttributeFactory))]
         public ActionResult validateUser([FromBody] User user)
         {
             string apiToken = HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();

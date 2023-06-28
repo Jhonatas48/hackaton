@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using hackaton.Models.DAO;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using NuGet.Protocol;
 using System.Net;
@@ -7,6 +8,12 @@ namespace hackaton.Models.Security
 {
     public class BearerAuthorizeAttribute: Attribute, IAsyncAuthorizationFilter
     {
+        private readonly Context _context;
+        public BearerAuthorizeAttribute(Context context)
+        {
+            _context = context;
+
+        }
 
         //Chamado sempre que possuir o cabeçalho Authorization
         public async Task OnAuthorizationAsync(AuthorizationFilterContext context)
@@ -37,11 +44,10 @@ namespace hackaton.Models.Security
             if (string.IsNullOrEmpty(token) || token.Equals("undefined")) {
                 return false;
             }
-            // Lógica de validação do token
-            // Retorna true se o token for válido, caso contrário, retorna false
-            // Implemente a lógica de validação de acordo com os requisitos do seu sistema
-            // Você pode usar serviços, bancos de dados, listas de tokens válidos, etc.
-            return true;
+
+           var apiRetrieve=  _context.Apis.Where(api=> api.Token.Equals(token)).FirstOrDefault();   
+            
+            return apiRetrieve != null;
         }
     }
 }

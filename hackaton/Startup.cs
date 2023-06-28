@@ -12,7 +12,7 @@ namespace hackaton
     public class Startup
     {
         private readonly Context _context;
-        private readonly bool useSqlServer= true;
+        private readonly bool useSqlServer= false;
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -58,6 +58,7 @@ namespace hackaton
             services.AddScoped<RedirectClient>();
             services.AddScoped<RequireLoginAttributeFactory>();
             services.AddScoped<RequireLoginAdminAttributeFactory>();
+            services.AddScoped<BearerAuthorizeAttributeFactory>();
             //Adiciona a Classe UserCacheService no escopo para ser usado como cache
             services.AddScoped<UserCacheService>();
             //Adiciona a Classe QRCodeService no escopo para ser usado como cache
